@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+    <style type="text/css">
+        .loading_imgs {
+            display: grid;
+            place-content: center;
+            place-items: center;
+            background-color: #1a1a19;
+            user-select: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index:100;
+            visibility:hidden;
+        }
+        .room_list{
+            z-index:2
+        }
+        .main_screen{
+            z-index:1
+        }
+        .img1 {
+            width: 500px;
+        }
+        .img2 {
+            width: 64px;
+        }
+    </style>
+
+    <title>LOADING... - netroom extencions</title>
+</head>
+<body>
+    <div class="loading_imgs">
+        <img src="loading_1_b.gif" alt="loading..." class="img1">
+        <img src="loading_2.gif" alt="loading..." class="img2">
+        <p>Loading...</p>
+    </div>
+    <header>
+
+    </header>
+    <nav class="room_list" id="room_list">
+
+    </nav>
+    <div class="main_screen" id="main_screen">
+        <div class="chat" id="chat">
+
+        </div>
+        <div class="setting" id="setting">
+
+        </div>
+        <div class="room_setting" id="room_setting">
+
+        </div>
+        <div class="make_room" id="make_room">
+            
+        </div>
+    </div>
+    <nav class="member_list" id="member-list">
+    
+    </nav>
+    <script src="main-script.js" defer></script>
+</body>
+</html>

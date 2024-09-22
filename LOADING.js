@@ -1,4 +1,4 @@
-﻿/* 
+/* 
 NETROOM extensions load program
 made by AAAAAAAAAAAA.
 All rights reserved.
@@ -61,6 +61,15 @@ if (old_sys_dark) {
     }
 }
 console.log(dark);
+
+//UI二種類対応(ローカルストレージの値、designが1なら旧UI風、2ならディスコ風)
+
+if (localStorage.hasOwnProperty("design")) {
+    var design = localStorage.getItem("design");
+} else {
+    var design = "2";
+}
+
 //スマホ対応
 
 if (PC() == true) {
@@ -69,12 +78,18 @@ if (PC() == true) {
 
 }
 
-//ベースHTML
+//デザイン2のベースHTML
 
 let main_html = `
 
 `;
 
-//変更
+const body = document.querySelector('#body');
+const load_1 = "<script src='style-1.js' defer></script>";
 
-document.documentElement.innerHTML = main_html;
+//変更
+if (design == "1") {
+    body.insertAdjacentHTML('beforeend', load_1);
+} else {
+    document.documentElement.innerHTML = main_html;
+}

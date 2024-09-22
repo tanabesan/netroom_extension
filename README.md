@@ -1,5 +1,5 @@
 # NETROOM extensions
 ---
-
-## NETROOM extensions ‚Æ‚Í?
-- ¬àV‚É‚æ‚Á‚Ä10”NˆÈã‘O‚Éì‚ç‚ê‚½ƒ`ƒƒƒbƒgƒTƒCƒgA[NETROOM](https://netroom.oz96.com)‚Ì‚½‚ß‚É—Lu([@tanabesan](https://github.com/tanabesan/),[@AAniki](https://github.com/AAniki/),@baka?)‚É‚æ‚Á‚ÄŠJ”­’†‚ÌŠg’£‹@”\B
+<img src="https://github.com/user-attachments/assets/145d88b5-250b-4823-ad21-6aef7e05bf4f.png" width="300">
+## NETROOM extensions ã¨ã¯?
+- å°æ¾¤æ°ã«ã‚ˆã£ã¦10å¹´ä»¥ä¸Šå‰ã«ä½œã‚‰ã‚ŒãŸãƒãƒ£ãƒƒãƒˆã‚µã‚¤ãƒˆã€[NETROOM](https://netroom.oz96.com)ã®ãŸã‚ã«æœ‰å¿—([@tanabesan](https://github.com/tanabesan/),[@AAniki](https://github.com/AAniki/),@baka?)ã«ã‚ˆã£ã¦é–‹ç™ºä¸­ã®æ‹¡å¼µæ©Ÿèƒ½ã€‚

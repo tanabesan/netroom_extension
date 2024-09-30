@@ -23,7 +23,7 @@
             document.body.removeChild(element);
         }
 
-        
+
         //time_interval はどのテストを実行するか
         if (localStorage.hasOwnProperty("test_no")) {
             var test_no = localStorage.getItem("test_no");
@@ -52,7 +52,7 @@
         }
         note_template += "実験方法:javascripでユーザースクリプトを組み、それぞれについて何msごとの実行が制限がかからないかを検証する。デフォルトの値からスタートし、制限が途中でかかった場合は自動的に停止し、次回は+5msごとに送信する。そして試行回数750までで制限がかからなかった場合はそれをギリギリの値とし、次の実験に移る。\n\n実験結果:\n\n";
 
-
+        console.log("test_no:" + test_no);
         //活動記録残し用test_note、それぞれの全記録を残す
 
         if (localStorage.hasOwnProperty("test_note")) {
@@ -71,8 +71,9 @@
         } else {
             localStorage.setItem('time_interval', time_i);
         }
+        console.log("time_i:" + time_i);
         var wait = false;
-        document.socket.on('notice', function (res) {
+        socket.on('notice', function (res) {
             l('【notice】');
             show_notice(res)
             if (res.msg == "しばらくお待ちください") {
@@ -88,6 +89,7 @@
                     if (wait == false) {
                         socket.json.emit(test_ty, {});
                         int++
+                        console.log("正常に送信されました");
                     } else {
                         stop_int = true;
                         var note_mem = "\n" + time_i + "msでの実行結果: " + int + "回目にて制限";
@@ -96,6 +98,10 @@
                         time_i += 5;
                         localStorage.setItem('test_note', test_note);
                         localStorage.setItem('time_interval', time_i);
+                        console.log("正常に制限を記録しました");
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
                     }
                 } else {
                     stop_int = true;
@@ -109,14 +115,20 @@
                     }
                     saveTextFile(test_no, test_note);
                     localStorage.setItem('test_note', "");
+                    console.log("正常に成功を記録しました");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
                 }
             }
         }
 
         function test_2() {
             setInterval(test_func, time_i);
+            console.log("test_2実行");
         }
-        setTimeOut(test_2, 60000);
+        setTimeout(test_2, 70000);
+        console.log("70秒待機中");
 
     }
 })();

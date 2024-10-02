@@ -1,4 +1,13 @@
-//ご自由にテストしてください。
+// ==UserScript==
+// @name        ねとるむ拡張機能(仮)
+// @namespace    http://tampermonkey.net/
+// @version      none
+// @author       baka
+// @match        https://netroom.oz96.com/*
+// @grant        unsafeWindow
+// @run-at       document-idle
+// ==/UserScript==
+
 //警告表示
 console.log("%cSTOP！", "font-size: 65px; font-weight: bold; color: red; text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.7);");
 console.log("%cこれは開発者向けのブラウザー機能です。", "font-size: 24px; font-weight: bold;");
@@ -57,11 +66,6 @@ a {
 #comment {
     border-color: #ffffff !important;
 }
-
-.btn {
-    border-radius: 50px; 
-}
-
 
 header,
 footer,

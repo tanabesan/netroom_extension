@@ -1,12 +1,4 @@
-// ==UserScript==
-// @name         フレお気に入り
-// @namespace    http://tampermonkey.net/
-// @version      none
-// @author       baka
-// @match        https://netroom.oz96.com/*
-// @grant        none
-// @run-at       document-idle
-// ==/UserScript==
+// フレお気に入り
     const storagePrefix = 'starStatus_';
     const userList = document.getElementById('user_list2');
     const processedElements = new Set();

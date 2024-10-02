@@ -1,3 +1,4 @@
+// フレ検索
 const userList = document.getElementById('user_list2');
 
   function filterUsers(suN) {

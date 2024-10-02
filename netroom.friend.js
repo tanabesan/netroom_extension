@@ -1,13 +1,4 @@
-// ==UserScript==
-// @name        ねとるむフレ検索
-// @namespace    http://tampermonkey.net/
-// @version      none
-// @author       baka
-// @match        https://netroom.oz96.com/*
-// @grant        none
-// @run-at       document-idle
-// ==/UserScript==
-  const userList = document.getElementById('user_list2');
+const userList = document.getElementById('user_list2');
 
   function filterUsers(suN) {
     Array.from(userList.getElementsByClassName('li_user clearfix')).forEach($user => {

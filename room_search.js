@@ -1,13 +1,4 @@
-// ==UserScript==
-// @name         部屋お気に入り
-// @namespace    http://tampermonkey.net/
-// @version      none
-// @author       baka
-// @match        https://netroom.oz96.com/*
-// @grant        unsafeWindow
-// @run-at       document-end
-// ==/UserScript==
-
+// 部屋お気に入り
 function addStarMarks() {
     var roomList = document.getElementById('room_list');
     var children = roomList.children;

@@ -1,13 +1,4 @@
-// ==UserScript==
-// @name        ねとるむクリップボード
-// @namespace    http://tampermonkey.net/
-// @version      none
-// @author       baka
-// @match        https://netroom.oz96.com/*
-// @grant        unsafeWindow
-// @run-at       document-idle
-// ==/UserScript==
-
+//ねとるむクリップボード
 unsafeWindow.change_disp_by_user_or_guest = function (data) {
     clear_global();
     if (data.uid) {

@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         NETROOM§ŒÀ’²¸ƒc[ƒ‹
+// @name         NETROOMåˆ¶é™èª¿æŸ»ãƒ„ãƒ¼ãƒ«
 // @namespace    http://tampermonkey.net/
 // @version      2024-09-30
 // @author       AAniki
@@ -24,59 +24,76 @@
         }
 
 
-        //time_interval ‚Í‚Ç‚ÌƒeƒXƒg‚ğÀs‚·‚é‚©
+        //time_interval ã¯ã©ã®ãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã™ã‚‹ã‹
         if (localStorage.hasOwnProperty("test_no")) {
-            var test_no = localStorage.getItem("test_no");
+            const test_no_c = localStorage.getItem("test_no");
+            var test_no=Number(test_no_c);
+            console.log("test_noã®ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸å€¤:" + test_no);
         } else {
             var test_no = 1;
             localStorage.setItem('test_no', "1");
+            console.log("test_noã®åˆæœŸå€¤è¨­å®š");
         }
 
-        var note_template = "NETROOM.oz96.com‚ÌƒAƒNƒZƒX§ŒÀ§ŒÀ’²¸•ñ‘@AAniki\n";
+        let note_template = "NETROOM.oz96.comã®ã‚¢ã‚¯ã‚»ã‚¹åˆ¶é™åˆ¶é™èª¿æŸ»å ±å‘Šæ›¸ã€€AAniki\n";
 
-        //note_template‚Ìtest_no‚É‚æ‚é•ªŠ„
-        if (test_no = 1) {
-            note_template += "@‘®3 §ŒÀ‚ª“ñ”Ô–Ú‚Éd‚¢Lv3‚É‚Â‚¢‚Ä\n@§ŒÀ‚ª“ñ”Ô–Ú‚Éd‚¢Lv3‚É‚Â‚¢‚Ä‚ÌÀŒ±Œ‹‰Ê‚ğˆÈ‰º‚É‹L‚·B\n\n";
-            var time_i = 1000;
+        let time_i = 0;
+
+        //note_templateã®test_noã«ã‚ˆã‚‹åˆ†å‰²
+        if (test_no == 1) {
+            note_template += "ã€€æ›¸å¼3 åˆ¶é™ãŒäºŒç•ªç›®ã«é‡ã„Lv3ã«ã¤ã„ã¦\nã€€åˆ¶é™ãŒäºŒç•ªç›®ã«é‡ã„Lv3ã«ã¤ã„ã¦ã®å®Ÿé¨“çµæœã‚’ä»¥ä¸‹ã«è¨˜ã™ã€‚\n\n";
+            time_i = 5875;
             var test_ty = "change_room";
+            console.log("1ãŒèªè­˜ã•ã‚Œã¾ã—ãŸ");
         }
-        if (test_no = 2) {
-            note_template += "@‘®2 §ŒÀ‚ªO”Ô–Ú‚Éd‚¢Lv2‚É‚Â‚¢‚Ä\n@§ŒÀ‚ªO”Ô–Ú‚Éd‚¢Lv2‚É‚Â‚¢‚Ä‚ÌÀŒ±Œ‹‰Ê‚ğˆÈ‰º‚É‹L‚·B\n\n";
-            var time_i = 750;
+        if (test_no == 2) {
+            note_template += "ã€€æ›¸å¼2 åˆ¶é™ãŒä¸‰ç•ªç›®ã«é‡ã„Lv2ã«ã¤ã„ã¦\nã€€åˆ¶é™ãŒä¸‰ç•ªç›®ã«é‡ã„Lv2ã«ã¤ã„ã¦ã®å®Ÿé¨“çµæœã‚’ä»¥ä¸‹ã«è¨˜ã™ã€‚\n\n";
+            time_i = 750;
             var test_ty = "one_msg";
+            console.log("2ãŒèªè­˜ã•ã‚Œã¾ã—ãŸ");
         }
-        if (test_no = 3) {
-            note_template += "@‘®1 §ŒÀ‚ªÅ‚àŒy‚¢Lv1‚É‚Â‚¢‚Ä\n@§ŒÀ‚ªÅ‚àŒy‚¢Lv1‚É‚Â‚¢‚Ä‚ÌÀŒ±Œ‹‰Ê‚ğˆÈ‰º‚É‹L‚·B\n\n";
-            var time_i = 250;
+        if (test_no == 3) {
+            note_template += "ã€€æ›¸å¼1 åˆ¶é™ãŒæœ€ã‚‚è»½ã„Lv1ã«ã¤ã„ã¦\nã€€åˆ¶é™ãŒæœ€ã‚‚è»½ã„Lv1ã«ã¤ã„ã¦ã®å®Ÿé¨“çµæœã‚’ä»¥ä¸‹ã«è¨˜ã™ã€‚\n\n";
+            time_i = 250;
             var test_ty = "excute_ban";
+            console.log("3ãŒèªè­˜ã•ã‚Œã¾ã—ãŸ");
         }
-        note_template += "ÀŒ±•û–@:javascrip‚Åƒ†[ƒU[ƒXƒNƒŠƒvƒg‚ğ‘g‚İA‚»‚ê‚¼‚ê‚É‚Â‚¢‚Ä‰½ms‚²‚Æ‚ÌÀs‚ª§ŒÀ‚ª‚©‚©‚ç‚È‚¢‚©‚ğŒŸØ‚·‚éBƒfƒtƒHƒ‹ƒg‚Ì’l‚©‚çƒXƒ^[ƒg‚µA§ŒÀ‚ª“r’†‚Å‚©‚©‚Á‚½ê‡‚Í©“®“I‚É’â~‚µAŸ‰ñ‚Í+5ms‚²‚Æ‚É‘—M‚·‚éB‚»‚µ‚Äs‰ñ”750‚Ü‚Å‚Å§ŒÀ‚ª‚©‚©‚ç‚È‚©‚Á‚½ê‡‚Í‚»‚ê‚ğƒMƒŠƒMƒŠ‚Ì’l‚Æ‚µAŸ‚ÌÀŒ±‚ÉˆÚ‚éB\n\nÀŒ±Œ‹‰Ê:\n\n";
+        note_template += "å®Ÿé¨“æ–¹æ³•:javascripã§ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’çµ„ã¿ã€ãã‚Œãã‚Œã«ã¤ã„ã¦ä½•msã”ã¨ã®å®Ÿè¡ŒãŒåˆ¶é™ãŒã‹ã‹ã‚‰ãªã„ã‹ã‚’æ¤œè¨¼ã™ã‚‹ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®å€¤ã‹ã‚‰ã‚¹ã‚¿ãƒ¼ãƒˆã—ã€åˆ¶é™ãŒé€”ä¸­ã§ã‹ã‹ã£ãŸå ´åˆã¯è‡ªå‹•çš„ã«åœæ­¢ã—ã€æ¬¡å›ã¯+125msã”ã¨ã«é€ä¿¡ã™ã‚‹ã€‚ãã—ã¦è©¦è¡Œå›æ•°500ã¾ã§ã§åˆ¶é™ãŒã‹ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã¯ãã‚Œã‚’ã‚®ãƒªã‚®ãƒªã®å€¤ã¨ã—ã€æ¬¡ã®å®Ÿé¨“ã«ç§»ã‚‹ã€‚\n\nå®Ÿé¨“çµæœ:\n\n";
 
         console.log("test_no:" + test_no);
-        //Šˆ“®‹L˜^c‚µ—ptest_noteA‚»‚ê‚¼‚ê‚Ì‘S‹L˜^‚ğc‚·
+        //æ´»å‹•è¨˜éŒ²æ®‹ã—ç”¨test_noteã€ãã‚Œãã‚Œã®å…¨è¨˜éŒ²ã‚’æ®‹ã™
 
         if (localStorage.hasOwnProperty("test_note")) {
-            var test_note = localStorage.getItem("test_note");
+            let test_note = localStorage.getItem("test_note");
             if (test_note == "") {
                 localStorage.setItem('test_note', note_template);
             }
         } else {
             localStorage.setItem('test_note', note_template);
-            var test_note = note_template;
+            let test_note = note_template;
         }
 
-        //time_interval ‚Í‰½ms‚²‚Æ‚ÉÀs‚·‚é‚©
+        //time_interval ã¯ä½•msã”ã¨ã«å®Ÿè¡Œã™ã‚‹ã‹
         if (localStorage.hasOwnProperty("time_interval")) {
-            var time_i = localStorage.getItem("time_interval");
+            var time_ii=localStorage.getItem("time_interval");
+            console.log(time_ii);
+            if(time_ii==""){
+                localStorage.setItem('time_interval', time_i);
+                            time_i=Number(time_i);
+                           }else{
+            time_i = localStorage.getItem("time_interval");
+                
+            time_i=Number(time_i);
+            }
         } else {
             localStorage.setItem('time_interval', time_i);
         }
         console.log("time_i:" + time_i);
         var wait = false;
         socket.on('notice', function (res) {
-            l('ynoticez');
+            l('ã€noticeã€‘');
             show_notice(res)
-            if (res.msg == "‚µ‚Î‚ç‚­‚¨‘Ò‚¿‚­‚¾‚³‚¢") {
+            if (res.msg == "ã—ã°ã‚‰ããŠå¾…ã¡ãã ã•ã„") {
                 wait = true;
                 console.log(res);
             }
@@ -85,50 +102,52 @@
         var int = 0;
         function test_func() {
             if (stop_int == false) {
-                if (int < 751) {
+                if (int < 501) {
                     if (wait == false) {
                         socket.json.emit(test_ty, {});
                         int++
-                        console.log("³í‚É‘—M‚³‚ê‚Ü‚µ‚½");
+                        console.log("æ­£å¸¸ã«é€ä¿¡ã•ã‚Œã¾ã—ãŸ");
                     } else {
                         stop_int = true;
-                        var note_mem = "\n" + time_i + "ms‚Å‚ÌÀsŒ‹‰Ê: " + int + "‰ñ–Ú‚É‚Ä§ŒÀ";
+                        var note_mem = "\n" + time_i + "msã§ã®å®Ÿè¡Œçµæœ: " + int + "å›ç›®ã«ã¦åˆ¶é™";
                         console.log(note_mem);
                         test_note += note_mem;
-                        time_i += 5;
+                        time_i += 125;
                         localStorage.setItem('test_note', test_note);
                         localStorage.setItem('time_interval', time_i);
-                        console.log("³í‚É§ŒÀ‚ğ‹L˜^‚µ‚Ü‚µ‚½");
+                        console.log("æ­£å¸¸ã«åˆ¶é™ã‚’è¨˜éŒ²ã—ã¾ã—ãŸ");
                         setTimeout(() => {
                             window.location.reload();
-                        }, 3000);
+                        }, 70000);
                     }
                 } else {
                     stop_int = true;
-                    var note_mem = "\n" + time_i + "ms‚Å‚ÌÀsŒ‹‰Ê: " + int + "‰ñ–Ú‚Ü‚ÅsA§ŒÀ‰ñ”ğ";
+                    var note_mem = "\n" + time_i + "msã§ã®å®Ÿè¡Œçµæœ: " + int + "å›ç›®ã¾ã§è©¦è¡Œã€åˆ¶é™å›é¿";
                     console.log(note_mem);
                     test_note += note_mem;
-                    if (test_no = 3) {
+                    saveTextFile(test_no, test_note);
+                    localStorage.setItem('test_note', "");
+                    localStorage.setItem('time_interval', "");
+                    if (test_no == 3) {
                         localStorage.setItem('test_ended', true);
                     } else {
                         test_no++;
+                        localStorage.setItem('test_no', test_no);
                     }
-                    saveTextFile(test_no, test_note);
-                    localStorage.setItem('test_note', "");
-                    console.log("³í‚É¬Œ÷‚ğ‹L˜^‚µ‚Ü‚µ‚½");
+                    console.log("æ­£å¸¸ã«æˆåŠŸã‚’è¨˜éŒ²ã—ã¾ã—ãŸ");
                     setTimeout(() => {
                         window.location.reload();
-                    }, 3000);
+                    }, 70000);
                 }
             }
         }
 
         function test_2() {
             setInterval(test_func, time_i);
-            console.log("test_2Às");
+            console.log("test_2å®Ÿè¡Œ");
         }
         setTimeout(test_2, 70000);
-        console.log("70•b‘Ò‹@’†");
+        console.log("70ç§’å¾…æ©Ÿä¸­");
 
     }
 })();

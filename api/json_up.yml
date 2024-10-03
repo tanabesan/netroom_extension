@@ -1,4 +1,4 @@
-name: Update Release Notes JSON
+name: JSON情報の更新
 
 on:
   release:

@@ -63,15 +63,20 @@
         console.log("test_no:" + test_no);
         //活動記録残し用test_note、それぞれの全記録を残す
 
+
         if (localStorage.hasOwnProperty("test_note")) {
-            let test_note = localStorage.getItem("test_note");
+            var test_note = localStorage.getItem("test_note");
             if (test_note == "") {
                 localStorage.setItem('test_note', note_template);
+                var test_note  = note_template;
+
             }
         } else {
             localStorage.setItem('test_note', note_template);
-            let test_note = note_template;
+            var test_note = note_template;
+            console.log("temp=note");
         }
+
 
         //time_interval は何msごとに実行するか
         if (localStorage.hasOwnProperty("time_interval")) {
@@ -82,7 +87,6 @@
                             time_i=Number(time_i);
                            }else{
             time_i = localStorage.getItem("time_interval");
-                
             time_i=Number(time_i);
             }
         } else {

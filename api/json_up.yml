@@ -1,1 +1,40 @@
+name: Update Release Notes JSON
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Get the latest release information
+        id: get_release
+        run: |
+          latest_release=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest)
+          echo "::set-output name=tag::$(echo $latest_release | jq -r '.tag_name')"
+          echo "::set-output name=notes::$(echo $latest_release | jq -r '.body')"
+
+      - name: Update JSON file
+        run: |
+          # JSONファイルが存在しない場合は初期化
+          if [ ! -f api/data.json ]; then
+            echo '{ "releases": [] }' > api/data.json
+          fi
+
+          # 最新のリリース情報をJSONファイルに追加
+          jq --arg tag "${{ steps.get_release.outputs.tag }}" --arg notes "${{ steps.get_release.outputs.notes }}" \
+          '.releases += [{"tag": $tag, "notes": $notes}]' api/data.json > tmp.json && mv tmp.json api/data.json
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add api/data.json
+          git commit -m "Update release notes with new release ${{ steps.get_release.outputs.tag }}"
+          git push
 

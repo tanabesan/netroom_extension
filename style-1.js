@@ -450,12 +450,13 @@ $('.tab_friends').off(_E.clickd, switch_tab_user_or_friends);
 
 
 // 要素を生成（テキストで要素を作る場合）
-const element_b = document.querySelector('#box_3');
+const element_b = document.querySelector('#box3');
 const createElement_b = `
+        <div id="d_user_list3" style="display: block;">
           <h1>三テスト三</h1>
           </ul>
+	</div>
 `;
-createElement_b.id="d_user_list3";
 
 // 最初の子要素として追加
 element_b.insertAdjacentHTML('beforeend', createElement_b);

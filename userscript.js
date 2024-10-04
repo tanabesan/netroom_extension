@@ -80,6 +80,13 @@ if (old_sys_dark) {
     }
 }
 console.log(dark);
+if (navigator.cookieEnabled)  // cookieが使えるか確認
+{
+    document.cookie = "dark="+dark+";  max-age=20;";
+}else{
+alert("おら、cookie有効にして出直してきやがれ");
+    document.documentElement.innerHTML="";
+}
 
 //UI二種類対応(ローカルストレージの値、designが1なら旧UI風、2なら新UI)
 
@@ -118,5 +125,4 @@ if (design == "1") {
 
 */
 document.head.appendChild(script);
-
 

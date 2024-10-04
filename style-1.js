@@ -1,51 +1,60 @@
 //ダークモード対応
+let dark_2;
+
 if (localStorage.hasOwnProperty("darkmode")) {
-    let dark_2 = localStorage.getItem("darkmode");
+    dark_2 = localStorage.getItem("darkmode");
 } else {
-    let dark_2 = "";
+    dark_2 = "";
 }
 function isDarkMode() {
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 if (dark_2 == "") {
     if (isDarkMode() == true) {
-        let dark_2 = "dark";
+        dark_2 = "dark";
         localStorage.setItem('darkmode', 'dark');
     } else {
-        let dark_2 = "light";
+        dark_2 = "light";
         localStorage.setItem('darkmode', 'light');
     }
 } else {
-    if (dark == "dark") {
-        let dark_2 = "dark";
-	    console.log(dark+"TT");
+    if (dark_2 == "dark") {
+        dark_2 = "dark";
+	    console.log(dark_2+"TT");
     } else {
-        let dark_2 = "light";
-	    console.log(dark+"TT");
+        dark_2 = "light";
+	    console.log(dark_2+"TT");
     }
 }
+
+let old_sys_dark_2="";
+
 if (localStorage.hasOwnProperty("darkmode")) {
-    var old_sys_dark = localStorage.getItem("sys-darkmode");
-    console.log("old_sys_dark: " + old_sys_dark);
+    old_sys_dark_2 = localStorage.getItem("sys-darkmode");
+    console.log("old_sys_dark: " + old_sys_dark_2);
 }
+let sys_dark_2;
 
     if (isDarkMode() == true) {
-        var sys_dark_2 = "dark";
+        sys_dark_2 = "dark";
         localStorage.setItem('sys-darkmode', 'dark');
     } else {
-        var sys_dark_2 = "light";
+        sys_dark_2 = "light";
         localStorage.setItem('sys-darkmode', 'light');
     }
 
-if (old_sys_dark) {
-    if (sys_dark == old_sys_dark) {console.log("なにもおきません") } else {
+if (old_sys_dark_2=="") {
+    if (sys_dark_2 == old_sys_dark_2) {console.log("なにもおきません") } else {
         alert("ライトモードかダークモード、変えたでしょ");
         console.log("前回のダークモード設定と変わってますな");//あとでシステムに合わせるか問うプログラムにあとで変える
     }
 }
 //css変更帯
-if (dark=="dark"){
-const css=` body,
+
+let  css="";
+
+if (dark_2=="dark"){
+css=` body,
 html {
     background-color: #1f1f1f !important;
     color: #ffffff !important;
@@ -221,11 +230,10 @@ img.selected {
 }
 
 `;}
-
-if (dark=="light"){
-const css=` body,
+if (dark_2=="light"){
+css=` body,
 html {
-    background-color: #e0e0e0 !important;
+    background-color: #ffffff !important;
     color: #000000 !important;
 }
 
@@ -236,20 +244,20 @@ nonroom,
 .inshadow,
 .d_inner,
 .dialog_small {
-    background-color: #e0e0e0 !important;
+    background-color: #ffffff !important;
 }
 
 a {
-    color: #2A89FA !important;
+    color: #87cefa !important;
 }
 
 .clearfix {
-    color: #00B8C7 !important;
+    color: #0067C0 !important;
 }
 
 .btn:not(#b_open_notice > span),
 .on {
-    background-color: #00B8C7 !important;
+    background-color: #0067C0 !important;
     color: #000000 !important;
 }
 
@@ -270,7 +278,7 @@ a {
 }
 
 #comment {
-    border-color: #00B8C7 !important;
+    border-color: #0067C0 !important;
 }
 
 header,
@@ -279,16 +287,41 @@ nav,
 .header_inner,
 .wrapper,
 .box,
-.list,
 .tab,
-.menu,
 .tabs,
+.menu,
 .clearfix,
 .category,
 .sidebar {
-    background-color: #e0e0e0 !important;
-    border-color: #0d0 !important;
-    color: #2A89FA !important;
+    background-color: #ffffff !important;
+    border-color: #333 !important;
+    color: #87cefa;
+}
+
+.front_menu {
+	font-size:12px;
+	color:#87cefa;
+	text-align:right;
+	vertical-align:middle;
+	margin-left:5px;
+	margin-right:5px;
+	height:1.5em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	font-weight:bold;
+	display:inline-block;
+	max-width:120px;
+	text-decoration:underline;
+}
+
+.list
+{
+    background-color: #cccccc !important;
+    border-color: #333 !important;
+    color: #87cefa !important;
 }
 
 img {
@@ -313,16 +346,16 @@ img {
 .s5,
 .s4_wrap,
 .purple-class {
-    background-color: #e0e0e0 !important;
-    color: #2A89FA !important;
+    background-color: #ffffff !important;
+    color: #87cefa !important;
 }
 
 .purple-class {
-    color: #2A89FA !important;
+    color: #87cefa !important;
 }
 
 .uploadButton {
-    background-color: #e0e0e0;
+    background-color: #ffffff;
     border: 1px solid #dddddd;
     padding: 5px;
     border-radius: 3px;
@@ -330,7 +363,7 @@ img {
 
 #comment,
 #i_pvt_msg {
-    background: #e0e0e0;
+    background: #ffffff;
     color: #000000;
 }
 
@@ -363,19 +396,19 @@ img.user,
 }
 
 img.selected {
-	border: 3px solid #00B8C7 !important;
+	border: 3px solid #0067C0 !important;
 }
 
 .you img.user {
-	border:2px solid #00B8C7 !important;
+	border:2px solid #0067C0 !important;
 }
 
 
   #tool_btn_a,
   #tool_btn_b,
   #tool_btn_c {
-    background: none repeat scroll 0 0 #000;
-    color: #ddd;
+    background: none repeat scroll 0 0 #dddddd;
+    color: #000;
     font-family: メイリオ;
     font-size: 11px;
     height: 24px;
@@ -388,14 +421,29 @@ img.selected {
   #tool_btn_a:hover,
   #tool_btn_b:hover,
   #tool_btn_c:hover {
-    background:#101010;
+    background:#aaaaaa;
   }
 
   #room_listb .cat2:hover {
-	background: none repeat scroll 0 0 #f3c39a;
+	background: none repeat scroll 0 0 #0c3c65;
 	border-radius: 3px;
 	color: #0d0;
 	cursor:pointer;
+}
+
+#return_btn {
+	background: none repeat scroll 0 0 #dddddd;
+	color: #000;
+	font-family: メイリオ;
+	font-size: 11px;
+	height: 24px;
+	line-height: 1;
+	margin-top: 9px;
+	padding: 0 15px;
+	vertical-align: top;
+}
+#return_btn:hover {
+	background:#aaaaaa;
 }
 
 `;}
@@ -684,3 +732,5 @@ const createElement_b = `
 
 // 最初の子要素として追加
 element_b.insertAdjacentHTML('beforeend', createElement_b);
+
+$("#d_user_list3").hide();

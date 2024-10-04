@@ -182,7 +182,7 @@ document.head.appendChild(style);
 $('body').css('background-image', 'url("https://yinkya.github.io/ip/IMG_0379.jpeg")');
 
 
-unsafeWindow.show_room_name = function(res){
+function show_room_name(res){
 	roomnam = res.room_name;
 	roomdes = res.room_desc;
 	lastupd = res.room_update_time;
@@ -241,7 +241,7 @@ unsafeWindow.show_room_name = function(res){
 
 var intervalId;
 
-unsafeWindow.set_url_mode=function(room_id, page, title, cmd) {
+function set_url_mode(room_id, page, title, cmd) {
 	now_cmd = cmd;
 	var disp_room_id = get_parameter();
 	var disp_page = get_parameter(1);
@@ -386,7 +386,7 @@ document.getElementById("box3").querySelector(".tabs").appendChild(tabother);
 
 
 
-unsafeWindow.switch_tab_user_or_friends = function(friends) {
+function switch_tab_user_or_friends(friends){
 	if (friends=="b") {
 		var $t = $("div.tab_friends");
 		var $t_out = $("div.tab_user_in_room_2");

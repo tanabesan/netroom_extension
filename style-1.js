@@ -452,11 +452,10 @@ $('.tab_friends').off(_E.clickd, switch_tab_user_or_friends);
 // 要素を生成（テキストで要素を作る場合）
 const element = document.querySelector('#box_3');
 const createElement = `
-<div id="d_user_list3" style="display: none;">
           <h1>三テスト三</h1>
           </ul>
-        </div>
 `;
+createElement.id="d_user_list3";
 
 // 最初の子要素として追加
-element.insertAdjacentHTML('afterbegin', createElement);
+element.appendChild('afterbegin', createElement);

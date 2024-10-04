@@ -8,7 +8,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 
-/* 
+/*
 NETROOM extension load program
 made by AAAAAAAAAAAA.
 All rights reserved.
@@ -74,7 +74,7 @@ if (localStorage.hasOwnProperty("darkmode")) {
 
 if (old_sys_dark) {
     if (sys_dark == old_sys_dark) {console.log("なにもおきません") } else {
-        alert("前回のダークモード設定と変わってますな");
+        alert("ライトモードかダークモード、変えたでしょ");
         console.log("前回のダークモード設定と変わってますな");//あとでシステムに合わせるか問うプログラムにあとで変える
     }
 }
@@ -102,18 +102,20 @@ let main_html = `
 
 `;
 
-const body = document.querySelector('#body');
-const load_1 = "<script src='https://tanabesan.github.io/netroom_extension/style-1.js' defer></script>";
+var script = document.createElement('script');
+script.src = 'https://tanabesan.github.io/netroom_extension/style-1.js';
+
 
 /* UI2も完成したら
 
 //変更
 if (design == "1") {
-    body.insertAdjacentHTML('beforeend', load_1);
+    document.head.appendChild(script);
 } else {
     document.documentElement.innerHTML = main_html;
 }
 
 */
+document.head.appendChild(script);
 
-body.insertAdjacentHTML('beforeend', load_1);
+

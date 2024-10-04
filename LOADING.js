@@ -1,11 +1,29 @@
+// ==UserScript==
+// @name        NETROOM extension
+// @namespace    https://github.com/tanabesan/netroom_extension
+// @version      beta0.0
+// @author       @tanabesan,@AAniki,@fy1215
+// @match        https://netroom.oz96.com/*
+// @grant        unsafeWindow
+// @run-at       document-idle
+// ==/UserScript==
+
 /* 
-NETROOM extensions load program
+NETROOM extension load program
 made by AAAAAAAAAAAA.
 All rights reserved.
  */
 
+//警告表示
+console.log("%cSTOP！", "font-size: 65px; font-weight: bold; color: red; text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.7);");
+console.log("%cこれは開発者向けのブラウザー機能です。", "font-size: 24px; font-weight: bold;");
+console.log("%c誰かにここに何かをコピー・貼り付けするように言われた場合、それは第三者があなたのNETROOMアカウントへのアクセスを得るための詐欺・不正行為です。", "font-size: 18px;");
+console.log("%c安全だと言われても%c絶対に貼り付け、実行をしないでください。", "font-size: 18px;", "color: red; font-weight: bold; font-size: 23px;");
+console.log("%c詳細は https://www.weblio.jp/content/セルフXSS をご覧ください。", "font-size: 16px; font-style: italic;");
+
+
 /*
-htmlタグ変更帯(LOADING)
+style-2のhtmlタグ変更帯(LOADING)
 */
 
 //スマホ識別
@@ -62,7 +80,7 @@ if (old_sys_dark) {
 }
 console.log(dark);
 
-//UI二種類対応(ローカルストレージの値、designが1なら旧UI風、2ならディスコ風)
+//UI二種類対応(ローカルストレージの値、designが1なら旧UI風、2なら新UI)
 
 if (localStorage.hasOwnProperty("design")) {
     var design = localStorage.getItem("design");
@@ -85,7 +103,9 @@ let main_html = `
 `;
 
 const body = document.querySelector('#body');
-const load_1 = "<script src='style-1.js' defer></script>";
+const load_1 = "<script src='https://tanabesan.github.io/netroom_extension/style-1.js' defer></script>";
+
+/* UI2も完成したら
 
 //変更
 if (design == "1") {
@@ -93,3 +113,7 @@ if (design == "1") {
 } else {
     document.documentElement.innerHTML = main_html;
 }
+
+*/
+
+body.insertAdjacentHTML('beforeend', load_1);

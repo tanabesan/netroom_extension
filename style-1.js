@@ -18,8 +18,10 @@ if (dark == "") {
 } else {
     if (dark == "dark") {
         dark = "dark";
+	    console.log(dark+"TT");
     } else {
         dark = "light";
+	    console.log(dark+"TT");
     }
 }
 if (localStorage.hasOwnProperty("darkmode")) {

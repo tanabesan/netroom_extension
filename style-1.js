@@ -1,26 +1,26 @@
 //ダークモード対応
 if (localStorage.hasOwnProperty("darkmode")) {
-    let dark = localStorage.getItem("darkmode");
+    let dark_2 = localStorage.getItem("darkmode");
 } else {
-    let dark = "";
+    let dark_2 = "";
 }
 function isDarkMode() {
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
-if (dark == "") {
+if (dark_2 == "") {
     if (isDarkMode() == true) {
-        let dark = "dark";
+        let dark_2 = "dark";
         localStorage.setItem('darkmode', 'dark');
     } else {
-        let dark = "light";
+        let dark_2 = "light";
         localStorage.setItem('darkmode', 'light');
     }
 } else {
     if (dark == "dark") {
-        let dark = "dark";
+        let dark_2 = "dark";
 	    console.log(dark+"TT");
     } else {
-        let dark = "light";
+        let dark_2 = "light";
 	    console.log(dark+"TT");
     }
 }
@@ -30,10 +30,10 @@ if (localStorage.hasOwnProperty("darkmode")) {
 }
 
     if (isDarkMode() == true) {
-        var sys_dark = "dark";
+        var sys_dark_2 = "dark";
         localStorage.setItem('sys-darkmode', 'dark');
     } else {
-        var sys_dark = "light";
+        var sys_dark_2 = "light";
         localStorage.setItem('sys-darkmode', 'light');
     }
 

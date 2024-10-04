@@ -1,5 +1,48 @@
-//css変更帯
+//ダークモード対応
+if (localStorage.hasOwnProperty("darkmode")) {
+    var dark = localStorage.getItem("darkmode");
+} else {
+    var dark = "";
+}
+function isDarkMode() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+if (dark == "") {
+    if (isDarkMode() == true) {
+        dark = "dark";
+        localStorage.setItem('darkmode', 'dark');
+    } else {
+        dark = "light";
+        localStorage.setItem('darkmode', 'light');
+    }
+} else {
+    if (dark == "dark") {
+        dark = "dark";
+    } else {
+        dark = "light";
+    }
+}
+if (localStorage.hasOwnProperty("darkmode")) {
+    var old_sys_dark = localStorage.getItem("sys-darkmode");
+    console.log("old_sys_dark: " + old_sys_dark);
+}
 
+    if (isDarkMode() == true) {
+        var sys_dark = "dark";
+        localStorage.setItem('sys-darkmode', 'dark');
+    } else {
+        var sys_dark = "light";
+        localStorage.setItem('sys-darkmode', 'light');
+    }
+
+if (old_sys_dark) {
+    if (sys_dark == old_sys_dark) {console.log("なにもおきません") } else {
+        alert("ライトモードかダークモード、変えたでしょ");
+        console.log("前回のダークモード設定と変わってますな");//あとでシステムに合わせるか問うプログラムにあとで変える
+    }
+}
+//css変更帯
+if (dark=="dark"){
 const css=` body,
 html {
     background-color: #1f1f1f !important;
@@ -175,7 +218,186 @@ img.selected {
 	cursor:pointer;
 }
 
-`;
+`;}
+
+if (dark=="light"){
+const css=` body,
+html {
+    background-color: #e0e0e0 !important;
+    color: #000000 !important;
+}
+
+#d_user_list,
+.dialog,
+.mes_wrap,
+nonroom,
+.inshadow,
+.d_inner,
+.dialog_small {
+    background-color: #e0e0e0 !important;
+}
+
+a {
+    color: #2A89FA !important;
+}
+
+.clearfix {
+    color: #00B8C7 !important;
+}
+
+.btn:not(#b_open_notice > span),
+.on {
+    background-color: #00B8C7 !important;
+    color: #000000 !important;
+}
+
+#b_send {
+    height: 32px;
+}
+
+.comd,
+.m_time,
+.cat1,
+.at_uname,
+.m_no,
+.cat2,
+.user_name,
+#room_title,
+.m_uname {
+    color: #000000 !important;
+}
+
+#comment {
+    border-color: #00B8C7 !important;
+}
+
+header,
+footer,
+nav,
+.header_inner,
+.wrapper,
+.box,
+.list,
+.tab,
+.menu,
+.tabs,
+.clearfix,
+.category,
+.sidebar {
+    background-color: #e0e0e0 !important;
+    border-color: #0d0 !important;
+    color: #2A89FA !important;
+}
+
+img {
+    filter: brightness(0.8) contrast(1.2) !important;
+}
+
+.s1 .rm a,
+.s0 .rm a,
+.s2 .rm a,
+.s3 .rm a,
+.s4 .rm a,
+.s5 .rm a,
+.s4_wrap .rm a,
+.user .rm a {
+    color: #000000 !important;
+}
+
+.s0,
+.s1,
+.s3,
+.s4,
+.s5,
+.s4_wrap,
+.purple-class {
+    background-color: #e0e0e0 !important;
+    color: #2A89FA !important;
+}
+
+.purple-class {
+    color: #2A89FA !important;
+}
+
+.uploadButton {
+    background-color: #e0e0e0;
+    border: 1px solid #dddddd;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+#comment,
+#i_pvt_msg {
+    background: #e0e0e0;
+    color: #000000;
+}
+
+img.user,
+#comment_photo img,
+#icon_table img {
+    border-radius: 50%;
+}
+
+#user_list .user,
+#guest>div>span.s1>img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.ga {
+    position: fixed;
+    right: 456px;
+}
+
+#d_user_list2 {
+    position: fixed;
+    height: 885px;
+    background: 0;
+}
+
+#twitter-widget-0 {
+    display: none;
+}
+
+img.selected {
+	border: 3px solid #00B8C7 !important;
+}
+
+.you img.user {
+	border:2px solid #00B8C7 !important;
+}
+
+
+  #tool_btn_a,
+  #tool_btn_b,
+  #tool_btn_c {
+    background: none repeat scroll 0 0 #000;
+    color: #ddd;
+    font-family: メイリオ;
+    font-size: 11px;
+    height: 24px;
+    line-height: 1;
+    margin-top: 9px;
+    padding: 0 15px;
+    vertical-align: top;
+  }
+
+  #tool_btn_a:hover,
+  #tool_btn_b:hover,
+  #tool_btn_c:hover {
+    background:#101010;
+  }
+
+  #room_listb .cat2:hover {
+	background: none repeat scroll 0 0 #f3c39a;
+	border-radius: 3px;
+	color: #0d0;
+	cursor:pointer;
+}
+
+`;}
+
 const style=document.createElement('style');
 style.appendChild(document.createTextNode(css));
 document.head.appendChild(style);

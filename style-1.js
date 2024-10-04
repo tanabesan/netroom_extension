@@ -1,26 +1,26 @@
 //ダークモード対応
 if (localStorage.hasOwnProperty("darkmode")) {
-    var dark = localStorage.getItem("darkmode");
+    let dark = localStorage.getItem("darkmode");
 } else {
-    var dark = "";
+    let dark = "";
 }
 function isDarkMode() {
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 if (dark == "") {
     if (isDarkMode() == true) {
-        dark = "dark";
+        let dark = "dark";
         localStorage.setItem('darkmode', 'dark');
     } else {
-        dark = "light";
+        let dark = "light";
         localStorage.setItem('darkmode', 'light');
     }
 } else {
     if (dark == "dark") {
-        dark = "dark";
+        let dark = "dark";
 	    console.log(dark+"TT");
     } else {
-        dark = "light";
+        let dark = "light";
 	    console.log(dark+"TT");
     }
 }

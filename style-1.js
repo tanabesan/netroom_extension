@@ -20,10 +20,8 @@ if (dark_2 == "") {
 } else {
     if (dark_2 == "dark") {
         dark_2 = "dark";
-	    console.log(dark_2+"TT");
     } else {
         dark_2 = "light";
-	    console.log(dark_2+"TT");
     }
 }
 
@@ -31,7 +29,6 @@ let old_sys_dark_2="";
 
 if (localStorage.hasOwnProperty("darkmode")) {
     old_sys_dark_2 = localStorage.getItem("sys-darkmode");
-    console.log("old_sys_dark: " + old_sys_dark_2);
 }
 let sys_dark_2;
 

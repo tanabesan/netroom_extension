@@ -230,6 +230,10 @@ img.selected {
 	border-radius: 3px;
   }
 
+  .col{
+	color: #ffffff;
+}
+
 `;}
 if (dark_2=="light"){
 css=` body,
@@ -450,6 +454,10 @@ img.selected {
         background-color :#ffffff;
 		border-radius: 3px;
   }
+
+.col{
+	color: #1f1f1f;
+}
 
 `;}
 
@@ -729,88 +737,26 @@ $('.tab_friends').off(_E.clickd, switch_tab_user_or_friends);
 		switch_tab_user_or_friends("c");
 	});
 
+let set_d="";
+if (dark_2=="dark"){
+
+}
 
 // 要素を生成（テキストで要素を作る場合）
 const element_b = document.querySelector('#box3');
 const createElement_b = `
         <div id="d_user_list3" style="display: block;">
-          <h1>NETROOM extension 機能設定</h1>
-	  <div class="toggle_button" style="float; left;">
-   		<div class="set_men" id="room_title">テーマ</div>
-		<input id="toggle" class="toggle_input" type='checkbox' />
-		<label for="toggle" class="toggle_label"/>
-	　 </div>
-           <div calss="comd set_int" style="float: left;">ライト</div>
+          <center><h1 class="col">NETROOM extension 機能設定</h1></center>
+             <center>
+<fieldset>
+<legend>テーマカラー</legend>
+<label><input type="radio" name="col" value="light" checked="">ライト</label>
+<label><input type="radio" name="col" value="dark">ダーク</label>
+</fieldset>
+           </center>
 
           </ul>
 	</div>
-
-
-
-<style>
-.toggle_input {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 5;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.toggle_label {
-  width: 85px;
-  height: 42px;
-  background: #fff;
-  border: 3px solid #eee;
-  position: relative;
-  display: inline-block;
-  border-radius: 40px;
-  transition: 0.4s;
-  box-sizing: border-box;
-}
-
-.toggle_label:after {
-  content: "";
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
-  left: 2px;
-  top: 2px;
-  z-index: 2;
-  background: #eee;
-  transition: 0.4s;
-}
-
-.toggle_input:checked + .toggle_label {
-
-  border: 3px solid #4BD865;
-}
-
-.toggle_input:checked + .toggle_label:after {
-  left: 42px;
-  background: #4BD865;
-}
-
-.toggle_button {
-  position: relative;
-  width: 85px;
-  height: 42px;
-  margin: auto;
-}
-
-.set_men{
-	font-size: 14px;
-}
-
-.set_int{
-	font-size: 11.5px;
-
-}
-</style>
-
 `;
 
 // 最初の子要素として追加

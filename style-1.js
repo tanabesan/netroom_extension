@@ -735,10 +735,13 @@ const element_b = document.querySelector('#box3');
 const createElement_b = `
         <div id="d_user_list3" style="display: block;">
           <h1>NETROOM extension 機能設定</h1>
-	  <div class="toggle_button">
+	  <div class="toggle_button" style="float; left;">
+   		<div class="set_men" id="room_title">テーマ</div>
 		<input id="toggle" class="toggle_input" type='checkbox' />
 		<label for="toggle" class="toggle_label"/>
 	　 </div>
+           <div calss="comd set_int" style="float: left;">ライト</div>
+
           </ul>
 	</div>
 
@@ -796,6 +799,15 @@ const createElement_b = `
   width: 85px;
   height: 42px;
   margin: auto;
+}
+
+.set_men{
+	font-size: 14px;
+}
+
+.set_int{
+	font-size: 11.5px;
+
 }
 </style>
 

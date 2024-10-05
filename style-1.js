@@ -734,12 +734,110 @@ $('.tab_friends').off(_E.clickd, switch_tab_user_or_friends);
 const element_b = document.querySelector('#box3');
 const createElement_b = `
         <div id="d_user_list3" style="display: block;">
-          <h1>三テスト三</h1>
+          <h1>NETROOM extension 機能設定</h1>
+	  <div class="toggle_button">
+		<input id="toggle" class="toggle_input" type='checkbox' />
+		<label for="toggle" class="toggle_label"/>
+	　 </div>
           </ul>
 	</div>
+
+
+
+<style>
+.toggle_input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toggle_label {
+  width: 85px;
+  height: 42px;
+  background: #fff;
+  border: 3px solid #eee;
+  position: relative;
+  display: inline-block;
+  border-radius: 40px;
+  transition: 0.4s;
+  box-sizing: border-box;
+}
+
+.toggle_label:after {
+  content: "";
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  left: 2px;
+  top: 2px;
+  z-index: 2;
+  background: #eee;
+  transition: 0.4s;
+}
+
+.toggle_input:checked + .toggle_label {
+
+  border: 3px solid #4BD865;
+}
+
+.toggle_input:checked + .toggle_label:after {
+  left: 42px;
+  background: #4BD865;
+}
+
+.toggle_button {
+  position: relative;
+  width: 85px;
+  height: 42px;
+  margin: auto;
+}
+</style>
+
 `;
 
 // 最初の子要素として追加
 element_b.insertAdjacentHTML('beforeend', createElement_b);
 
 $("#d_user_list3").hide();
+
+
+//部屋リスト自動更新30s毎
+
+var auto_l = document.createElement('div');
+auto_l.id = 'clock';
+auto_l.style.display = 'inline';
+if (dark_2=="dark"){
+	auto_l.style.color = 'white';
+}else{
+	auto_l.style.color = 'black';
+}
+auto_l.style.fontSize = '5pt';
+
+let auto_l_time = 30;
+
+function updateAuto() {
+	auto_l_time = auto_l_time - 1;
+	if(auto_l_time == 0){
+		var parameter = {
+			'category': selected_category,
+			'room_name': searched_room_name,
+			'update_time': ""
+			};
+		auto_l.textContent = "Loading";
+		auto_l_time = 30;
+		socket.json.emit('get_room_list', parameter);
+	}else{
+	auto_l.textContent = "自動更新まであと" + auto_l_time + "秒";
+	}
+}
+
+setInterval(updateAuto, 1000);
+
+var myinfowrap = document.getElementById("reload_btn_wrap");
+myinfowrap.insertBefore(auto_l, myinfowrap.nextChild);

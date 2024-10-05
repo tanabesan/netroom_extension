@@ -737,9 +737,12 @@ $('.tab_friends').off(_E.clickd, switch_tab_user_or_friends);
 		switch_tab_user_or_friends("c");
 	});
 
-let set_d="";
-if (dark_2=="dark"){
-
+let set_w_d = "";
+let set_d_d = "";
+if (dark_2 == "dark") {
+	set_d_d = ' checked=""';
+} else {
+	set_w_d = ' checked=""'
 }
 
 // 要素を生成（テキストで要素を作る場合）
@@ -750,8 +753,8 @@ const createElement_b = `
              <center>
 <fieldset>
 <legend>テーマカラー</legend>
-<label><input type="radio" name="col" value="light" checked="">ライト</label>
-<label><input type="radio" name="col" value="dark">ダーク</label>
+<label><input type="radio" name="col" value="light"`+ set_w_d +` onClick="change_theme('dark');">ライト</label>
+<label><input type="radio" name="col" value="dark"` + set_d_d + ` onClick="change_theme('light');">ダーク</label>
 </fieldset>
            </center>
 
@@ -764,6 +767,21 @@ element_b.insertAdjacentHTML('beforeend', createElement_b);
 
 $("#d_user_list3").hide();
 
+//ダークモード変更
+
+function change_theme(theme_name) {
+	if (theme_name == dark_2) {
+		var theme_new = "";
+		if (theme_name == "dark") {
+			theme_new = "light";
+		} else {
+			theme_new = "dark";
+		}
+		localStorage.setItem('darkmode', theme_new);
+		createOverlay();
+		updateText("㊟変更は次回のロード時に反映されます。<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>→了解したのであります←</b></button>");
+	}
+}
 
 //部屋リスト自動更新30s毎
 
@@ -799,3 +817,60 @@ setInterval(updateAuto, 1000);
 
 var myinfowrap = document.getElementById("reload_btn_wrap");
 myinfowrap.insertBefore(auto_l, myinfowrap.nextChild);
+
+
+// 半透明な灰色の壁を作成する関数
+let overlay = null;
+let loadingText = null;
+
+function createOverlay() {
+	if (overlay) {
+		overlay.remove();
+	}
+
+	// オーバーレイ要素の作成
+	overlay = document.createElement('div');
+	overlay.classList.add('overlay');
+
+	// スタイルの設定
+	overlay.style.position = 'fixed';
+	overlay.style.top = '0';
+	overlay.style.left = '0';
+	overlay.style.width = '100%';
+	overlay.style.height = '100%';
+	overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+	overlay.style.zIndex = '2';
+
+	// テキスト要素の作成
+	loadingText = document.createElement('div');
+	loadingText.style.color = '#ffffff';
+	loadingText.style.fontSize = '24px';
+	loadingText.style.textAlign = 'center';
+	loadingText.style.position = 'absolute';
+	loadingText.style.top = '50%';
+	loadingText.style.left = '50%';
+	loadingText.style.transform = 'translate(-50%, -50%)';
+
+	// オーバーレイ要素にテキスト要素を追加
+	overlay.appendChild(loadingText);
+
+	// ボディ要素にオーバーレイ要素を追加
+	document.body.appendChild(overlay);
+}
+
+
+// 変数の値を更新する関数
+function updateText(text) {
+	if (loadingText) {
+		loadingText.innerHTML = text;
+	}
+}
+
+
+// 半透明な灰色の壁を削除する関数
+function removeOverlay() {
+	let overlay = document.querySelector('.overlay');
+	if (overlay) {
+		document.body.removeChild(overlay);
+	}
+}

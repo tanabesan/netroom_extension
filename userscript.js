@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        NETROOM extension
 // @namespace    https://github.com/tanabesan/netroom_extension
-// @version      beta0.0
+// @version      beta0.1
 // @icon         https://raw.githubusercontent.com/tanabesan/netroom_extension/refs/heads/main/white_logo_official.png
 // @author       @tanabesan,@AAniki,@fy1215
 // @match        https://netroom.oz96.com/*
@@ -126,3 +126,6 @@ if (design == "1") {
 */
 document.head.appendChild(script);
 
+//favicon変更
+
+document.querySelector('link[rel="shortcut icon"]').href = "https://tanabesan.github.io/netroom_extension/white_logo_official.png";

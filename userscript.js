@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        NETROOM extension
 // @namespace    https://github.com/tanabesan/netroom_extension
-// @version      beta0.1
+// @version      beta0.11
 // @icon         https://raw.githubusercontent.com/tanabesan/netroom_extension/refs/heads/main/white_logo_official.png
 // @author       @tanabesan,@AAniki,@fy1215
 // @match        https://netroom.oz96.com/*

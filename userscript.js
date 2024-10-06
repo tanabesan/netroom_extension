@@ -65,16 +65,16 @@ if (localStorage.hasOwnProperty("darkmode")) {
     console.log("old_sys_dark: " + old_sys_dark);
 }
 
-    if (isDarkMode() == true) {
-        var sys_dark = "dark";
-        localStorage.setItem('sys-darkmode', 'dark');
-    } else {
-        var sys_dark = "light";
-        localStorage.setItem('sys-darkmode', 'light');
-    }
+if (isDarkMode() == true) {
+    var sys_dark = "dark";
+    localStorage.setItem('sys-darkmode', 'dark');
+} else {
+    var sys_dark = "light";
+    localStorage.setItem('sys-darkmode', 'light');
+}
 
 if (old_sys_dark) {
-    if (sys_dark == old_sys_dark) {console.log("なにもおきません") } else {
+    if (sys_dark == old_sys_dark) { console.log("なにもおきません") } else {
         alert("ライトモードかダークモード、変えたでしょ");
         console.log("前回のダークモード設定と変わってますな");//あとでシステムに合わせるか問うプログラムにあとで変える
     }
@@ -82,18 +82,18 @@ if (old_sys_dark) {
 console.log(dark);
 if (navigator.cookieEnabled)  // cookieが使えるか確認
 {
-    document.cookie = "dark="+dark+";  max-age=20;";
-}else{
-alert("おら、cookie有効にして出直してきやがれ");
-    document.documentElement.innerHTML="";
+    document.cookie = "dark=" + dark + ";  max-age=20;";
+} else {
+    alert("おら、cookie有効にして出直してきやがれ");
+    document.documentElement.innerHTML = "";
 }
 
-//UI二種類対応(ローカルストレージの値、designが1なら旧UI風、2なら新UI)
+//UI二種類対応(ローカルストレージの値、e-uiがoldなら旧UI風、newなら新UI)
 
-if (localStorage.hasOwnProperty("design")) {
-    var design = localStorage.getItem("design");
+if (localStorage.hasOwnProperty("e-ui")) {
+    var e_ui = localStorage.getItem("e-ui");
 } else {
-    var design = "2";
+    var e_ui = "new";
 }
 
 //スマホ対応
@@ -114,17 +114,13 @@ var script = document.createElement('script');
 script.src = 'https://tanabesan.github.io/netroom_extension/style-1.js';
 
 
-/* UI2も完成したら
-
 //変更
-if (design == "1") {
+if (e_ui == "old") {
     document.head.appendChild(script);
 } else {
-    document.documentElement.innerHTML = main_html;
+    //document.documentElement.innerHTML = main_html;
+    document.head.appendChild(script);
 }
-
-*/
-document.head.appendChild(script);
 
 //favicon変更
 

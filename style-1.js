@@ -745,6 +745,15 @@ if (dark_2 == "dark") {
 	set_w_d = ' checked=""'
 }
 
+let now_ui = "old";
+let set_u_o = "";
+let set_u_n = "";
+if (now_ui == "old") {
+	set_u_o = ' checked=""';
+} else {
+	set_u_n = ' checked=""'
+}
+
 // 要素を生成（テキストで要素を作る場合）
 const element_b = document.querySelector('#box3');
 const createElement_b = `
@@ -755,6 +764,11 @@ const createElement_b = `
 <legend>テーマカラー</legend>
 <label><input type="radio" name="col" value="light"`+ set_w_d +` onClick="change_theme('dark');">ライト</label>
 <label><input type="radio" name="col" value="dark"` + set_d_d + ` onClick="change_theme('light');">ダーク</label>
+</fieldset>
+<fieldset>
+<legend>テーマカラー</legend>
+<label><input type="radio" name="ui" value="old"`+ set_u_o + ` onClick="change_ui('old');">UI1</label>
+<label><input type="radio" name="ui" value="new"` + set_u_n + ` onClick="change_ui('new');">UI2</label>
 </fieldset>
            </center>
 
@@ -769,19 +783,40 @@ $("#d_user_list3").hide();
 
 //ダークモード変更
 
+let dark_3 = dark_2;
+
 function change_theme(theme_name) {
-	if (theme_name == dark_2) {
+	if (theme_name == dark_3) {
 		var theme_new = "";
 		if (theme_name == "dark") {
 			theme_new = "light";
 		} else {
 			theme_new = "dark";
 		}
+		dark_3 = theme_new;
 		localStorage.setItem('darkmode', theme_new);
 		createOverlay();
-		updateText("㊟変更は次回のロード時に反映されます。<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>→了解したのであります←</b></button>");
+		updateText("<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>変更は次回のロード時に反映されます。<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>→了解したのであります←</b></button>");
 	}
 }
+
+let now_ui_2 = now_ui;
+
+function change_ui(ui_name) {
+	if (ui_name == now_ui_2) {
+		var ui_new = "";
+		if (ui_name == "old") {
+			ui_new = "new";
+		} else {
+			ui_new = "old";
+		}
+		now_ui_2 = ui_new;
+		localStorage.setItem('e-ui', ui_new);
+		createOverlay();
+		updateText("<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>変更は次回のロード時に反映されます。<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>→了解したのであります←</b></button>");
+	}
+}
+
 
 //部屋リスト自動更新30s毎
 

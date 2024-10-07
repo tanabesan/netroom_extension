@@ -134,6 +134,6 @@ footer p {
 }
 
 #splash-screen .logo {
-    width: 300px; /* ロゴの幅を大きくする */
+    width: 550px; /* ロゴの幅を大きくする */
     height: auto; /* アスペクト比を維持 */
 }

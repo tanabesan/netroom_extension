@@ -155,3 +155,33 @@ footer p {
     text-align: center; /* テキストを中央寄せ */
     padding: 20px; /* 内側の余白 */
 }
+
+header {
+    background-color: #333; /* ヘッダーの背景色 */
+    padding: 10px 20px; /* ヘッダーの内側の余白 */
+}
+
+.header-content {
+    display: flex; /* フレックスボックスを使用 */
+    align-items: center; /* 垂直方向の中央揃え */
+    justify-content: flex-start; /* 水平方向の左揃え */
+}
+
+.logo {
+    font-size: 20px; /* ロゴのフォントサイズ */
+    margin-right: 20px; /* ナビゲーションとの間隔 */
+    color: white; /* ロゴの色 */
+}
+
+.navbar ul {
+    list-style: none; /* リストのスタイルを無効にする */
+    padding: 0; /* パディングを無効にする */
+    margin: 0; /* マージンを無効にする */
+    display: flex; /* フレックスボックスで横並び */
+}
+
+.navbar li {
+    margin-right: 15px; /* リスト項目の間隔 */
+    color: white; /* リスト項目の色 */
+}
+

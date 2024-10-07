@@ -17,4 +17,119 @@
     height: auto;
 }
 
-/* ページの他のスタイルは前述の通り */
+/* ベーススタイル */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ddd;
+}
+
+/* ヘッダー */
+header {
+    background-color: #111;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+/* メインセクション */
+#main {
+    padding: 50px;
+    text-align: center;
+}
+
+#main h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#main p {
+    font-size: 1.2em;
+}
+
+/* 機能紹介セクション */
+#features {
+    padding: 50px;
+    background-color: #111;
+}
+
+#features h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#features ul li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* ダウンロードセクション */
+#download {
+    padding: 50px;
+    text-align: center;
+}
+
+#download button {
+    background-color: #444;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#download button:hover {
+    background-color: #666;
+}
+
+/* サポートセクション */
+#support {
+    padding: 50px;
+    background-color: #111;
+    text-align: center;
+}
+
+/* フッター */
+footer {
+    background-color: #000;
+    text-align: center;
+    padding: 20px;
+}
+
+footer p {
+    margin: 5px;
+}
+

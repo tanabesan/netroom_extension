@@ -6,5 +6,5 @@ window.addEventListener("load", function() {
         setTimeout(function() {
             splashScreen.style.display = "none";
         }, 500); // 0.5秒後に非表示
-    }, 1500); // 1.5秒後にフェードアウトを開始
+    }, 1850); // 1.5秒後にフェードアウトを開始
 });

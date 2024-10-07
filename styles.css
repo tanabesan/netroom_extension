@@ -151,3 +151,7 @@ footer p {
     align-items: center;
     z-index: 10000;
 }
+#features,#team {
+    text-align: center; /* テキストを中央寄せ */
+    padding: 20px; /* 内側の余白 */
+}

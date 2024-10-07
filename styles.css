@@ -136,5 +136,18 @@ footer p {
 #splash-screen .logo {
     width: 550px; /* ロゴの幅を大きくする */
     height: auto; /* アスペクト比を維持 */
-    background-color: #1F1F1F;
+}
+
+/* スプラッシュスクリーンスタイル */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a; /* 画像の背景に合わせた暗いグレー */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
 }

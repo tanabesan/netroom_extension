@@ -43,7 +43,7 @@ let sys_dark_2;
 if (old_sys_dark_2=="") {
     if (sys_dark_2 == old_sys_dark_2) {console.log("なにもおきません") } else {
         createOverlay();
-		updateText("<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>システムテーマが変更されました。設定を同期しますか？<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>いいえ</b></button><button onclick='removeOverlay();' style='font-size:22px;'><b>はい</b></button>");
+		updateText("<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>システムテーマが変更されました。設定を同期しますか？<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>いいえ</b></button><button onclick='syn_theme();' style='font-size:22px;'><b>はい</b></button>");
     }
 }
 

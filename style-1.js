@@ -42,10 +42,21 @@ let sys_dark_2;
 
 if (old_sys_dark_2=="") {
     if (sys_dark_2 == old_sys_dark_2) {console.log("なにもおきません") } else {
-        alert("ライトモードかダークモード、変えたでしょ");
-        console.log("前回のダークモード設定と変わってますな");//あとでシステムに合わせるか問うプログラムにあとで変える
+        createOverlay();
+		updateText("<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>システムテーマが変更されました。設定を同期しますか？<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>いいえ</b></button><button onclick='removeOverlay();' style='font-size:22px;'><b>はい</b></button>");
     }
 }
+
+function syn_theme(){
+    if (isDarkMode() == true) {
+        dark_2 = "dark";
+        localStorage.setItem('darkmode', 'dark');
+    } else {
+        dark_2 = "light";
+        localStorage.setItem('darkmode', 'light');
+    }
+}
+
 //css変更帯
 
 let  css="";

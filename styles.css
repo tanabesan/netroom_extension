@@ -185,22 +185,37 @@ header {
     color: white; /* リスト項目の色 */
 }
 
+/* styles.cssに追加 */
+
 #main {
-    width: 300px;
-    height: 300px;
+    position: relative;
+    padding: 20px;
+    color: white; /* テキストが見やすいように色を変更 */
+    overflow: hidden;
+    z-index: 1; /* 他の要素より前面に表示 */
+}
+
+#main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(45deg, #ff6b6b, #f7c6c7);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
+    z-index: -1; /* 背景として表示 */
 }
 
-        @keyframes main {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

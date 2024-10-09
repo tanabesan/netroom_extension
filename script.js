@@ -9,37 +9,37 @@ window.addEventListener("load", function() {
     }, 1850); // 1.85秒後にフェードアウトを開始
 });
 
-let slideIndex = 0;
-showSlides();
+let currentSlideIndex = 0;
 
-function showSlides() {
-    let slides = document.getElementsByClassName("slide");
-    let dots = document.getElementsByClassName("slideshow-dots")[0].children;
+function showSlide(index) {
+    const slides = document.querySelectorAll('#slideshow .slide');
+    const dots = document.querySelectorAll('.slideshow-dots span');
 
-    // 全スライドを非表示
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
+    // スライドの表示
+    slides.forEach((slide, i) => {
+        slide.style.display = (i === index) ? 'block' : 'none';
+    });
 
-    // 全てのドットを非アクティブ状態に
-    for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active-dot", "");
-    }
-
-    // スライドのインデックスを増やす
-    slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-
-    // 現在のスライドとドットをアクティブにする
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active-dot";
-
-    // 3秒ごとにスライドを切り替え
-    setTimeout(showSlides, 3000);
+    // ドットのアクティブ状態の更新
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active-dot', i === index);
+    });
 }
 
-function currentSlide(n) {
-    slideIndex = n;
-    showSlides();
+// スライドを変更する関数
+function changeSlide(direction) {
+    currentSlideIndex += direction;
+
+    // スライドの範囲を制限
+    const slides = document.querySelectorAll('#slideshow .slide');
+    if (currentSlideIndex < 0) {
+        currentSlideIndex = slides.length - 1; // 最後のスライドに戻る
+    } else if (currentSlideIndex >= slides.length) {
+        currentSlideIndex = 0; // 最初のスライドに戻る
+    }
+
+    showSlide(currentSlideIndex);
 }
 
+// 初期スライドを表示
+showSlide(currentSlideIndex);

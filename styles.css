@@ -1,28 +1,24 @@
 /* スライドショースタイル */
-.slideshow-container {
+#slideshow {
     position: relative;
     max-width: 100%;
     margin: auto;
     overflow: hidden;
 }
 
-.slides {
-    display: none;
+.slide {
+    display: none; /* スライドを非表示にする */
     position: relative;
     text-align: center;
 }
 
-.slides img {
+.slide img {
     width: 300px; /* 幅を固定 */
     height: 200px; /* 高さを固定 */
     object-fit: cover; /* アスペクト比を維持しつつ、指定したサイズに収める */
 }
 
-.slideshow-container .active {
-    display: block;
-}
-
-.dot-container {
+.slideshow-dots {
     text-align: center;
     margin-top: 10px;
 }
@@ -41,13 +37,11 @@
     background-color: #717171;
 }
 
-/* レスポンシブ対応 */
-@media screen and (max-width: 768px) {
-    .features-container {
-        grid-template-columns: 1fr;
-    }
-
+/* スライドの表示 */
+.active {
+    display: block; /* アクティブなスライドを表示 */
 }
+
 /* ベーススタイル */
 body {
     margin: 0;

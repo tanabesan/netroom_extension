@@ -47,10 +47,6 @@
         grid-template-columns: 1fr;
     }
 
-    .slides img {
-        width: 100%; /* モバイルの場合は幅を100%にする */
-        height: auto; /* 高さは自動にする */
-    }
 }
 /* ベーススタイル */
 body {

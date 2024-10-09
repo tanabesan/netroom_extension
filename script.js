@@ -10,39 +10,22 @@ window.addEventListener("load", function() {
 });
 
 let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.slideshow-dots span');
 
-function showSlide(index) {
-    // すべてのスライドを非表示にする
-    slides.forEach((slide) => {
-        slide.style.display = 'none';
-    });
+function showSlide(n) {
+    const slides = document.getElementsByClassName("slide");
+    currentSlideIndex += n;
 
-    // すべてのドットを非アクティブにする
-    dots.forEach((dot) => {
-        dot.classList.remove('active-dot');
-    });
-
-    // 指定したスライドを表示する
-    slides[index].style.display = 'block';
-    dots[index].classList.add('active-dot');
-
-    // 現在のインデックスを更新
-    currentSlideIndex = index;
-}
-
-function changeSlide(n) {
-    let newIndex = currentSlideIndex + n;
-
-    if (newIndex >= slides.length) {
-        newIndex = 0; // 最後のスライドから最初へ
-    } else if (newIndex < 0) {
-        newIndex = slides.length - 1; // 最初のスライドから最後へ
+    // スライドのインデックスを循環させる
+    if (currentSlideIndex < 0) {
+        currentSlideIndex = slides.length - 1; // 最後のスライドに戻る
+    } else if (currentSlideIndex >= slides.length) {
+        currentSlideIndex = 0; // 最初のスライドに戻る
     }
 
-    showSlide(newIndex);
+    // スライドを非表示にする
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    // 現在のスライドを表示する
+    slides[currentSlideIndex].style.display = "block";
 }
-
-// 初期スライドを表示
-showSlide(currentSlideIndex);

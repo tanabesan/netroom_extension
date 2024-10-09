@@ -29,3 +29,8 @@ function showSlide(n) {
     // 現在のスライドを表示する
     slides[currentSlideIndex].style.display = "block";
 }
+
+// ページが読み込まれたときに最初のスライドを表示する
+document.addEventListener("DOMContentLoaded", () => {
+    showSlide(0); // 最初のスライドを表示
+});

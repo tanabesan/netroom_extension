@@ -245,6 +245,19 @@ img.selected {
 	color: #ffffff;
 }
 
+#wrap_container {
+	width:100%;
+	/* max-width:1280px; */
+	margin:auto;
+	display:block;
+}
+
+#box2 {
+	margin:0;
+	/* max-width:870px; */
+	/* width:870px; */
+}
+
 `;}
 if (dark_2=="light"){
 css=` body,
@@ -468,6 +481,19 @@ img.selected {
 
 .col{
 	color: #1f1f1f;
+}
+
+#wrap_container {
+	width:100%;
+	/* max-width:1280px; */
+	margin:auto;
+	display:block;
+}
+
+#box2 {
+	margin:0;
+	/* max-width:870px; */
+	/* width:870px; */
 }
 
 `;}

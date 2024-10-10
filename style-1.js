@@ -954,3 +954,811 @@ function removeOverlay() {
 		document.body.removeChild(overlay);
 	}
 }
+
+
+
+//baka氏クリップボード
+
+// ==UserScript==
+// @name        ねとるむクリップボード
+// @namespace    http://tampermonkey.net/
+// @version      none
+// @author       baka
+// @match        https://netroom.oz96.com/*
+// @grant        unsafeWindow
+// @run-at       document-idle
+// ==/UserScript==
+
+function change_disp_by_user_or_guest(data) {
+    clear_global();
+    if (data.uid) {
+        uid = data.uid;
+        var cmd = data.cmd;
+        if (uid == "guest") { }
+        $('#b_open_login').hide();
+        $('#li_logout').show();
+        $('#b_open_create_user').hide();
+        $('#div_login').hide();
+        $('#b_open_notice').show();
+        $('#li_change_photo').show();
+        $('#li_change_passwd').show();
+        $('#create_new_user').hide();
+        $('.b_show_create_room').show();
+        var uid_data = {};
+        uid_data[data.uid] = [data.uname, data.imgs[0], data.status];
+        add_user_store(uid_data);
+        socket.json.emit('get_friend_list');
+        if (cmd == "login" || cmd == "create_user") {
+            fsid.set(data.sid, data.keep_login)
+        }
+        user_photo(data.imgs, data.uname, data.character_name);
+        if (data.created) {
+            show_photo_dialog()
+        }
+    } else {
+        data.uname = "ゲスト";
+        uid = "guest";
+        $('#b_open_login').show();
+        $('#li_logout').hide();
+        $('#b_open_create_user').show();
+        $('#b_open_notice').hide();
+        $('#li_change_photo').hide();
+        $('#li_change_passwd').hide();
+        $('#create_new_user').show();
+        $('.b_show_create_room').hide();
+        fsid.del();
+        user_photo(data.imgs, data.uname, data.character_name)
+    }
+    get_page();
+    get_list(selected_category, searched_room_name, "")
+};
+
+document.getElementById('comment').addEventListener('paste', function (event) {
+    const items = event.clipboardData.items;
+    for (let item of items) {
+        if (item.type.indexOf('image') !== -1) {
+            const blob = item.getAsFile();
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const clipboard_img_src = event.target.result;
+                unsafeWindow.clipboard_img_src = clipboard_img_src;
+
+                const img = document.createElement('img');
+                img.src = clipboard_img_src;
+                img.style.maxWidth = '100px';
+                img.style.maxHeight = '100px';
+                img.style.position = 'absolute';
+                img.style.cursor = 'pointer';
+
+                img.onload = function () {
+                    const imgHeight = img.naturalHeight;
+                    const imgWidth = img.naturalWidth;
+
+                    let resizedImgSrc = clipboard_img_src;
+                    if (imgHeight > 720 || imgWidth > 720) {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+
+                        const scale = Math.min(720 / imgWidth, 720 / imgHeight);
+                        canvas.width = imgWidth * scale;
+                        canvas.height = imgHeight * scale;
+
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        resizedImgSrc = canvas.toDataURL();
+                    }
+
+                    const commentElement = document.getElementById('comment');
+                    let preview = document.getElementById('preview');
+                    if (!preview) {
+                        preview = document.createElement('div');
+                        preview.id = 'preview';
+                        preview.style.position = 'relative';
+                        commentElement.parentElement.style.position = 'relative';
+                        commentElement.parentElement.appendChild(preview);
+                    }
+                    preview.innerHTML = '';
+
+                    const previewImg = document.createElement('img');
+                    previewImg.src = resizedImgSrc;
+                    previewImg.style.maxWidth = '100px';
+                    previewImg.style.maxHeight = '100px';
+                    previewImg.style.cursor = 'pointer';
+
+                    preview.style.position = 'absolute';
+                    preview.style.top = '-120px';
+                    preview.style.right = '10px';
+
+                    preview.appendChild(previewImg);
+
+                    previewImg.addEventListener('click', function () {
+                        const enlarged = document.createElement('div');
+                        enlarged.style = `
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100vw;
+                            height: 100vh;
+                            background-color: rgba(0, 0, 0, 0.8);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            z-index: 1000;
+                        `;
+                        const largeImg = document.createElement('img');
+                        largeImg.src = resizedImgSrc;
+                        largeImg.style.maxWidth = '90%';
+                        largeImg.style.maxHeight = '90%';
+                        enlarged.appendChild(largeImg);
+                        document.body.appendChild(enlarged);
+
+                        enlarged.addEventListener('click', function () {
+                            document.body.removeChild(enlarged);
+                        });
+                    });
+                };
+            };
+            reader.readAsDataURL(blob);
+        }
+    }
+});
+
+document.getElementById('comment').addEventListener('keyup', function (event) {
+    if (event.key === 'Backspace') {
+        if (this.value === '') {
+            unsafeWindow.clipboard_img_src = "";
+            var preview = document.getElementById('preview');
+            if (preview) {
+                preview.innerHTML = '';
+            }
+        }
+    }
+});
+
+function send() {
+    clear_fnc_validator('div_msg');
+    var msg = $('#comment').val();
+    if (msg != "") {
+        var check_msg = replaceAll(msg, " ", "");
+        check_msg = replaceAll(check_msg, "　", "");
+        if (check_msg == "") {
+            fnc_validator('comment', 'comment_err', '空白だけの投稿はできません');
+            return;
+        }
+        if (!validator.isLength(msg, 1, 4000)) {
+            fnc_validator('comment', 'comment_err', '入力文字数が長すぎます');
+            return;
+        }
+        msg = trim_space(msg, max_br);
+        if (msg == false) {
+            fnc_validator('comment', 'comment_err', '入力欄が空白です');
+            return;
+        }
+    } else {
+        if (!img_src2 && !unsafeWindow.clipboard_img_src) {
+            fnc_validator('comment', 'comment_err', '入力欄が空欄です');
+            return;
+        }
+    }
+
+    if (!img_src2 && unsafeWindow.clipboard_img_src) {
+        img_src2 = unsafeWindow.clipboard_img_src;
+    }
+    if (img_src2) {
+        var imgStructure = img_src2.split(',');
+        if (imgStructure.length == 2) {
+            var str = imgStructure[0];
+            str = str.replace("data:image/", "");
+            str = str.replace(";base64", "");
+            if (str == "jpeg" || str == "png" || str == "gif") { } else {
+                alert('添付画像エラー。画像は、jpg、png、gifのみ添付してください。');
+                return;
+            }
+        } else {
+            alert('添付画像エラー。選択された画像をご確認ください');
+            return;
+        }
+    }
+    var character_name = "";
+    if (gloval_character_name[selected_my_icon]) {
+        character_name = gloval_character_name[selected_my_icon];
+    }
+    var data = {
+        comment: msg,
+        type: "1",
+        room_id: disp_room_id,
+        img: img_src2,
+        img_no: selected_my_icon,
+        character_name: character_name
+    };
+    socket.json.emit('send', data);
+    send_anime(uid);
+    $('#comment').val("");
+    img_src2 = "";
+    unsafeWindow.clipboard_img_src = "";
+    $('#i_file2').val("");
+    $('#uv').val("");
+    $('#uv').hide();
+    $('#file_span2').html("");
+
+    var preview = document.getElementById('preview');
+    if (preview) {
+        preview.innerHTML = '';
+    }
+    if (_MY_SP_ == 1) {
+        $('#comment').blur();
+        $('#box2 .tabs').show();
+    }
+    if (google_analytics) {
+        ga('send', 'event', 'button', 'click', 'msg send');
+    }
+    check_room_list_update();
+}
+
+
+//クリップボード
+
+// ==UserScript==
+// @name         フレお気に入り
+// @namespace    http://tampermonkey.net/
+// @version      none
+// @author       baka
+// @match        https://netroom.oz96.com/*
+// @grant        none
+// @run-at       document-idle
+// ==/UserScript==
+const storagePrefix = 'starStatus_';
+const userList = document.getElementById('user_list2');
+const processedElements = new Set();
+const originalPositions = new Map();
+
+function updateStars() {
+    const onlineElements = userList.querySelectorAll('.online, .online_1');
+    const clearfix = userList.querySelector('.clearfix');
+
+    onlineElements.forEach((element, index) => {
+        if (processedElements.has(element)) return;
+
+        const liElement = element.closest('li');
+        const storageKey = `${storagePrefix}${index}`;
+        let starStatus = localStorage.getItem(storageKey) || '☆';
+        const star = document.createElement('span');
+        star.textContent = starStatus;
+        star.style.fontSize = '18px';
+        star.style.marginRight = '5px';
+        star.style.cursor = 'pointer';
+
+        if (!originalPositions.has(liElement)) {
+            originalPositions.set(liElement, liElement.nextSibling);
+        }
+
+        star.addEventListener('click', () => {
+            starStatus = star.textContent === '☆' ? '★' : '☆';
+            star.textContent = starStatus;
+            localStorage.setItem(storageKey, starStatus);
+
+            if (starStatus === '★' && clearfix) {
+                clearfix.parentNode.insertBefore(liElement, clearfix.nextSibling);
+            } else {
+                const originalPosition = originalPositions.get(liElement);
+                if (originalPosition) {
+                    userList.insertBefore(liElement, originalPosition);
+                } else {
+                    userList.appendChild(liElement);
+                }
+            }
+        });
+
+        element.insertAdjacentElement('beforebegin', star);
+        processedElements.add(element);
+
+        if (starStatus === '★' && clearfix) {
+            clearfix.parentNode.insertBefore(liElement, clearfix.nextSibling);
+        }
+    });
+}
+
+const observer = new MutationObserver((mutations) => {
+    let needsUpdate = false;
+
+    for (const mutation of mutations) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            needsUpdate = true;
+            break;
+        }
+    }
+
+    if (needsUpdate) {
+        updateStars();
+    }
+});
+
+if (userList) {
+    observer.observe(userList, { childList: true, subtree: true });
+    updateStars();
+}
+
+
+//フレ検索
+
+// ==UserScript==
+// @name        ねとるむフレ検索
+// @namespace    http://tampermonkey.net/
+// @version      none
+// @author       baka
+// @match        https://netroom.oz96.com/*
+// @grant        none
+// @run-at       document-idle
+// ==/UserScript==
+const userList_1 = document.getElementById('user_list2');
+
+function filterUsers(suN) {
+    Array.from(userList_1.getElementsByClassName('li_user clearfix')).forEach($user => {
+        $user.style.display = $user.getElementsByClassName('user_name')[0].textContent.includes(suN) || suN === "" ? '' : 'none';
+    });
+}
+
+function addSearchInput() {
+    if (!document.getElementById('suNe')) {
+        const suNe = document.createElement('input');
+        suNe.type = 'text';
+        suNe.id = 'suNe';
+        suNe.placeholder = '検索...';
+        userList_1.prepend(suNe);
+        suNe.addEventListener('input', () => filterUsers(suNe.value));
+    }
+}
+
+new MutationObserver(() => addSearchInput()).observe(userList_1, { childList: true, subtree: true });
+addSearchInput();
+
+
+//ログ検索
+
+// ==UserScript==
+// @name        ねとるむログ検索
+// @namespace    http://tampermonkey.net/
+// @version      none
+// @author       baka
+// @match        https://netroom.oz96.com/*
+// @grant        unsafeWindow
+// @run-at       document-idle
+// ==/UserScript==
+
+var returnBtn = document.getElementById('return_btn');
+
+var searchButton = document.createElement('button');
+searchButton.textContent = 'ログ検索';
+searchButton.style.marginLeft = '5px';
+searchButton.style.width = '60px';
+searchButton.style.height = '24px';
+searchButton.style.lineHeight = '1';
+searchButton.style.marginTop = '9px';
+searchButton.style.background = '#fff';
+searchButton.style.color = '#333';
+searchButton.style.fontFamily = 'メイリオ';
+searchButton.style.fontSize = '11px';
+searchButton.style.border = '1px solid #ccc';
+searchButton.style.cursor = 'pointer';
+searchButton.style.position = 'relative';
+searchButton.style.top = '-13px';
+
+returnBtn.parentNode.insertBefore(searchButton, returnBtn.nextSibling);
+
+const popup = document.createElement('div');
+popup.id = 'blockPopup';
+popup.style.position = 'fixed';
+popup.style.top = '50%';
+popup.style.left = '50%';
+popup.style.transform = 'translate(-50%, -50%)';
+popup.style.width = '430px';
+popup.style.maxHeight = '80vh';
+popup.style.overflowY = 'auto';
+popup.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+popup.style.border = '2px solid #ccc';
+popup.style.borderRadius = '10px';
+popup.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+popup.style.display = 'none';
+popup.style.zIndex = '9999';
+popup.style.padding = '10px';
+
+const closeButton = document.createElement('button');
+closeButton.id = 'closeButton';
+closeButton.textContent = '☓';
+closeButton.style.position = 'sticky';
+closeButton.style.top = '0px';
+closeButton.style.right = '10px';
+closeButton.style.color = 'white';
+closeButton.style.backgroundColor = 'red';
+closeButton.style.border = 'none';
+closeButton.style.cursor = 'pointer';
+closeButton.style.fontSize = '16px';
+closeButton.style.padding = '1px';
+closeButton.style.height = '20px';
+closeButton.style.lineHeight = '1';
+
+const warningMessage = document.createElement('div');
+warningMessage.textContent = '※ 動作中は、なるべくねとるむを動かさないでください。検索漏れが出る場合があります';
+warningMessage.style.color = 'red';
+warningMessage.style.fontWeight = 'bold';
+warningMessage.style.fontSize = '14px';
+warningMessage.style.marginBottom = '10px';
+
+const commandDescription = document.createElement('div');
+commandDescription.innerHTML = 'コマンド（任意、複数可、未指定の場合自動で全て検索）: <br> @user[ユーザー名] - 検索するユーザーの指定 <br> @page[最初のページ数-最後のページ数] - 検索するページの指定 <br>@page[100-x] の形式で指定すると、100ページ以降の結果を取得します。<br> 例 @user[baka]あ　@page[1-100]あ　@user[baka]@page[100-x]あ <br> ';
+commandDescription.style.fontSize = '12px';
+commandDescription.style.marginBottom = '10px';
+
+const inputField = document.createElement('input');
+inputField.type = 'text';
+inputField.placeholder = '検索する言葉を入力';
+inputField.style.width = '75%';
+inputField.style.padding = '5px';
+inputField.style.border = '1px solid #ccc';
+inputField.style.borderRadius = '5px';
+inputField.style.marginBottom = '10px';
+
+const logSearchButton = document.createElement('button');
+logSearchButton.textContent = 'ログ検索';
+logSearchButton.style.marginLeft = '5px';
+logSearchButton.style.padding = '5px';
+logSearchButton.style.height = '30px';
+logSearchButton.style.backgroundColor = '#0067C0';
+logSearchButton.style.color = 'white';
+logSearchButton.style.border = 'none';
+logSearchButton.style.borderRadius = '5px';
+logSearchButton.style.cursor = 'pointer';
+logSearchButton.style.fontSize = '12px';
+
+popup.appendChild(closeButton);
+popup.appendChild(warningMessage);
+popup.appendChild(commandDescription);
+popup.appendChild(inputField);
+popup.appendChild(logSearchButton);
+document.body.appendChild(popup);
+
+searchButton.addEventListener('click', function () {
+    popup.style.display = 'block';
+});
+
+let isDragging = false;
+let offsetX, offsetY;
+
+popup.addEventListener('mousedown', function (e) {
+    const popupRect = popup.getBoundingClientRect();
+    const edgeArea = 20;
+
+    if (
+        e.clientX >= popupRect.left &&
+        e.clientX <= popupRect.right &&
+        (e.clientY >= popupRect.top && e.clientY <= popupRect.top + edgeArea ||
+            e.clientY >= popupRect.bottom - edgeArea && e.clientY <= popupRect.bottom)
+    ) {
+        isDragging = true;
+        offsetX = e.clientX - popupRect.left;
+        offsetY = e.clientY - popupRect.top;
+    }
+});
+
+document.addEventListener('mousemove', function (e) {
+    if (isDragging) {
+        popup.style.left = e.clientX - offsetX + 'px';
+        popup.style.top = e.clientY - offsetY + 'px';
+        popup.style.transform = 'none';
+    }
+});
+
+document.addEventListener('mouseup', function () {
+    isDragging = false;
+});
+
+closeButton.addEventListener('click', function () {
+    popup.style.display = 'none';
+});
+
+let intervalId_1;
+let resultsContainer = null;
+let seenMessages = new Set();
+let currentSearchKeywords = '';
+
+const workerScript = `
+    let intervalId_1;
+    self.onmessage = function(event) {
+        const { type, intervalDuration, data } = event.data;
+        if (type === 'start') {
+            let currentPage = data.currentPage;
+            intervalId_1 = setInterval(() => {
+                postMessage({ type: 'fetch', page: currentPage });
+                currentPage++;
+            }, intervalDuration);
+        } else if (type === 'stop') {
+            clearInterval(intervalId_1);
+        }
+    };
+`;
+
+const workerBlob = new Blob([workerScript], { type: 'application/javascript' });
+const worker = new Worker(URL.createObjectURL(workerBlob));
+
+logSearchButton.addEventListener('click', function () {
+    if (logSearchButton.textContent === 'ストップ') {
+        worker.postMessage({ type: 'stop' });
+        logSearchButton.textContent = 'ログ検索';
+        warningMessage.textContent = '※処理終了';
+        warningMessage.style.color = 'green';
+        warningMessage.style.fontWeight = 'bold';
+        return;
+    }
+
+    logSearchButton.textContent = 'ストップ';
+    warningMessage.textContent = '※処理中...（他のタブなどでもなるべく、ねとるむを動かさないでください）';
+    warningMessage.style.color = 'orange';
+    warningMessage.style.fontWeight = 'bold';
+
+    const inputText = inputField.value.trim();
+    if (!inputText) {
+        alert('検索する言葉を入力してください。');
+        return;
+    }
+
+    seenMessages.clear();
+    users = [];
+
+    const userRegex = /@user\[(.*?)\]|@user\[(.*?)\s/g;
+    const pageRegex = /@page\[(\d+(-\w+)?)\]/g;
+    let pageRange = null;
+
+    let match;
+    while ((match = userRegex.exec(inputText)) !== null) {
+        users.push(match[1] || match[2]);
+    }
+
+    while ((match = pageRegex.exec(inputText)) !== null) {
+        pageRange = match[1];
+    }
+    currentSearchKeywords = inputText.replace(userRegex, '').replace(pageRegex, '').trim();
+    const firstPage = pageRange ? parseInt(pageRange.split('-')[0]) : 1;
+    const lastPageRaw = pageRange ? pageRange.split('-')[1] : null;
+    const lastPage = lastPageRaw === 'x' ? 'x' : (lastPageRaw !== undefined ? parseInt(lastPageRaw) : null);
+
+    if (!resultsContainer) {
+        resultsContainer = document.createElement('div');
+        resultsContainer.style.marginTop = '10px';
+        popup.appendChild(resultsContainer);
+    } else {
+        resultsContainer.innerHTML = '';
+    }
+
+    let currentPage = firstPage;
+
+    const intervalDuration = 4000;
+
+    worker.postMessage({ type: 'start', intervalDuration, data: { currentPage } });
+
+    worker.onmessage = function (e) {
+        if (e.data.type === 'fetch') {
+            currentPage = e.data.page;
+
+            socket.json.emit('join', {
+                'room_id': disp_room_id,
+                'page': currentPage,
+                'passwd': global_passwd,
+                'answer': global_answer,
+                'now_cmd': now_cmd
+            });
+        }
+    };
+
+    socket.on('got_page', function (res) {
+        var ini_flag = 2;
+        if (res.join_flag) {
+            ini_flag = 1;
+        }
+        if (res.joined_room_name) {
+            show_room_name(res.joined_room_name);
+        }
+
+        if (res.res2.length > 0) {
+            if (lastPage === 'x') {
+                currentPage++;
+            } else if (lastPage && currentPage < lastPage) {
+                currentPage++;
+            } else if ((lastPage && currentPage >= lastPage)) {
+                worker.postMessage({ type: 'stop' });
+                logSearchButton.textContent = 'ログ検索';
+                warningMessage.textContent = '※処理終了';
+            } else if (!lastPage || isNaN(lastPage)) {
+                currentPage++;
+            }
+        } else if (res.res2.length == 0) {
+            worker.postMessage({ type: 'stop' });
+            logSearchButton.textContent = 'ログ検索';
+            warningMessage.textContent = '※処理終了';
+            socket.json.emit('join', {
+                'room_id': disp_room_id,
+                'page': 0,
+                'passwd': global_passwd,
+                'answer': global_answer,
+                'now_cmd': now_cmd
+            });
+        }
+
+        for (let i = 0; i < res.res2.length; i++) {
+            const message = res.res2[i];
+            const uname = message.uname;
+            const comment = message.comment;
+            const seq = message.seq;
+
+            if (seenMessages.has(seq)) {
+                continue;
+            }
+            seenMessages.add(seq);
+            if (users.length > 0 && !users.includes(uname)) {
+                continue;
+            }
+
+            if (currentSearchKeywords && !comment.includes(currentSearchKeywords)) {
+                continue;
+            }
+
+            const pageNum = Math.floor(seq / 100) + 1;
+
+            if (pageRange) {
+                const pageNumbers = pageRange.split('-').map(Number);
+                if (pageNumbers.length === 1) {
+                    if (pageNum !== pageNumbers[0]) continue;
+                } else if (pageNumbers[1] === 'x') {
+                    if (pageNum < pageNumbers[0]) continue;
+                } else {
+                    const startPage = pageNumbers[0];
+                    const endPage = pageNumbers[1];
+                    if (pageNum < startPage || pageNum > endPage) continue;
+                }
+            }
+
+            const highlightedComment = currentSearchKeywords ? comment.replace(new RegExp(currentSearchKeywords, 'g'), '<span style="background-color: yellow;">$&</span>') : comment;
+
+            const resultHtml = document.createElement('div');
+            resultHtml.style.marginBottom = '5px';
+            resultHtml.style.padding = '5px';
+            resultHtml.style.border = '1px solid #e0e0e0';
+            resultHtml.style.borderRadius = '5px';
+            resultHtml.innerHTML = `
+                <strong>${seq} : ${uname}</strong>: ${highlightedComment}
+               <span class="jumpButton" style="color: #0067C0; cursor: pointer; font-size: 11px; padding-left: 5px;">ジャンプ</span>
+            `;
+            resultsContainer.appendChild(resultHtml);
+
+            const jumpButton = resultHtml.querySelector('.jumpButton');
+            jumpButton.addEventListener('click', function () {
+                worker.postMessage({ type: 'stop' });
+                logSearchButton.textContent = 'ログ検索';
+                warningMessage.textContent = '※処理終了';
+                socket.json.emit('join', {
+                    'room_id': disp_room_id,
+                    'page': pageNum,
+                    'passwd': global_passwd,
+                    'answer': global_answer,
+                    'now_cmd': now_cmd
+                });
+                document.getElementById('closeButton').click();
+            });
+        }
+    });
+});
+
+
+//部屋お気に入り
+
+// ==UserScript==
+// @name         部屋お気に入り
+// @namespace    http://tampermonkey.net/
+// @version      none
+// @author       baka
+// @match        https://netroom.oz96.com/*
+// @grant        unsafeWindow
+// @run-at       document-end
+// ==/UserScript==
+
+function addStarMarks() {
+    var roomList = document.getElementById('room_list');
+    var children = roomList.children;
+    var storedRoomNames = JSON.parse(localStorage.getItem('starredRoomNames')) || [];
+
+    for (var i = 0; i < children.length; i++) {
+        var s2Element = children[i].querySelector('.s2');
+
+        if (s2Element) {
+            if (!s2Element.nextElementSibling || !s2Element.nextElementSibling.classList.contains('star-mark')) {
+                var starElement = document.createElement('span');
+                starElement.classList.add('star-mark');
+                starElement.style.fontSize = '24px';
+                starElement.style.cursor = 'pointer';
+                starElement.style.transition = 'transform 0.2s';
+                starElement.style.display = 'inline-block';
+                starElement.style.marginLeft = '5px';
+
+                var roomName = now_room_list[i].room_name;
+
+                if (i !== 0 && storedRoomNames.includes(roomName)) {
+                    starElement.innerHTML = '★';
+                } else if (i !== 0) {
+                    starElement.innerHTML = '☆';
+                }
+
+                starElement.addEventListener('mousedown', function (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+
+                    var index = Array.from(roomList.children).indexOf(this.closest('li'));
+                    var roomData = now_room_list[index];
+                    var roomName = roomData.room_name;
+
+                    if (this.innerHTML === '☆') {
+                        this.innerHTML = '★';
+                        var newRoomObject = {
+                            "_id": roomData._id,
+                            "room_name": roomData.room_name,
+                            "category": roomData.category,
+                            "count": 0,
+                            "r_permition": roomData.r_permition,
+                            "room_riddle": roomData.room_riddle,
+                            "update_time": roomData.update_time,
+                            "in_user": {}
+                        };
+
+                        storedRoomNames.push(roomName);
+                        localStorage.setItem('starredRoomNames', JSON.stringify(storedRoomNames));
+                        localStorage.setItem(roomName, JSON.stringify(newRoomObject));
+
+                        now_room_list.splice(2, 0, newRoomObject);
+                        show_room_list(now_room_list, "");
+                        addStarMarks();
+                    } else {
+                        this.innerHTML = '☆';
+                        var roomIndex = storedRoomNames.indexOf(roomName);
+                        if (roomIndex > -1) {
+                            storedRoomNames.splice(roomIndex, 1);
+                        }
+                        localStorage.setItem('starredRoomNames', JSON.stringify(storedRoomNames));
+                        localStorage.removeItem(roomName);
+
+                        now_room_list = now_room_list.filter(function (room) {
+                            return room.room_name !== roomName;
+                        });
+                        show_room_list(now_room_list, "");
+                        addStarMarks();
+                    }
+                });
+
+                s2Element.parentNode.insertBefore(starElement, s2Element.nextSibling);
+            }
+        }
+    }
+}
+
+function loadStarredRooms() {
+    var storedRoomNames = JSON.parse(localStorage.getItem('starredRoomNames')) || [];
+    var starredRooms = [];
+    for (var roomName of storedRoomNames) {
+        var roomData = JSON.parse(localStorage.getItem(roomName));
+        if (roomData) {
+            starredRooms.push(roomData);
+        }
+    }
+    return starredRooms;
+}
+
+socket.on('got_room_list', function (res0) {
+    var res = res0.res;
+    var update_time = res0.update_time;
+
+    var starredRooms = loadStarredRooms();
+
+    if (starredRooms.length > 0) {
+        res.splice(2, 0, ...starredRooms);
+    }
+
+    show_room_list(res, update_time);
+    addStarMarks();
+});
+

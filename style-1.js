@@ -257,6 +257,11 @@ img.selected {
 	max-width:100%;
 }
 
+body[data-isroom="0"] #box1{
+	float:left;
+	max-width:100%;
+}
+
 `;}
 if (dark_2=="light"){
 css=` body,
@@ -491,6 +496,11 @@ img.selected {
 
 #box2 {
 	margin:0;
+	max-width:100%;
+}
+
+body[data-isroom="0"] #box1{
+	float:left;
 	max-width:100%;
 }
 

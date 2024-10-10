@@ -35,7 +35,7 @@
 }
 
 .product-image {
-    width: 250px; /* サイズを一定に */
+    width: 500px; /* サイズを一定に */
     height: auto;
     border-radius: 8px; /* 少し丸みをつけて高級感を演出 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 軽く影を付けて立体感 */
@@ -51,7 +51,7 @@
 .product-name {
     font-size: 1.8rem; /* 商品名の大きさを強調 */
     letter-spacing: 0.05rem; /* 少しだけ文字間隔を広げる */
-    color: #00bfff; /* 未来感のあるライトブルー */
+    color: #ffffff; /* 未来感のあるライト */
 }
 
 

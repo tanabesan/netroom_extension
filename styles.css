@@ -18,6 +18,41 @@
     height: auto;
 }
 
+/* 商品紹介セクションのスタイル */
+#product-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    background-color: #f5f5f5; /* 必要に応じて背景色を変更 */
+    border-bottom: 1px solid #ddd;
+}
+
+/* 商品画像のスタイル */
+.product-image-container {
+    margin-right: 20px;
+}
+
+.product-image {
+    max-width: 300px; /* 商品画像の最大幅 */
+    height: auto; /* 比率を維持しつつ高さを自動調整 */
+    border-radius: 10px; /* 画像の角を丸くする */
+}
+
+/* 商品名のスタイル */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+
 /* スライドショースタイル */
 #slideshow {
     position: relative;

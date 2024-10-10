@@ -1,3 +1,24 @@
+.team-members {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.team-member-photo {
+    width: 100px; /* 適切なサイズに調整 */
+    height: auto;
+    border-radius: 50%; /* 丸くする場合 */
+}
+
+.team-member-name {
+    text-align: center;
+    font-size: 16px; /* フォントサイズを調整 */
+    margin-top: 8px;
+    color: #fff; /* テキストの色 */
+}
+
 /* スプラッシュスクリーンのスタイル */
 #splash-screen {
     position: fixed; /* 画面全体を覆うためにfixedを使用 */

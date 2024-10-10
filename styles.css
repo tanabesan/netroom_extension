@@ -1,3 +1,23 @@
+/* スプラッシュスクリーンのスタイル */
+#splash-screen {
+    position: fixed; /* 画面全体を覆うためにfixedを使用 */
+    top: 0;
+    left: 0;
+    width: 100vw; /* 横幅を100%に設定 */
+    height: 100vh; /* 縦幅を100%に設定 */
+    background-color: #000; /* 背景色を黒に設定（必要に応じて変更） */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* 他の要素の上に表示されるように */
+}
+
+/* ロゴ画像のスタイル */
+#splash-screen .logo {
+    max-width: 50%;
+    height: auto;
+}
+
 /* スライドショースタイル */
 #slideshow {
     position: relative;

@@ -24,27 +24,26 @@
     justify-content: center;
     align-items: center;
     padding: 50px 0;
-    background-color: #1c1c1c; /* 高級感のあるダークな背景色 */
-    border-bottom: 2px solid #555; /* 落ち着いた色調のボーダー */
+    background-color: #2c2c2c; /* ダークグレー */
+    border-bottom: 1px solid #444; /* 控えめなボーダー */
 }
 
 /* 商品画像のスタイル */
 .product-image-container {
     margin-right: 40px;
-    position: relative;
 }
 
 .product-image {
-    max-width: 350px; /* 商品画像の最大幅 */
+    max-width: 300px;
     height: auto;
-    border-radius: 12px; /* 少し大きめの丸み */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 高級感のある影 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 滑らかな変化のアニメーション */
+    border-radius: 10px; /* 少しの丸み */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* 影を軽く */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-image:hover {
-    transform: scale(1.05); /* マウスオーバーで画像が少し拡大 */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* ホバー時に影を強調 */
+    transform: scale(1.03); /* ホバー時の軽い拡大 */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* ホバー時に影を少し強調 */
 }
 
 /* 商品名のスタイル */
@@ -52,59 +51,30 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #fff; /* 白い文字で明るく */
+    color: #f5f5f5; /* 明るいグレー */
 }
 
 .product-name {
-    font-size: 36px;
-    font-weight: 600;
-    color: #f0e68c; /* ゴールド系の色で高級感を演出 */
-    text-transform: uppercase; /* 大文字に変換して力強さを演出 */
-    letter-spacing: 2px; /* 少し広めの文字間隔 */
-    font-family: 'Georgia', serif; /* 高級感のあるセリフ体 */
-    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* テキストに影をつけて立体感 */
-    margin-bottom: 10px;
+    font-size: 32px;
+    font-weight: 700; /* 太字で強調 */
+    color: #e0d8a8; /* 落ち着いたゴールド */
+    text-transform: uppercase; /* 大文字 */
+    letter-spacing: 1px; /* 少し広めの文字間隔 */
+    font-family: 'Merriweather', serif; /* 高級感のあるフォント */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* テキストの影を控えめに */
+    margin-bottom: 15px;
 }
 
-/* アニメーションで高級感を追加 */
+/* シンプルなラインの装飾 */
 .product-name::before {
     content: '';
     display: block;
-    width: 60px;
-    height: 3px;
-    background-color: #f0e68c; /* ゴールド色のライン */
-    margin-bottom: 15px;
-    animation: expand 1s ease;
+    width: 50px;
+    height: 2px;
+    background-color: #e0d8a8; /* ゴールド色のライン */
+    margin-bottom: 10px;
 }
 
-@keyframes expand {
-    from {
-        width: 0;
-    }
-    to {
-        width: 60px;
-    }
-}
-
-
-.product-image {
-    max-width: 300px; /* 商品画像の最大幅 */
-    height: auto; /* 比率を維持しつつ高さを自動調整 */
-    border-radius: 10px; /* 画像の角を丸くする */
-}
-
-/* 商品名のスタイル */
-.product-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.product-name {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-}
 
 
 /* スライドショースタイル */

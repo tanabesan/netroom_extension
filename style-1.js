@@ -247,15 +247,14 @@ img.selected {
 
 #wrap_container {
 	width:100%;
-	/* max-width:1280px; */
 	margin:auto;
 	display:block;
+	max-width:100%;
 }
 
 #box2 {
 	margin:0;
-	/* max-width:870px; */
-	/* width:870px; */
+	max-width:100%;
 }
 
 `;}
@@ -485,15 +484,14 @@ img.selected {
 
 #wrap_container {
 	width:100%;
-	/* max-width:1280px; */
 	margin:auto;
 	display:block;
+	max-width:100%;
 }
 
 #box2 {
 	margin:0;
-	/* max-width:870px; */
-	/* width:870px; */
+	max-width:100%;
 }
 
 `;}

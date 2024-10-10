@@ -23,15 +23,69 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
-    background-color: #f5f5f5; /* 必要に応じて背景色を変更 */
-    border-bottom: 1px solid #ddd;
+    padding: 50px 0;
+    background-color: #1c1c1c; /* 高級感のあるダークな背景色 */
+    border-bottom: 2px solid #555; /* 落ち着いた色調のボーダー */
 }
 
 /* 商品画像のスタイル */
 .product-image-container {
-    margin-right: 20px;
+    margin-right: 40px;
+    position: relative;
 }
+
+.product-image {
+    max-width: 350px; /* 商品画像の最大幅 */
+    height: auto;
+    border-radius: 12px; /* 少し大きめの丸み */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 高級感のある影 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 滑らかな変化のアニメーション */
+}
+
+.product-image:hover {
+    transform: scale(1.05); /* マウスオーバーで画像が少し拡大 */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* ホバー時に影を強調 */
+}
+
+/* 商品名のスタイル */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff; /* 白い文字で明るく */
+}
+
+.product-name {
+    font-size: 36px;
+    font-weight: 600;
+    color: #f0e68c; /* ゴールド系の色で高級感を演出 */
+    text-transform: uppercase; /* 大文字に変換して力強さを演出 */
+    letter-spacing: 2px; /* 少し広めの文字間隔 */
+    font-family: 'Georgia', serif; /* 高級感のあるセリフ体 */
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* テキストに影をつけて立体感 */
+    margin-bottom: 10px;
+}
+
+/* アニメーションで高級感を追加 */
+.product-name::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #f0e68c; /* ゴールド色のライン */
+    margin-bottom: 15px;
+    animation: expand 1s ease;
+}
+
+@keyframes expand {
+    from {
+        width: 0;
+    }
+    to {
+        width: 60px;
+    }
+}
+
 
 .product-image {
     max-width: 300px; /* 商品画像の最大幅 */

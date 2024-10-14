@@ -1053,8 +1053,6 @@ document.getElementById('comment').addEventListener('paste', function (event) {
             const reader = new FileReader();
             reader.onload = function (event) {
                 const clipboard_img_src = event.target.result;
-                unsafeWindow.clipboard_img_src = clipboard_img_src;
-
                 const img = document.createElement('img');
                 img.src = clipboard_img_src;
                 img.style.maxWidth = '100px';
@@ -1137,7 +1135,7 @@ document.getElementById('comment').addEventListener('paste', function (event) {
 document.getElementById('comment').addEventListener('keyup', function (event) {
     if (event.key === 'Backspace') {
         if (this.value === '') {
-            unsafeWindow.clipboard_img_src = "";
+            clipboard_img_src = "";
             var preview = document.getElementById('preview');
             if (preview) {
                 preview.innerHTML = '';
@@ -1166,14 +1164,14 @@ function send() {
             return;
         }
     } else {
-        if (!img_src2 && !unsafeWindow.clipboard_img_src) {
+        if (!img_src2 && !clipboard_img_src) {
             fnc_validator('comment', 'comment_err', '入力欄が空欄です');
             return;
         }
     }
 
-    if (!img_src2 && unsafeWindow.clipboard_img_src) {
-        img_src2 = unsafeWindow.clipboard_img_src;
+    if (!img_src2 && clipboard_img_src) {
+        img_src2 = clipboard_img_src;
     }
     if (img_src2) {
         var imgStructure = img_src2.split(',');
@@ -1206,7 +1204,7 @@ function send() {
     send_anime(uid);
     $('#comment').val("");
     img_src2 = "";
-    unsafeWindow.clipboard_img_src = "";
+    clipboard_img_src = "";
     $('#i_file2').val("");
     $('#uv').val("");
     $('#uv').hide();

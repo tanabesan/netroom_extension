@@ -2,67 +2,73 @@
 let dark_2;
 
 if (localStorage.hasOwnProperty("darkmode")) {
-    dark_2 = localStorage.getItem("darkmode");
+	dark_2 = localStorage.getItem("darkmode");
 } else {
-    dark_2 = "";
+	dark_2 = "";
 }
+
 function isDarkMode() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+	return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 if (dark_2 == "") {
-    if (isDarkMode() == true) {
-        dark_2 = "dark";
-        localStorage.setItem('darkmode', 'dark');
-    } else {
-        dark_2 = "light";
-        localStorage.setItem('darkmode', 'light');
-    }
+	if (isDarkMode() == true) {
+		dark_2 = "dark";
+		localStorage.setItem('darkmode', 'dark');
+	} else {
+		dark_2 = "light";
+		localStorage.setItem('darkmode', 'light');
+	}
 } else {
-    if (dark_2 == "dark") {
-        dark_2 = "dark";
-    } else {
-        dark_2 = "light";
-    }
+	if (dark_2 == "dark") {
+		dark_2 = "dark";
+	} else {
+		dark_2 = "light";
+	}
 }
 
-let old_sys_dark_2="";
+let old_sys_dark_2 = "";
 
 if (localStorage.hasOwnProperty("darkmode")) {
-    old_sys_dark_2 = localStorage.getItem("sys-darkmode");
+	old_sys_dark_2 = localStorage.getItem("sys-darkmode");
 }
 let sys_dark_2;
 
-    if (isDarkMode() == true) {
-        sys_dark_2 = "dark";
-        localStorage.setItem('sys-darkmode', 'dark');
-    } else {
-        sys_dark_2 = "light";
-        localStorage.setItem('sys-darkmode', 'light');
-    }
-
-if (old_sys_dark_2=="") {
-    if (sys_dark_2 == old_sys_dark_2) {console.log("なにもおきません") } else {
-        createOverlay();
-		updateText("<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>システムテーマが変更されました。設定を同期しますか？<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>いいえ</b></button><button onclick='syn_theme();' style='font-size:22px;'><b>はい</b></button>");
-    }
+if (isDarkMode() == true) {
+	sys_dark_2 = "dark";
+	localStorage.setItem('sys-darkmode', 'dark');
+} else {
+	sys_dark_2 = "light";
+	localStorage.setItem('sys-darkmode', 'light');
 }
 
-function syn_theme(){
-    if (isDarkMode() == true) {
-        dark_2 = "dark";
-        localStorage.setItem('darkmode', 'dark');
-    } else {
-        dark_2 = "light";
-        localStorage.setItem('darkmode', 'light');
-    }
+if (old_sys_dark_2 == "") {
+	if (sys_dark_2 == old_sys_dark_2) {
+		console.log("なにもおきません")
+	} else {
+		createOverlay();
+		updateText(
+			"<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>システムテーマが変更されました。設定を同期しますか？<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>いいえ</b></button><button onclick='syn_theme();' style='font-size:22px;'><b>はい</b></button>"
+		);
+	}
+}
+
+function syn_theme() {
+	if (isDarkMode() == true) {
+		dark_2 = "dark";
+		localStorage.setItem('darkmode', 'dark');
+	} else {
+		dark_2 = "light";
+		localStorage.setItem('darkmode', 'light');
+	}
 }
 
 //css変更帯
 
-let  css="";
+let css = "";
 
-if (dark_2=="dark"){
-css=` body,
+if (dark_2 == "dark") {
+	css =
+		` body,
 html {
     background-color: #1f1f1f !important;
     color: #ffffff !important;
@@ -267,9 +273,11 @@ body[data-isroom="0"] #box1{
     right: 0px;
 }
 
-`;}
-if (dark_2=="light"){
-css=` body,
+`;
+}
+if (dark_2 == "light") {
+	css =
+		` body,
 html {
     background-color: #ffffff !important;
     color: #000000 !important;
@@ -514,15 +522,17 @@ body[data-isroom="0"] #box1{
     right: 0px;
 }
 
-`;}
+`;
+}
 
-const style=document.createElement('style');
+const style = document.createElement('style');
 style.appendChild(document.createTextNode(css));
 document.head.appendChild(style);
-$('body').css('background-image', 'url("https://yinkya.github.io/ip/IMG_0379.jpeg")');
+$('body').css('background-image',
+	'url("https://yinkya.github.io/ip/IMG_0379.jpeg")');
 
 
-function show_room_name(res){
+function show_room_name(res) {
 	roomnam = res.room_name;
 	roomdes = res.room_desc;
 	lastupd = res.room_update_time;
@@ -535,15 +545,18 @@ function show_room_name(res){
 	leaved_room = "";
 	view_at_join_room(w_permition);
 	$('#room_title').replaceWith('<div id="room_title"></div>');
-	$('#room_title').html('<marquee style="display:inline-block; width: 100%;" scrollamount="6">' + res.room_name + '</marquee>');
+	$('#room_title').html(
+		'<marquee style="display:inline-block; width: 100%;" scrollamount="6">' +
+		res.room_name + '</marquee>');
 	$('#room_title').css({
-	    'width': '90%',
-	    'box-sizing': 'border-box'
+		'width': '90%',
+		'box-sizing': 'border-box'
 	});
 
 
 	if (_MY_SP_ == '1') {
-		$('#room_title2').html('<marquee><h1 id="room_title">' + res.room_name + '</h1></marquee>')
+		$('#room_title2').html('<marquee><h1 id="room_title">' + res.room_name +
+			'</h1></marquee>')
 	}
 	var imgdata = "";
 	var html = "";
@@ -600,7 +613,7 @@ function set_url_mode(room_id, page, title, cmd) {
 	}
 
 	var max_page = "";
-	if (typeof (last_msg_seq[room_id]) != 'undefined') {
+	if (typeof(last_msg_seq[room_id]) != 'undefined') {
 		var room_last_seq = last_msg_seq[room_id];
 		max_page = which_page(room_last_seq);
 	}
@@ -646,7 +659,7 @@ function set_url_mode(room_id, page, title, cmd) {
 	var scrollTitle = title;
 	clearInterval(intervalId);
 
-	intervalId = setInterval(function () {
+	intervalId = setInterval(function() {
 		scrollTitle = scrollTitle.substring(1) + scrollTitle.substring(0, 1);
 		document.title = scrollTitle;
 	}, 800);
@@ -656,9 +669,9 @@ function set_url_mode(room_id, page, title, cmd) {
 var clock = document.createElement('div');
 clock.id = 'clock';
 clock.style.display = 'inline';
-if (dark_2=="dark"){
+if (dark_2 == "dark") {
 	clock.style.color = 'white';
-}else{
+} else {
 	clock.style.color = 'black';
 }
 clock.style.fontSize = '13pt';
@@ -685,8 +698,6 @@ myinfowrap.insertBefore(clock, myinfowrap.firstChild);
 //twitter(旧X)消えろ
 
 
-
-
 //ツールボタンB
 var toolButtonA = document.createElement('button');
 toolButtonA.id = 'tool_btn_a';
@@ -694,7 +705,7 @@ toolButtonA.textContent = '仮ボタンa';
 toolButtonA.style.display = 'inline';
 var returnButton = document.getElementById('return_btn');
 returnButton.parentNode.insertBefore(toolButtonA, returnButton.nextSibling);
-toolButtonA.addEventListener('click', function () {
+toolButtonA.addEventListener('click', function() {
 	//write code here
 });
 
@@ -704,7 +715,7 @@ toolButtonB.id = 'tool_btn_b';
 toolButtonB.textContent = '仮ボタンb';
 toolButtonB.style.display = 'inline';
 returnButton.parentNode.insertBefore(toolButtonB, returnButton.nextSibling);
-toolButtonB.addEventListener('click', function () {
+toolButtonB.addEventListener('click', function() {
 	//write code here
 });
 
@@ -715,8 +726,8 @@ toolButtonC.textContent = 'ログ検索';
 toolButtonC.style.display = 'inline';
 toolButtonC.style.marginLeft = '10px';
 returnButton.parentNode.insertBefore(toolButtonC, returnButton.nextSibling);
-toolButtonC.addEventListener('click', function () {
-    popup.style.display = 'block';
+toolButtonC.addEventListener('click', function() {
+	popup.style.display = 'block';
 });
 
 //ヘルプタブ表示
@@ -727,14 +738,11 @@ tabother.innerHTML = '<span>機能設定</span>';
 document.getElementById("box3").querySelector(".tabs").appendChild(tabother);
 
 
-
-
-
-function switch_tab_user_or_friends(friends){
-	if (friends=="b") {
+function switch_tab_user_or_friends(friends) {
+	if (friends == "b") {
 		var $t = $("div.tab_friends");
 		var $t_out = $("div.tab_user_in_room_2");
-                var $t_out2 = $("div.tab_setting");
+		var $t_out2 = $("div.tab_setting");
 		$("#d_user_list3").hide();
 		$("#d_user_list2").show();
 		$("#d_user_list").hide();
@@ -742,10 +750,10 @@ function switch_tab_user_or_friends(friends){
 			$('#tab_user_in_room').hide()
 		}
 	}
-        if (friends=="a"){
+	if (friends == "a") {
 		var $t = $("div.tab_user_in_room_2");
 		var $t_out = $("div.tab_friends");
-                var $t_out2 = $("div.tab_setting");
+		var $t_out2 = $("div.tab_setting");
 		$("#d_user_list").show();
 		$("#d_user_list2").hide();
 		$('#tab_user_in_room').show()
@@ -753,44 +761,44 @@ function switch_tab_user_or_friends(friends){
 	}
 
 
-        if (friends=="c"){
+	if (friends == "c") {
 		var $t = $("div.tab_setting");
 		var $t_out = $("div.tab_friends");
-        var $t_out2 = $("div.tab_user_in_room_2");
+		var $t_out2 = $("div.tab_user_in_room_2");
 		$("#d_user_list").hide();
 		$("#d_user_list2").hide();
 		$("#d_user_list3").show();
-        }
+	}
 
-        if(friends=="a"||friends=="b"||friends=="c"){
-	        $t.addClass('selected');
-	        $t_out.removeClass('selected')
-	        $t_out2.removeClass('selected')
-        }else{
+	if (friends == "a" || friends == "b" || friends == "c") {
+		$t.addClass('selected');
+		$t_out.removeClass('selected')
+		$t_out2.removeClass('selected')
+	} else {
 
-        }
+	}
 }
 
 
 $('.tab_user_in_room_2').off(_E.clickd, switch_tab_user_or_friends);
 
-	$('.tab_user_in_room_2').on("click", function(e) {
-//		e.preventDefault();
-		switch_tab_user_or_friends("a");
-	});
+$('.tab_user_in_room_2').on("click", function(e) {
+	//		e.preventDefault();
+	switch_tab_user_or_friends("a");
+});
 
 $('.tab_friends').off(_E.clickd, switch_tab_user_or_friends);
 
-	$('.tab_friends').on("click", function(e) {
-//		e.preventDefault();
-		switch_tab_user_or_friends("b");
-	});
+$('.tab_friends').on("click", function(e) {
+	//		e.preventDefault();
+	switch_tab_user_or_friends("b");
+});
 
 
-	$('.tab_setting').on("click", function(e) {
-//		e.preventDefault();
-		switch_tab_user_or_friends("c");
-	});
+$('.tab_setting').on("click", function(e) {
+	//		e.preventDefault();
+	switch_tab_user_or_friends("c");
+});
 
 let set_w_d = "";
 let set_d_d = "";
@@ -802,10 +810,10 @@ if (dark_2 == "dark") {
 
 
 if (localStorage.hasOwnProperty("e-ui")) {
-    var now_ui = localStorage.getItem("e-ui");
+	var now_ui = localStorage.getItem("e-ui");
 } else {
-    var now_ui = "new";
-    localStorage.setItem('e-ui', e - ui);
+	var now_ui = "new";
+	localStorage.setItem('e-ui', e - ui);
 }
 let set_u_o = "";
 let set_u_n = "";
@@ -817,19 +825,28 @@ if (now_ui == "old") {
 
 // 要素を生成（テキストで要素を作る場合）
 const element_b = document.querySelector('#box3');
-const createElement_b = `
+const createElement_b =
+	`
         <div id="d_user_list3" style="display: block;">
           <center><h1 class="col">NETROOM extension 機能設定</h1></center>
              <center>
 <fieldset>
 <legend>テーマカラー</legend>
-<label><input type="radio" name="col" value="light"`+ set_w_d +` onClick="change_theme('dark');">ライト</label>
-<label><input type="radio" name="col" value="dark"` + set_d_d + ` onClick="change_theme('light');">ダーク</label>
+<label><input type="radio" name="col" value="light"` +
+	set_w_d +
+	` onClick="change_theme('dark');">ライト</label>
+<label><input type="radio" name="col" value="dark"` +
+	set_d_d +
+	` onClick="change_theme('light');">ダーク</label>
 </fieldset>
 <fieldset>
 <legend>テーマカラー</legend>
-<label><input type="radio" name="ui" value="old"`+ set_u_o + ` onClick="change_ui('old');">UI1</label>
-<label><input type="radio" name="ui" value="new"` + set_u_n + ` onClick="change_ui('new');">UI2</label>
+<label><input type="radio" name="ui" value="old"` +
+	set_u_o +
+	` onClick="change_ui('old');">UI1</label>
+<label><input type="radio" name="ui" value="new"` +
+	set_u_n +
+	` onClick="change_ui('new');">UI2</label>
 </fieldset>
            </center>
 
@@ -857,7 +874,9 @@ function change_theme(theme_name) {
 		dark_3 = theme_new;
 		localStorage.setItem('darkmode', theme_new);
 		createOverlay();
-		updateText("<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>変更は次回のロード時に反映されます。<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>→了解したのであります←</b></button>");
+		updateText(
+			"<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>変更は次回のロード時に反映されます。<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>→了解したのであります←</b></button>"
+		);
 	}
 }
 
@@ -874,7 +893,9 @@ function change_ui(ui_name) {
 		now_ui_2 = ui_new;
 		localStorage.setItem('e-ui', ui_new);
 		createOverlay();
-		updateText("<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>変更は次回のロード時に反映されます。<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>→了解したのであります←</b></button>");
+		updateText(
+			"<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>変更は次回のロード時に反映されます。<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>→了解したのであります←</b></button>"
+		);
 	}
 }
 
@@ -884,9 +905,9 @@ function change_ui(ui_name) {
 var auto_l = document.createElement('div');
 auto_l.id = 'clock';
 auto_l.style.display = 'inline';
-if (dark_2=="dark"){
+if (dark_2 == "dark") {
 	auto_l.style.color = 'white';
-}else{
+} else {
 	auto_l.style.color = 'black';
 }
 auto_l.style.fontSize = '5pt';
@@ -895,17 +916,17 @@ let auto_l_time = 30;
 
 function updateAuto() {
 	auto_l_time = auto_l_time - 1;
-	if(auto_l_time == 0){
+	if (auto_l_time == 0) {
 		var parameter = {
 			'category': selected_category,
 			'room_name': searched_room_name,
 			'update_time': ""
-			};
+		};
 		auto_l.textContent = "Loading";
 		auto_l_time = 30;
 		socket.json.emit('get_room_list', parameter);
-	}else{
-	auto_l.textContent = "自動更新まであと" + auto_l_time + "秒";
+	} else {
+		auto_l.textContent = "自動更新まであと" + auto_l_time + "秒";
 	}
 }
 
@@ -997,58 +1018,59 @@ function img_users_pict(uid, img_no, status, selected) {
 		selected = ''
 	}
 	return '<img class="user' + selected + '" data-uid="' + uid +
-		'" data-img_no="' + img_no + '" img_url="https://netroom.oz96.com/img/user2/' + img + '/' + img_no +
+		'" data-img_no="' + img_no + '" img_url="https://netroom.oz96.com/img/user2/' +
+		img + '/' + img_no +
 		'.jpg" src="https://tanabesan.github.io/netroom_extension/img/loading_img.png">'
 }
 
 
 setInterval(() => {
 
-// すべての img タグを取得
-let imgElements = document.querySelectorAll('img');
+	// すべての img タグを取得
+	let imgElements = document.querySelectorAll('img');
 
-// 各 img タグに対して処理を行う
-imgElements.forEach(img => {
-  // img_url 属性の値を取得
-  let imgUrl = img.getAttribute('img_url');
+	// 各 img タグに対して処理を行う
+	imgElements.forEach(img => {
+		// img_url 属性の値を取得
+		let imgUrl = img.getAttribute('img_url');
 
-  // img_url が存在する場合、src 属性に設定
-  if (imgUrl) {
-
-
-  let img_1 = new Image();
-
-  // 画像の読み込み完了時のイベントリスナー
-  img_1.onload = () => {
-    let width = img_1.width;
-    let height = img_1.height;
-
-    if (width > 5000 || height > 5000) {
-          img.src = "https://tanabesan.github.io/netroom_extension/img/blocked.jpg";
-	    			show_notice({
-				'msg': 'クラッシュgifをブロックしました！'
-			})
-      // ここで、画像サイズが大きい場合の処理を追加できます。
-      // 例：アラートを表示する、別の画像に置き換えるなど
-    } else {
-          img.src = imgUrl;
-    }
-  };
-
-  // 画像の読み込みエラー時のイベントリスナー
-  img_1.onerror = () => {
-    img.removeAttribute('img_url');
-  };
-
-  // 画像の読み込み開始
-  img_1.src = imgUrl;
+		// img_url が存在する場合、src 属性に設定
+		if (imgUrl) {
 
 
+			let img_1 = new Image();
 
-    // 不要な img_url 属性を削除 (任意)
-    img.removeAttribute('img_url');
-  }
-});
+			// 画像の読み込み完了時のイベントリスナー
+			img_1.onload = () => {
+				let width = img_1.width;
+				let height = img_1.height;
+
+				if (width > 5000 || height > 5000) {
+					img.src =
+						"https://tanabesan.github.io/netroom_extension/img/blocked.jpg";
+					show_notice({
+							'msg': 'クラッシュgifをブロックしました！'
+						})
+						// ここで、画像サイズが大きい場合の処理を追加できます。
+						// 例：アラートを表示する、別の画像に置き換えるなど
+				} else {
+					img.src = imgUrl;
+				}
+			};
+
+			// 画像の読み込みエラー時のイベントリスナー
+			img_1.onerror = () => {
+				img.removeAttribute('img_url');
+			};
+
+			// 画像の読み込み開始
+			img_1.src = imgUrl;
+
+
+			// 不要な img_url 属性を削除 (任意)
+			img.removeAttribute('img_url');
+		}
+	});
 
 
 }, 100);
@@ -1111,7 +1133,10 @@ function show_msg(room_id, res, ini_flag, target, nowHeight) {
 			}
 			if (data.img) {
 				var file = data.img;
-				var imgdata = '<br><img class="click_img" img_url="https://netroom.oz96.com/img/tmp/' + room_id + '_' + data["seq"] + '.jpg"  src="https://tanabesan.github.io/netroom_extension/img/loading_img.png">'
+				var imgdata =
+					'<br><img class="click_img" img_url="https://netroom.oz96.com/img/tmp/' +
+					room_id + '_' + data["seq"] +
+					'.jpg"  src="https://tanabesan.github.io/netroom_extension/img/loading_img.png">'
 			} else {
 				var imgdata = ""
 			}
@@ -1276,7 +1301,6 @@ function show_msg(room_id, res, ini_flag, target, nowHeight) {
  */
 
 
-
 //baka氏クリップボード
 
 // ==UserScript==
@@ -1290,107 +1314,108 @@ function show_msg(room_id, res, ini_flag, target, nowHeight) {
 // ==/UserScript==
 
 function change_disp_by_user_or_guest(data) {
-    clear_global();
-    if (data.uid) {
-        uid = data.uid;
-        var cmd = data.cmd;
-        if (uid == "guest") { }
-        $('#b_open_login').hide();
-        $('#li_logout').show();
-        $('#b_open_create_user').hide();
-        $('#div_login').hide();
-        $('#b_open_notice').show();
-        $('#li_change_photo').show();
-        $('#li_change_passwd').show();
-        $('#create_new_user').hide();
-        $('.b_show_create_room').show();
-        var uid_data = {};
-        uid_data[data.uid] = [data.uname, data.imgs[0], data.status];
-        add_user_store(uid_data);
-        socket.json.emit('get_friend_list');
-        if (cmd == "login" || cmd == "create_user") {
-            fsid.set(data.sid, data.keep_login)
-        }
-        user_photo(data.imgs, data.uname, data.character_name);
-        if (data.created) {
-            show_photo_dialog()
-        }
-    } else {
-        data.uname = "ゲスト";
-        uid = "guest";
-        $('#b_open_login').show();
-        $('#li_logout').hide();
-        $('#b_open_create_user').show();
-        $('#b_open_notice').hide();
-        $('#li_change_photo').hide();
-        $('#li_change_passwd').hide();
-        $('#create_new_user').show();
-        $('.b_show_create_room').hide();
-        fsid.del();
-        user_photo(data.imgs, data.uname, data.character_name)
-    }
-    get_page();
-    get_list(selected_category, searched_room_name, "")
+	clear_global();
+	if (data.uid) {
+		uid = data.uid;
+		var cmd = data.cmd;
+		if (uid == "guest") {}
+		$('#b_open_login').hide();
+		$('#li_logout').show();
+		$('#b_open_create_user').hide();
+		$('#div_login').hide();
+		$('#b_open_notice').show();
+		$('#li_change_photo').show();
+		$('#li_change_passwd').show();
+		$('#create_new_user').hide();
+		$('.b_show_create_room').show();
+		var uid_data = {};
+		uid_data[data.uid] = [data.uname, data.imgs[0], data.status];
+		add_user_store(uid_data);
+		socket.json.emit('get_friend_list');
+		if (cmd == "login" || cmd == "create_user") {
+			fsid.set(data.sid, data.keep_login)
+		}
+		user_photo(data.imgs, data.uname, data.character_name);
+		if (data.created) {
+			show_photo_dialog()
+		}
+	} else {
+		data.uname = "ゲスト";
+		uid = "guest";
+		$('#b_open_login').show();
+		$('#li_logout').hide();
+		$('#b_open_create_user').show();
+		$('#b_open_notice').hide();
+		$('#li_change_photo').hide();
+		$('#li_change_passwd').hide();
+		$('#create_new_user').show();
+		$('.b_show_create_room').hide();
+		fsid.del();
+		user_photo(data.imgs, data.uname, data.character_name)
+	}
+	get_page();
+	get_list(selected_category, searched_room_name, "")
 };
 
-document.getElementById('comment').addEventListener('paste', function (event) {
-    const items = event.clipboardData.items;
-    for (let item of items) {
-        if (item.type.indexOf('image') !== -1) {
-            const blob = item.getAsFile();
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                const clipboard_img_src = event.target.result;
-                const img = document.createElement('img');
-                img.src = clipboard_img_src;
-                img.style.maxWidth = '100px';
-                img.style.maxHeight = '100px';
-                img.style.position = 'absolute';
-                img.style.cursor = 'pointer';
+document.getElementById('comment').addEventListener('paste', function(event) {
+	const items = event.clipboardData.items;
+	for (let item of items) {
+		if (item.type.indexOf('image') !== -1) {
+			const blob = item.getAsFile();
+			const reader = new FileReader();
+			reader.onload = function(event) {
+				const clipboard_img_src = event.target.result;
+				const img = document.createElement('img');
+				img.src = clipboard_img_src;
+				img.style.maxWidth = '100px';
+				img.style.maxHeight = '100px';
+				img.style.position = 'absolute';
+				img.style.cursor = 'pointer';
 
-                img.onload = function () {
-                    const imgHeight = img.naturalHeight;
-                    const imgWidth = img.naturalWidth;
+				img.onload = function() {
+					const imgHeight = img.naturalHeight;
+					const imgWidth = img.naturalWidth;
 
-                    let resizedImgSrc = clipboard_img_src;
-                    if (imgHeight > 720 || imgWidth > 720) {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
+					let resizedImgSrc = clipboard_img_src;
+					if (imgHeight > 720 || imgWidth > 720) {
+						const canvas = document.createElement('canvas');
+						const ctx = canvas.getContext('2d');
 
-                        const scale = Math.min(720 / imgWidth, 720 / imgHeight);
-                        canvas.width = imgWidth * scale;
-                        canvas.height = imgHeight * scale;
+						const scale = Math.min(720 / imgWidth, 720 / imgHeight);
+						canvas.width = imgWidth * scale;
+						canvas.height = imgHeight * scale;
 
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                        resizedImgSrc = canvas.toDataURL();
-                    }
+						ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+						resizedImgSrc = canvas.toDataURL();
+					}
 
-                    const commentElement = document.getElementById('comment');
-                    let preview = document.getElementById('preview');
-                    if (!preview) {
-                        preview = document.createElement('div');
-                        preview.id = 'preview';
-                        preview.style.position = 'relative';
-                        commentElement.parentElement.style.position = 'relative';
-                        commentElement.parentElement.appendChild(preview);
-                    }
-                    preview.innerHTML = '';
+					const commentElement = document.getElementById('comment');
+					let preview = document.getElementById('preview');
+					if (!preview) {
+						preview = document.createElement('div');
+						preview.id = 'preview';
+						preview.style.position = 'relative';
+						commentElement.parentElement.style.position = 'relative';
+						commentElement.parentElement.appendChild(preview);
+					}
+					preview.innerHTML = '';
 
-                    const previewImg = document.createElement('img');
-                    previewImg.src = resizedImgSrc;
-                    previewImg.style.maxWidth = '100px';
-                    previewImg.style.maxHeight = '100px';
-                    previewImg.style.cursor = 'pointer';
+					const previewImg = document.createElement('img');
+					previewImg.src = resizedImgSrc;
+					previewImg.style.maxWidth = '100px';
+					previewImg.style.maxHeight = '100px';
+					previewImg.style.cursor = 'pointer';
 
-                    preview.style.position = 'absolute';
-                    preview.style.top = '-120px';
-                    preview.style.right = '10px';
+					preview.style.position = 'absolute';
+					preview.style.top = '-120px';
+					preview.style.right = '10px';
 
-                    preview.appendChild(previewImg);
+					preview.appendChild(previewImg);
 
-                    previewImg.addEventListener('click', function () {
-                        const enlarged = document.createElement('div');
-                        enlarged.style = `
+					previewImg.addEventListener('click', function() {
+						const enlarged = document.createElement('div');
+						enlarged.style =
+							`
                             position: fixed;
                             top: 0;
                             left: 0;
@@ -1402,114 +1427,114 @@ document.getElementById('comment').addEventListener('paste', function (event) {
                             align-items: center;
                             z-index: 1000;
                         `;
-                        const largeImg = document.createElement('img');
-                        largeImg.src = resizedImgSrc;
-                        largeImg.style.maxWidth = '90%';
-                        largeImg.style.maxHeight = '90%';
-                        enlarged.appendChild(largeImg);
-                        document.body.appendChild(enlarged);
+						const largeImg = document.createElement('img');
+						largeImg.src = resizedImgSrc;
+						largeImg.style.maxWidth = '90%';
+						largeImg.style.maxHeight = '90%';
+						enlarged.appendChild(largeImg);
+						document.body.appendChild(enlarged);
 
-                        enlarged.addEventListener('click', function () {
-                            document.body.removeChild(enlarged);
-                        });
-                    });
-                };
-            };
-            reader.readAsDataURL(blob);
-        }
-    }
+						enlarged.addEventListener('click', function() {
+							document.body.removeChild(enlarged);
+						});
+					});
+				};
+			};
+			reader.readAsDataURL(blob);
+		}
+	}
 });
 
-document.getElementById('comment').addEventListener('keyup', function (event) {
-    if (event.key === 'Backspace') {
-        if (this.value === '') {
-            clipboard_img_src = "";
-            var preview = document.getElementById('preview');
-            if (preview) {
-                preview.innerHTML = '';
-            }
-        }
-    }
+document.getElementById('comment').addEventListener('keyup', function(event) {
+	if (event.key === 'Backspace') {
+		if (this.value === '') {
+			clipboard_img_src = "";
+			var preview = document.getElementById('preview');
+			if (preview) {
+				preview.innerHTML = '';
+			}
+		}
+	}
 });
 
 function send() {
-    clear_fnc_validator('div_msg');
-    var msg = $('#comment').val();
-    if (msg != "") {
-        var check_msg = replaceAll(msg, " ", "");
-        check_msg = replaceAll(check_msg, "　", "");
-        if (check_msg == "") {
-            fnc_validator('comment', 'comment_err', '空白だけの投稿はできません');
-            return;
-        }
-        if (!validator.isLength(msg, 1, 4000)) {
-            fnc_validator('comment', 'comment_err', '入力文字数が長すぎます');
-            return;
-        }
-        msg = trim_space(msg, max_br);
-        if (msg == false) {
-            fnc_validator('comment', 'comment_err', '入力欄が空白です');
-            return;
-        }
-    } else {
-        if (!img_src2 && !clipboard_img_src) {
-            fnc_validator('comment', 'comment_err', '入力欄が空欄です');
-            return;
-        }
-    }
+	clear_fnc_validator('div_msg');
+	var msg = $('#comment').val();
+	if (msg != "") {
+		var check_msg = replaceAll(msg, " ", "");
+		check_msg = replaceAll(check_msg, "　", "");
+		if (check_msg == "") {
+			fnc_validator('comment', 'comment_err', '空白だけの投稿はできません');
+			return;
+		}
+		if (!validator.isLength(msg, 1, 4000)) {
+			fnc_validator('comment', 'comment_err', '入力文字数が長すぎます');
+			return;
+		}
+		msg = trim_space(msg, max_br);
+		if (msg == false) {
+			fnc_validator('comment', 'comment_err', '入力欄が空白です');
+			return;
+		}
+	} else {
+		if (!img_src2 && !clipboard_img_src) {
+			fnc_validator('comment', 'comment_err', '入力欄が空欄です');
+			return;
+		}
+	}
 
-    if (!img_src2 && clipboard_img_src) {
-        img_src2 = clipboard_img_src;
-    }
-    if (img_src2) {
-        var imgStructure = img_src2.split(',');
-        if (imgStructure.length == 2) {
-            var str = imgStructure[0];
-            str = str.replace("data:image/", "");
-            str = str.replace(";base64", "");
-            if (str == "jpeg" || str == "png" || str == "gif") { } else {
-                alert('添付画像エラー。画像は、jpg、png、gifのみ添付してください。');
-                return;
-            }
-        } else {
-            alert('添付画像エラー。選択された画像をご確認ください');
-            return;
-        }
-    }
-    var character_name = "";
-    if (gloval_character_name[selected_my_icon]) {
-        character_name = gloval_character_name[selected_my_icon];
-    }
-    var data = {
-        comment: msg,
-        type: "1",
-        room_id: disp_room_id,
-        img: img_src2,
-        img_no: selected_my_icon,
-        character_name: character_name
-    };
-    socket.json.emit('send', data);
-    send_anime(uid);
-    $('#comment').val("");
-    img_src2 = "";
-    clipboard_img_src = "";
-    $('#i_file2').val("");
-    $('#uv').val("");
-    $('#uv').hide();
-    $('#file_span2').html("");
+	if (!img_src2 && clipboard_img_src) {
+		img_src2 = clipboard_img_src;
+	}
+	if (img_src2) {
+		var imgStructure = img_src2.split(',');
+		if (imgStructure.length == 2) {
+			var str = imgStructure[0];
+			str = str.replace("data:image/", "");
+			str = str.replace(";base64", "");
+			if (str == "jpeg" || str == "png" || str == "gif") {} else {
+				alert('添付画像エラー。画像は、jpg、png、gifのみ添付してください。');
+				return;
+			}
+		} else {
+			alert('添付画像エラー。選択された画像をご確認ください');
+			return;
+		}
+	}
+	var character_name = "";
+	if (gloval_character_name[selected_my_icon]) {
+		character_name = gloval_character_name[selected_my_icon];
+	}
+	var data = {
+		comment: msg,
+		type: "1",
+		room_id: disp_room_id,
+		img: img_src2,
+		img_no: selected_my_icon,
+		character_name: character_name
+	};
+	socket.json.emit('send', data);
+	send_anime(uid);
+	$('#comment').val("");
+	img_src2 = "";
+	clipboard_img_src = "";
+	$('#i_file2').val("");
+	$('#uv').val("");
+	$('#uv').hide();
+	$('#file_span2').html("");
 
-    var preview = document.getElementById('preview');
-    if (preview) {
-        preview.innerHTML = '';
-    }
-    if (_MY_SP_ == 1) {
-        $('#comment').blur();
-        $('#box2 .tabs').show();
-    }
-    if (google_analytics) {
-        ga('send', 'event', 'button', 'click', 'msg send');
-    }
-    check_room_list_update();
+	var preview = document.getElementById('preview');
+	if (preview) {
+		preview.innerHTML = '';
+	}
+	if (_MY_SP_ == 1) {
+		$('#comment').blur();
+		$('#box2 .tabs').show();
+	}
+	if (google_analytics) {
+		ga('send', 'event', 'button', 'click', 'msg send');
+	}
+	check_room_list_update();
 }
 
 
@@ -1530,69 +1555,72 @@ const processedElements = new Set();
 const originalPositions = new Map();
 
 function updateStars() {
-    const onlineElements = userList.querySelectorAll('.online, .online_1');
-    const clearfix = userList.querySelector('.clearfix');
+	const onlineElements = userList.querySelectorAll('.online, .online_1');
+	const clearfix = userList.querySelector('.clearfix');
 
-    onlineElements.forEach((element, index) => {
-        if (processedElements.has(element)) return;
+	onlineElements.forEach((element, index) => {
+		if (processedElements.has(element)) return;
 
-        const liElement = element.closest('li');
-        const storageKey = `${storagePrefix}${index}`;
-        let starStatus = localStorage.getItem(storageKey) || '☆';
-        const star = document.createElement('span');
-        star.textContent = starStatus;
-        star.style.fontSize = '18px';
-        star.style.marginRight = '5px';
-        star.style.cursor = 'pointer';
+		const liElement = element.closest('li');
+		const storageKey = `${storagePrefix}${index}`;
+		let starStatus = localStorage.getItem(storageKey) || '☆';
+		const star = document.createElement('span');
+		star.textContent = starStatus;
+		star.style.fontSize = '18px';
+		star.style.marginRight = '5px';
+		star.style.cursor = 'pointer';
 
-        if (!originalPositions.has(liElement)) {
-            originalPositions.set(liElement, liElement.nextSibling);
-        }
+		if (!originalPositions.has(liElement)) {
+			originalPositions.set(liElement, liElement.nextSibling);
+		}
 
-        star.addEventListener('click', () => {
-            starStatus = star.textContent === '☆' ? '★' : '☆';
-            star.textContent = starStatus;
-            localStorage.setItem(storageKey, starStatus);
+		star.addEventListener('click', () => {
+			starStatus = star.textContent === '☆' ? '★' : '☆';
+			star.textContent = starStatus;
+			localStorage.setItem(storageKey, starStatus);
 
-            if (starStatus === '★' && clearfix) {
-                clearfix.parentNode.insertBefore(liElement, clearfix.nextSibling);
-            } else {
-                const originalPosition = originalPositions.get(liElement);
-                if (originalPosition) {
-                    userList.insertBefore(liElement, originalPosition);
-                } else {
-                    userList.appendChild(liElement);
-                }
-            }
-        });
+			if (starStatus === '★' && clearfix) {
+				clearfix.parentNode.insertBefore(liElement, clearfix.nextSibling);
+			} else {
+				const originalPosition = originalPositions.get(liElement);
+				if (originalPosition) {
+					userList.insertBefore(liElement, originalPosition);
+				} else {
+					userList.appendChild(liElement);
+				}
+			}
+		});
 
-        element.insertAdjacentElement('beforebegin', star);
-        processedElements.add(element);
+		element.insertAdjacentElement('beforebegin', star);
+		processedElements.add(element);
 
-        if (starStatus === '★' && clearfix) {
-            clearfix.parentNode.insertBefore(liElement, clearfix.nextSibling);
-        }
-    });
+		if (starStatus === '★' && clearfix) {
+			clearfix.parentNode.insertBefore(liElement, clearfix.nextSibling);
+		}
+	});
 }
 
 const observer = new MutationObserver((mutations) => {
-    let needsUpdate = false;
+	let needsUpdate = false;
 
-    for (const mutation of mutations) {
-        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            needsUpdate = true;
-            break;
-        }
-    }
+	for (const mutation of mutations) {
+		if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+			needsUpdate = true;
+			break;
+		}
+	}
 
-    if (needsUpdate) {
-        updateStars();
-    }
+	if (needsUpdate) {
+		updateStars();
+	}
 });
 
 if (userList) {
-    observer.observe(userList, { childList: true, subtree: true });
-    updateStars();
+	observer.observe(userList, {
+		childList: true,
+		subtree: true
+	});
+	updateStars();
 }
 
 
@@ -1610,23 +1638,28 @@ if (userList) {
 const userList_1 = document.getElementById('user_list2');
 
 function filterUsers(suN) {
-    Array.from(userList_1.getElementsByClassName('li_user clearfix')).forEach($user => {
-        $user.style.display = $user.getElementsByClassName('user_name')[0].textContent.includes(suN) || suN === "" ? '' : 'none';
-    });
+	Array.from(userList_1.getElementsByClassName('li_user clearfix')).forEach(
+		$user => {
+			$user.style.display = $user.getElementsByClassName('user_name')[0].textContent
+				.includes(suN) || suN === "" ? '' : 'none';
+		});
 }
 
 function addSearchInput() {
-    if (!document.getElementById('suNe')) {
-        const suNe = document.createElement('input');
-        suNe.type = 'text';
-        suNe.id = 'suNe';
-        suNe.placeholder = '検索...';
-        userList_1.prepend(suNe);
-        suNe.addEventListener('input', () => filterUsers(suNe.value));
-    }
+	if (!document.getElementById('suNe')) {
+		const suNe = document.createElement('input');
+		suNe.type = 'text';
+		suNe.id = 'suNe';
+		suNe.placeholder = '検索...';
+		userList_1.prepend(suNe);
+		suNe.addEventListener('input', () => filterUsers(suNe.value));
+	}
 }
 
-new MutationObserver(() => addSearchInput()).observe(userList_1, { childList: true, subtree: true });
+new MutationObserver(() => addSearchInput()).observe(userList_1, {
+	childList: true,
+	subtree: true
+});
 addSearchInput();
 
 
@@ -1683,7 +1716,8 @@ warningMessage.style.fontSize = '14px';
 warningMessage.style.marginBottom = '10px';
 
 const commandDescription = document.createElement('div');
-commandDescription.innerHTML = 'コマンド（任意、複数可、未指定の場合自動で全て検索）: <br> @user[ユーザー名] - 検索するユーザーの指定 <br> @page[最初のページ数-最後のページ数] - 検索するページの指定 <br>@page[100-x] の形式で指定すると、100ページ以降の結果を取得します。<br> 例 @user[baka]あ　@page[1-100]あ　@user[baka]@page[100-x]あ <br> ';
+commandDescription.innerHTML =
+	'コマンド（任意、複数可、未指定の場合自動で全て検索）: <br> @user[ユーザー名] - 検索するユーザーの指定 <br> @page[最初のページ数-最後のページ数] - 検索するページの指定 <br>@page[100-x] の形式で指定すると、100ページ以降の結果を取得します。<br> 例 @user[baka]あ　@page[1-100]あ　@user[baka]@page[100-x]あ <br> ';
 commandDescription.style.fontSize = '12px';
 commandDescription.style.marginBottom = '10px';
 
@@ -1719,36 +1753,36 @@ document.body.appendChild(popup);
 let isDragging = false;
 let offsetX, offsetY;
 
-popup.addEventListener('mousedown', function (e) {
-    const popupRect = popup.getBoundingClientRect();
-    const edgeArea = 20;
+popup.addEventListener('mousedown', function(e) {
+	const popupRect = popup.getBoundingClientRect();
+	const edgeArea = 20;
 
-    if (
-        e.clientX >= popupRect.left &&
-        e.clientX <= popupRect.right &&
-        (e.clientY >= popupRect.top && e.clientY <= popupRect.top + edgeArea ||
-            e.clientY >= popupRect.bottom - edgeArea && e.clientY <= popupRect.bottom)
-    ) {
-        isDragging = true;
-        offsetX = e.clientX - popupRect.left;
-        offsetY = e.clientY - popupRect.top;
-    }
+	if (
+		e.clientX >= popupRect.left &&
+		e.clientX <= popupRect.right &&
+		(e.clientY >= popupRect.top && e.clientY <= popupRect.top + edgeArea ||
+			e.clientY >= popupRect.bottom - edgeArea && e.clientY <= popupRect.bottom)
+	) {
+		isDragging = true;
+		offsetX = e.clientX - popupRect.left;
+		offsetY = e.clientY - popupRect.top;
+	}
 });
 
-document.addEventListener('mousemove', function (e) {
-    if (isDragging) {
-        popup.style.left = e.clientX - offsetX + 'px';
-        popup.style.top = e.clientY - offsetY + 'px';
-        popup.style.transform = 'none';
-    }
+document.addEventListener('mousemove', function(e) {
+	if (isDragging) {
+		popup.style.left = e.clientX - offsetX + 'px';
+		popup.style.top = e.clientY - offsetY + 'px';
+		popup.style.transform = 'none';
+	}
 });
 
-document.addEventListener('mouseup', function () {
-    isDragging = false;
+document.addEventListener('mouseup', function() {
+	isDragging = false;
 });
 
-closeButton.addEventListener('click', function () {
-    popup.style.display = 'none';
+closeButton.addEventListener('click', function() {
+	popup.style.display = 'none';
 });
 
 let intervalId_1;
@@ -1756,7 +1790,8 @@ let resultsContainer = null;
 let seenMessages = new Set();
 let currentSearchKeywords = '';
 
-const workerScript = `
+const workerScript =
+	`
     let intervalId_1;
     self.onmessage = function(event) {
         const { type, intervalDuration, data } = event.data;
@@ -1772,174 +1807,195 @@ const workerScript = `
     };
 `;
 
-const workerBlob = new Blob([workerScript], { type: 'application/javascript' });
+const workerBlob = new Blob([workerScript], {
+	type: 'application/javascript'
+});
 const worker = new Worker(URL.createObjectURL(workerBlob));
 
-logSearchButton.addEventListener('click', function () {
-    if (logSearchButton.textContent === 'ストップ') {
-        worker.postMessage({ type: 'stop' });
-        logSearchButton.textContent = 'ログ検索';
-        warningMessage.textContent = '※処理終了';
-        warningMessage.style.color = 'green';
-        warningMessage.style.fontWeight = 'bold';
-        return;
-    }
+logSearchButton.addEventListener('click', function() {
+	if (logSearchButton.textContent === 'ストップ') {
+		worker.postMessage({
+			type: 'stop'
+		});
+		logSearchButton.textContent = 'ログ検索';
+		warningMessage.textContent = '※処理終了';
+		warningMessage.style.color = 'green';
+		warningMessage.style.fontWeight = 'bold';
+		return;
+	}
 
-    logSearchButton.textContent = 'ストップ';
-    warningMessage.textContent = '※処理中...（他のタブなどでもなるべく、ねとるむを動かさないでください）';
-    warningMessage.style.color = 'orange';
-    warningMessage.style.fontWeight = 'bold';
+	logSearchButton.textContent = 'ストップ';
+	warningMessage.textContent = '※処理中...（他のタブなどでもなるべく、ねとるむを動かさないでください）';
+	warningMessage.style.color = 'orange';
+	warningMessage.style.fontWeight = 'bold';
 
-    const inputText = inputField.value.trim();
-    if (!inputText) {
-        alert('検索する言葉を入力してください。');
-        return;
-    }
+	const inputText = inputField.value.trim();
+	if (!inputText) {
+		alert('検索する言葉を入力してください。');
+		return;
+	}
 
-    seenMessages.clear();
-    users = [];
+	seenMessages.clear();
+	users = [];
 
-    const userRegex = /@user\[(.*?)\]|@user\[(.*?)\s/g;
-    const pageRegex = /@page\[(\d+(-\w+)?)\]/g;
-    let pageRange = null;
+	const userRegex = /@user\[(.*?)\]|@user\[(.*?)\s/g;
+	const pageRegex = /@page\[(\d+(-\w+)?)\]/g;
+	let pageRange = null;
 
-    let match;
-    while ((match = userRegex.exec(inputText)) !== null) {
-        users.push(match[1] || match[2]);
-    }
+	let match;
+	while ((match = userRegex.exec(inputText)) !== null) {
+		users.push(match[1] || match[2]);
+	}
 
-    while ((match = pageRegex.exec(inputText)) !== null) {
-        pageRange = match[1];
-    }
-    currentSearchKeywords = inputText.replace(userRegex, '').replace(pageRegex, '').trim();
-    const firstPage = pageRange ? parseInt(pageRange.split('-')[0]) : 1;
-    const lastPageRaw = pageRange ? pageRange.split('-')[1] : null;
-    const lastPage = lastPageRaw === 'x' ? 'x' : (lastPageRaw !== undefined ? parseInt(lastPageRaw) : null);
+	while ((match = pageRegex.exec(inputText)) !== null) {
+		pageRange = match[1];
+	}
+	currentSearchKeywords = inputText.replace(userRegex, '').replace(pageRegex,
+		'').trim();
+	const firstPage = pageRange ? parseInt(pageRange.split('-')[0]) : 1;
+	const lastPageRaw = pageRange ? pageRange.split('-')[1] : null;
+	const lastPage = lastPageRaw === 'x' ? 'x' : (lastPageRaw !== undefined ?
+		parseInt(lastPageRaw) : null);
 
-    if (!resultsContainer) {
-        resultsContainer = document.createElement('div');
-        resultsContainer.style.marginTop = '10px';
-        popup.appendChild(resultsContainer);
-    } else {
-        resultsContainer.innerHTML = '';
-    }
+	if (!resultsContainer) {
+		resultsContainer = document.createElement('div');
+		resultsContainer.style.marginTop = '10px';
+		popup.appendChild(resultsContainer);
+	} else {
+		resultsContainer.innerHTML = '';
+	}
 
-    let currentPage = firstPage;
+	let currentPage = firstPage;
 
-    const intervalDuration = 4000;
+	const intervalDuration = 4000;
 
-    worker.postMessage({ type: 'start', intervalDuration, data: { currentPage } });
+	worker.postMessage({
+		type: 'start',
+		intervalDuration,
+		data: {
+			currentPage
+		}
+	});
 
-    worker.onmessage = function (e) {
-        if (e.data.type === 'fetch') {
-            currentPage = e.data.page;
+	worker.onmessage = function(e) {
+		if (e.data.type === 'fetch') {
+			currentPage = e.data.page;
 
-            socket.json.emit('join', {
-                'room_id': disp_room_id,
-                'page': currentPage,
-                'passwd': global_passwd,
-                'answer': global_answer,
-                'now_cmd': now_cmd
-            });
-        }
-    };
+			socket.json.emit('join', {
+				'room_id': disp_room_id,
+				'page': currentPage,
+				'passwd': global_passwd,
+				'answer': global_answer,
+				'now_cmd': now_cmd
+			});
+		}
+	};
 
-    socket.on('got_page', function (res) {
-        var ini_flag = 2;
-        if (res.join_flag) {
-            ini_flag = 1;
-        }
-        if (res.joined_room_name) {
-            show_room_name(res.joined_room_name);
-        }
+	socket.on('got_page', function(res) {
+		var ini_flag = 2;
+		if (res.join_flag) {
+			ini_flag = 1;
+		}
+		if (res.joined_room_name) {
+			show_room_name(res.joined_room_name);
+		}
 
-        if (res.res2.length > 0) {
-            if (lastPage === 'x') {
-                currentPage++;
-            } else if (lastPage && currentPage < lastPage) {
-                currentPage++;
-            } else if ((lastPage && currentPage >= lastPage)) {
-                worker.postMessage({ type: 'stop' });
-                logSearchButton.textContent = 'ログ検索';
-                warningMessage.textContent = '※処理終了';
-            } else if (!lastPage || isNaN(lastPage)) {
-                currentPage++;
-            }
-        } else if (res.res2.length == 0) {
-            worker.postMessage({ type: 'stop' });
-            logSearchButton.textContent = 'ログ検索';
-            warningMessage.textContent = '※処理終了';
-            socket.json.emit('join', {
-                'room_id': disp_room_id,
-                'page': 0,
-                'passwd': global_passwd,
-                'answer': global_answer,
-                'now_cmd': now_cmd
-            });
-        }
+		if (res.res2.length > 0) {
+			if (lastPage === 'x') {
+				currentPage++;
+			} else if (lastPage && currentPage < lastPage) {
+				currentPage++;
+			} else if ((lastPage && currentPage >= lastPage)) {
+				worker.postMessage({
+					type: 'stop'
+				});
+				logSearchButton.textContent = 'ログ検索';
+				warningMessage.textContent = '※処理終了';
+			} else if (!lastPage || isNaN(lastPage)) {
+				currentPage++;
+			}
+		} else if (res.res2.length == 0) {
+			worker.postMessage({
+				type: 'stop'
+			});
+			logSearchButton.textContent = 'ログ検索';
+			warningMessage.textContent = '※処理終了';
+			socket.json.emit('join', {
+				'room_id': disp_room_id,
+				'page': 0,
+				'passwd': global_passwd,
+				'answer': global_answer,
+				'now_cmd': now_cmd
+			});
+		}
 
-        for (let i = 0; i < res.res2.length; i++) {
-            const message = res.res2[i];
-            const uname = message.uname;
-            const comment = message.comment;
-            const seq = message.seq;
+		for (let i = 0; i < res.res2.length; i++) {
+			const message = res.res2[i];
+			const uname = message.uname;
+			const comment = message.comment;
+			const seq = message.seq;
 
-            if (seenMessages.has(seq)) {
-                continue;
-            }
-            seenMessages.add(seq);
-            if (users.length > 0 && !users.includes(uname)) {
-                continue;
-            }
+			if (seenMessages.has(seq)) {
+				continue;
+			}
+			seenMessages.add(seq);
+			if (users.length > 0 && !users.includes(uname)) {
+				continue;
+			}
 
-            if (currentSearchKeywords && !comment.includes(currentSearchKeywords)) {
-                continue;
-            }
+			if (currentSearchKeywords && !comment.includes(currentSearchKeywords)) {
+				continue;
+			}
 
-            const pageNum = Math.floor(seq / 100) + 1;
+			const pageNum = Math.floor(seq / 100) + 1;
 
-            if (pageRange) {
-                const pageNumbers = pageRange.split('-').map(Number);
-                if (pageNumbers.length === 1) {
-                    if (pageNum !== pageNumbers[0]) continue;
-                } else if (pageNumbers[1] === 'x') {
-                    if (pageNum < pageNumbers[0]) continue;
-                } else {
-                    const startPage = pageNumbers[0];
-                    const endPage = pageNumbers[1];
-                    if (pageNum < startPage || pageNum > endPage) continue;
-                }
-            }
+			if (pageRange) {
+				const pageNumbers = pageRange.split('-').map(Number);
+				if (pageNumbers.length === 1) {
+					if (pageNum !== pageNumbers[0]) continue;
+				} else if (pageNumbers[1] === 'x') {
+					if (pageNum < pageNumbers[0]) continue;
+				} else {
+					const startPage = pageNumbers[0];
+					const endPage = pageNumbers[1];
+					if (pageNum < startPage || pageNum > endPage) continue;
+				}
+			}
 
-            const highlightedComment = currentSearchKeywords ? comment.replace(new RegExp(currentSearchKeywords, 'g'), '<span style="background-color: yellow;">$&</span>') : comment;
+			const highlightedComment = currentSearchKeywords ? comment.replace(new RegExp(
+					currentSearchKeywords, 'g'),
+				'<span style="background-color: yellow;">$&</span>') : comment;
 
-            const resultHtml = document.createElement('div');
-            resultHtml.style.marginBottom = '5px';
-            resultHtml.style.padding = '5px';
-            resultHtml.style.border = '1px solid #e0e0e0';
-            resultHtml.style.borderRadius = '5px';
-            resultHtml.innerHTML = `
+			const resultHtml = document.createElement('div');
+			resultHtml.style.marginBottom = '5px';
+			resultHtml.style.padding = '5px';
+			resultHtml.style.border = '1px solid #e0e0e0';
+			resultHtml.style.borderRadius = '5px';
+			resultHtml.innerHTML =
+				`
                 <strong>${seq} : ${uname}</strong>: ${highlightedComment}
                <span class="jumpButton" style="color: #0067C0; cursor: pointer; font-size: 11px; padding-left: 5px;">ジャンプ</span>
             `;
-            resultsContainer.appendChild(resultHtml);
+			resultsContainer.appendChild(resultHtml);
 
-            const jumpButton = resultHtml.querySelector('.jumpButton');
-            jumpButton.addEventListener('click', function () {
-                worker.postMessage({ type: 'stop' });
-                logSearchButton.textContent = 'ログ検索';
-                warningMessage.textContent = '※処理終了';
-                socket.json.emit('join', {
-                    'room_id': disp_room_id,
-                    'page': pageNum,
-                    'passwd': global_passwd,
-                    'answer': global_answer,
-                    'now_cmd': now_cmd
-                });
-                document.getElementById('closeButton').click();
-            });
-        }
-    });
+			const jumpButton = resultHtml.querySelector('.jumpButton');
+			jumpButton.addEventListener('click', function() {
+				worker.postMessage({
+					type: 'stop'
+				});
+				logSearchButton.textContent = 'ログ検索';
+				warningMessage.textContent = '※処理終了';
+				socket.json.emit('join', {
+					'room_id': disp_room_id,
+					'page': pageNum,
+					'passwd': global_passwd,
+					'answer': global_answer,
+					'now_cmd': now_cmd
+				});
+				document.getElementById('closeButton').click();
+			});
+		}
+	});
 });
 
 
@@ -1956,117 +2012,127 @@ logSearchButton.addEventListener('click', function () {
 // ==/UserScript==
 
 function addStarMarks() {
-    var roomList = document.getElementById('room_list');
-    var children = roomList.children;
-    var storedRoomNames = JSON.parse(localStorage.getItem('starredRoomNames')) || [];
+	var roomList = document.getElementById('room_list');
+	var children = roomList.children;
+	var storedRoomNames = JSON.parse(localStorage.getItem('starredRoomNames')) || [];
 
-    for (var i = 0; i < children.length; i++) {
-        var s2Element = children[i].querySelector('.s2');
+	for (var i = 0; i < children.length; i++) {
+		var s2Element = children[i].querySelector('.s2');
 
-        if (s2Element) {
-            if (!s2Element.nextElementSibling || !s2Element.nextElementSibling.classList.contains('star-mark')) {
-                var starElement = document.createElement('span');
-                starElement.classList.add('star-mark');
-                starElement.style.fontSize = '24px';
-                starElement.style.cursor = 'pointer';
-                starElement.style.transition = 'transform 0.2s';
-                starElement.style.display = 'inline-block';
-                starElement.style.marginLeft = '5px';
+		if (s2Element) {
+			if (!s2Element.nextElementSibling || !s2Element.nextElementSibling.classList
+				.contains('star-mark')) {
+				var starElement = document.createElement('span');
+				starElement.classList.add('star-mark');
+				starElement.style.fontSize = '24px';
+				starElement.style.cursor = 'pointer';
+				starElement.style.transition = 'transform 0.2s';
+				starElement.style.display = 'inline-block';
+				starElement.style.marginLeft = '5px';
 
-                var roomName = now_room_list[i].room_name;
+				var roomName = now_room_list[i].room_name;
 
-                if (i !== 0 && storedRoomNames.includes(roomName)) {
-                    starElement.innerHTML = '★';
-                } else if (i !== 0) {
-                    starElement.innerHTML = '☆';
-                }
+				if (i !== 0 && storedRoomNames.includes(roomName)) {
+					starElement.innerHTML = '★';
+				} else if (i !== 0) {
+					starElement.innerHTML = '☆';
+				}
 
-                starElement.addEventListener('mousedown', function (event) {
-                    event.stopPropagation();
-                    event.preventDefault();
+				starElement.addEventListener('mousedown', function(event) {
+					event.stopPropagation();
+					event.preventDefault();
 
-                    var index = Array.from(roomList.children).indexOf(this.closest('li'));
-                    var roomData = now_room_list[index];
-                    var roomName = roomData.room_name;
+					var index = Array.from(roomList.children).indexOf(this.closest('li'));
+					var roomData = now_room_list[index];
+					var roomName = roomData.room_name;
 
-                    if (this.innerHTML === '☆') {
-                        this.innerHTML = '★';
-                        var newRoomObject = {
-                            "_id": roomData._id,
-                            "room_name": roomData.room_name,
-                            "category": roomData.category,
-                            "count": 0,
-                            "r_permition": roomData.r_permition,
-                            "room_riddle": roomData.room_riddle,
-                            "update_time": roomData.update_time,
-                            "in_user": {}
-                        };
+					if (this.innerHTML === '☆') {
+						this.innerHTML = '★';
+						var newRoomObject = {
+							"_id": roomData._id,
+							"room_name": roomData.room_name,
+							"category": roomData.category,
+							"count": 0,
+							"r_permition": roomData.r_permition,
+							"room_riddle": roomData.room_riddle,
+							"update_time": roomData.update_time,
+							"in_user": {}
+						};
 
-                        storedRoomNames.push(roomName);
-                        localStorage.setItem('starredRoomNames', JSON.stringify(storedRoomNames));
-                        localStorage.setItem(roomName, JSON.stringify(newRoomObject));
+						storedRoomNames.push(roomName);
+						localStorage.setItem('starredRoomNames', JSON.stringify(storedRoomNames));
+						localStorage.setItem(roomName, JSON.stringify(newRoomObject));
 
-                        now_room_list.splice(2, 0, newRoomObject);
-                        show_room_list(now_room_list, "");
-                        addStarMarks();
-                    } else {
-                        this.innerHTML = '☆';
-                        var roomIndex = storedRoomNames.indexOf(roomName);
-                        if (roomIndex > -1) {
-                            storedRoomNames.splice(roomIndex, 1);
-                        }
-                        localStorage.setItem('starredRoomNames', JSON.stringify(storedRoomNames));
-                        localStorage.removeItem(roomName);
+						now_room_list.splice(2, 0, newRoomObject);
+						show_room_list(now_room_list, "");
+						addStarMarks();
+					} else {
+						this.innerHTML = '☆';
+						var roomIndex = storedRoomNames.indexOf(roomName);
+						if (roomIndex > -1) {
+							storedRoomNames.splice(roomIndex, 1);
+						}
+						localStorage.setItem('starredRoomNames', JSON.stringify(storedRoomNames));
+						localStorage.removeItem(roomName);
 
-                        now_room_list = now_room_list.filter(function (room) {
-                            return room.room_name !== roomName;
-                        });
-                        show_room_list(now_room_list, "");
-                        addStarMarks();
-                    }
-                });
+						now_room_list = now_room_list.filter(function(room) {
+							return room.room_name !== roomName;
+						});
+						show_room_list(now_room_list, "");
+						addStarMarks();
+					}
+				});
 
-                s2Element.parentNode.insertBefore(starElement, s2Element.nextSibling);
-            }
-        }
-    }
+				s2Element.parentNode.insertBefore(starElement, s2Element.nextSibling);
+			}
+		}
+	}
 }
 
 function loadStarredRooms() {
-    var storedRoomNames = JSON.parse(localStorage.getItem('starredRoomNames')) || [];
-    var starredRooms = [];
-    for (var roomName of storedRoomNames) {
-        var roomData = JSON.parse(localStorage.getItem(roomName));
-        if (roomData) {
-            starredRooms.push(roomData);
-        }
-    }
-    return starredRooms;
+	var storedRoomNames = JSON.parse(localStorage.getItem('starredRoomNames')) || [];
+	var starredRooms = [];
+	for (var roomName of storedRoomNames) {
+		var roomData = JSON.parse(localStorage.getItem(roomName));
+		if (roomData) {
+			starredRooms.push(roomData);
+		}
+	}
+	return starredRooms;
 }
 
-socket.on('got_room_list', function (res0) {
-    var res = res0.res;
-    var update_time = res0.update_time;
+socket.on('got_room_list', function(res0) {
+	var res = res0.res;
+	var update_time = res0.update_time;
 
-    var starredRooms = loadStarredRooms();
+	var starredRooms = loadStarredRooms();
 
-    if (starredRooms.length > 0) {
-        res.splice(2, 0, ...starredRooms);
-    }
+	if (starredRooms.length > 0) {
+		res.splice(2, 0, ...starredRooms);
+	}
 
-    show_room_list(res, update_time);
-    addStarMarks();
+	show_room_list(res, update_time);
+	addStarMarks();
 });
 
 
 //ロード画面撤去
 (function() {
-    const splashScreen = document.getElementById("splash-screen");
-    setTimeout(function () {
-        splashScreen.style.opacity = "0";
-        splashScreen.style.transition = "opacity 0.5s ease";
-        setTimeout(function () {
-            splashScreen.style.display = "none";
-        }, 500); // 0.5秒後に非表示
-    }, 1850); // 1.85秒後にフェードアウトを開始
+	if (selected_uid) {
+		const splashScreen = document.getElementById("splash-screen");
+		setTimeout(function() {
+			splashScreen.style.opacity = "0";
+			splashScreen.style.transition = "opacity 0.5s ease";
+			setTimeout(function() {
+				splashScreen.style.display = "none";
+			}, 500); // 0.5秒後に非表示
+		}, 1850); // 1.85秒後にフェードアウトを開始
+	}else{
+		setTimeout(function() {
+			createOverlay();
+			updateText(
+				"接続に失敗しました。<br><br><button onclick='window.location.reload();' style='font-size:22px;'><b>リロードする</b></button>"
+			);
+		}, 1850); // 1.85秒後にフェードアウトを開始
+	}
 })();

@@ -94,7 +94,7 @@ if (localStorage.hasOwnProperty("e-ui")) {
     var e_ui = localStorage.getItem("e-ui");
 } else {
     var e_ui = "new";
-    localStorage.setItem('e-ui', e-ui);
+    localStorage.setItem('e-ui', e_ui);
 }
 
 //スマホ対応

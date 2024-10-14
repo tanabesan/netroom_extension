@@ -148,12 +148,13 @@ if (e_ui == "old") {
             background-color: #` + theme_c + `;
             display: flex;
             justify-content: center;
-            align-items: center;   
+            align-items: center;
             z-index: 99;
         }
 
         #splash-screen .logo_l {
             max-width: 50%;
+            max-height: 50%;
             height: auto;
         }
     `;

@@ -124,6 +124,14 @@ if (dark == "dark") {
 }
 console.log(theme_l);
 
+let theme_c = "";
+if (dark == "dark") {
+    theme_c = "000000";
+} else {
+    theme_c = "ffffff";
+}
+console.log(theme_l);
+
 //変更
 if (e_ui == "old") {
     document.head.appendChild(script);
@@ -137,7 +145,7 @@ if (e_ui == "old") {
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #000;
+            background-color: #` + theme_c + `;
             display: flex;
             justify-content: center;
             align-items: center;   

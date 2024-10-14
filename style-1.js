@@ -262,6 +262,11 @@ body[data-isroom="0"] #box1{
 	max-width:100%;
 }
 
+.ga {
+    position: fixed;
+    right: 0px;
+}
+
 `;}
 if (dark_2=="light"){
 css=` body,
@@ -504,6 +509,11 @@ body[data-isroom="0"] #box1{
 	max-width:100%;
 }
 
+.ga {
+    position: fixed;
+    right: 0px;
+}
+
 `;}
 
 const style=document.createElement('style');
@@ -677,7 +687,7 @@ myinfowrap.insertBefore(clock, myinfowrap.firstChild);
 
 
 
-//大阪弁bot(nrajs様より)
+//ツールボタンB
 var toolButtonA = document.createElement('button');
 toolButtonA.id = 'tool_btn_a';
 toolButtonA.textContent = '仮ボタンa';
@@ -701,12 +711,12 @@ toolButtonB.addEventListener('click', function () {
 // ツールボタンC
 var toolButtonC = document.createElement('button');
 toolButtonC.id = 'tool_btn_c';
-toolButtonC.textContent = '仮ボタンc';
+toolButtonC.textContent = 'ログ検索';
 toolButtonC.style.display = 'inline';
 toolButtonC.style.marginLeft = '10px';
 returnButton.parentNode.insertBefore(toolButtonC, returnButton.nextSibling);
 toolButtonC.addEventListener('click', function () {
-	//write code here
+    popup.style.display = 'block';
 });
 
 //ヘルプタブ表示
@@ -790,13 +800,19 @@ if (dark_2 == "dark") {
 	set_w_d = ' checked=""'
 }
 
-let now_ui = "old";
+
+if (localStorage.hasOwnProperty("e-ui")) {
+    var now_ui = localStorage.getItem("e-ui");
+} else {
+    var now_ui = "new";
+    localStorage.setItem('e-ui', e - ui);
+}
 let set_u_o = "";
 let set_u_n = "";
 if (now_ui == "old") {
-	set_u_o = ' checked=""';
+	set_u_n = ' checked=""';
 } else {
-	set_u_n = ' checked=""'
+	set_u_o = ' checked=""'
 }
 
 // 要素を生成（テキストで要素を作る場合）
@@ -954,6 +970,22 @@ function removeOverlay() {
 		document.body.removeChild(overlay);
 	}
 }
+
+//ホームのようこそ削除
+const home_uzai = document.getElementById('topimg_wrapper');
+home_uzai.remove();
+//吹き出し削除
+const fukidashi_uzai = document.getElementById('myinfowrap_fikidashi');
+fukidashi_uzai.remove();
+
+
+/**
+ * 小機能集合ゾーン
+ * 
+ * 
+ * 
+ * 
+ */
 
 
 
@@ -1195,7 +1227,7 @@ function send() {
 }
 
 
-//クリップボード
+//フレお気に入り
 
 // ==UserScript==
 // @name         フレお気に入り
@@ -1324,25 +1356,6 @@ addSearchInput();
 // @run-at       document-idle
 // ==/UserScript==
 
-var returnBtn = document.getElementById('return_btn');
-
-var searchButton = document.createElement('button');
-searchButton.textContent = 'ログ検索';
-searchButton.style.marginLeft = '5px';
-searchButton.style.width = '60px';
-searchButton.style.height = '24px';
-searchButton.style.lineHeight = '1';
-searchButton.style.marginTop = '9px';
-searchButton.style.background = '#fff';
-searchButton.style.color = '#333';
-searchButton.style.fontFamily = 'メイリオ';
-searchButton.style.fontSize = '11px';
-searchButton.style.border = '1px solid #ccc';
-searchButton.style.cursor = 'pointer';
-searchButton.style.position = 'relative';
-searchButton.style.top = '-13px';
-
-returnBtn.parentNode.insertBefore(searchButton, returnBtn.nextSibling);
 
 const popup = document.createElement('div');
 popup.id = 'blockPopup';
@@ -1416,9 +1429,6 @@ popup.appendChild(inputField);
 popup.appendChild(logSearchButton);
 document.body.appendChild(popup);
 
-searchButton.addEventListener('click', function () {
-    popup.style.display = 'block';
-});
 
 let isDragging = false;
 let offsetX, offsetY;
@@ -1762,3 +1772,16 @@ socket.on('got_room_list', function (res0) {
     addStarMarks();
 });
 
+
+//ロード画面撤去
+
+window.addEventListener("load", function () {
+    const splashScreen = document.getElementById("splash-screen");
+    setTimeout(function () {
+        splashScreen.style.opacity = "0";
+        splashScreen.style.transition = "opacity 0.5s ease";
+        setTimeout(function () {
+            splashScreen.style.display = "none";
+        }, 500); // 0.5秒後に非表示
+    }, 1850); // 1.85秒後にフェードアウトを開始
+});

@@ -94,6 +94,7 @@ if (localStorage.hasOwnProperty("e-ui")) {
     var e_ui = localStorage.getItem("e-ui");
 } else {
     var e_ui = "new";
+    localStorage.setItem('e-ui', e-ui);
 }
 
 //スマホ対応
@@ -113,10 +114,56 @@ let main_html = `
 var script = document.createElement('script');
 script.src = 'https://tanabesan.github.io/netroom_extension/style-1.js';
 
+console.log("dark:" + dark);
+
+let theme_l = "";
+if (dark == "dark") {
+    theme_l = "D";
+} else {
+    theme_l = "L";
+}
+console.log(theme_l);
 
 //変更
 if (e_ui == "old") {
     document.head.appendChild(script);
+
+    // スプラッシュスクリーンのCSSを挿入 (必要に応じて調整)
+    const style_1 = document.createElement('style');
+    style_1.textContent = `
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;   
+            z-index: 99;
+        }
+
+        #splash-screen .logo_l {
+            max-width: 50%;
+            height: auto;
+        }
+    `;
+    document.head.appendChild(style_1);
+
+    // スプラッシュスクリーンのHTML構造
+    const splashScreenHtml = `
+            <img src="https://tanabesan.github.io/netroom_extension/img/FLASH_LOGO_` + theme_l + `.gif" alt="Logo" class="logo_l">
+    `;
+
+    console.log(`https://tanabesan.github.io/netroom_extension/img/FLASH_LOGO_` + theme_l + `.gif`);
+    const splashScreenElement = document.createElement('div');
+    splashScreenElement.id = "splash-screen";
+    splashScreenElement.style.zIndex = "99";
+    splashScreenElement.innerHTML = splashScreenHtml;
+
+    // bodyの最初の子要素の前に挿入
+    document.body.insertBefore(splashScreenElement, document.body.firstChild);
 } else {
     //document.documentElement.innerHTML = main_html;
     document.head.appendChild(script);

@@ -1037,7 +1037,7 @@ imgElements.forEach(img => {
 
   // 画像の読み込みエラー時のイベントリスナー
   img_1.onerror = () => {
-    console.error('画像の読み込みに失敗しました。');
+    img.removeAttribute('img_url');
   };
 
   // 画像の読み込み開始

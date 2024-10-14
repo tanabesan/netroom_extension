@@ -1025,6 +1025,9 @@ imgElements.forEach(img => {
 
     if (width > 5000 || height > 5000) {
           img.src = "https://tanabesan.github.io/netroom_extension/img/blocked.jpg";
+	    			show_notice({
+				'msg': 'クラッシュgifをブロックしました！'
+			})
       // ここで、画像サイズが大きい場合の処理を追加できます。
       // 例：アラートを表示する、別の画像に置き換えるなど
     } else {

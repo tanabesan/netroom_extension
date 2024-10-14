@@ -979,6 +979,78 @@ const fukidashi_uzai = document.getElementById('myinfowrap_fikidashi');
 fukidashi_uzai.remove();
 
 
+//クラgif回避
+
+function img_users_pict(uid, img_no, status, selected) {
+	if (uid == '' || uid == 'guest') {
+		var img = 'guest';
+		img_no = 1
+	} else if (!img_no) {
+		var img = 'no_img';
+		img_no = 0
+	} else {
+		var img = uid
+	}
+	if (selected) {
+		selected = ' selected'
+	} else {
+		selected = ''
+	}
+	return '<img class="user' + selected + '" data-uid="' + uid +
+		'" data-img_no="' + img_no + '" img_url="https://netroom.oz96.com/img/user2/' + img + '/' + img_no +
+		'.jpg" src="https://tanabesan.github.io/netroom_extension/img/loading_img.png">'
+}
+
+
+setInterval(() => {
+
+// すべての img タグを取得
+let imgElements = document.querySelectorAll('img');
+
+// 各 img タグに対して処理を行う
+imgElements.forEach(img => {
+  // img_url 属性の値を取得
+  let imgUrl = img.getAttribute('img_url');
+
+  // img_url が存在する場合、src 属性に設定
+  if (imgUrl) {
+
+
+  let img_1 = new Image();
+
+  // 画像の読み込み完了時のイベントリスナー
+  img_1.onload = () => {
+    let width = img_1.width;
+    let height = img_1.height;
+
+    if (width > 5000 || height > 5000) {
+          img.src = "https://tanabesan.github.io/netroom_extension/img/blocked.jpg";
+      // ここで、画像サイズが大きい場合の処理を追加できます。
+      // 例：アラートを表示する、別の画像に置き換えるなど
+    } else {
+          img.src = imgUrl;
+    }
+  };
+
+  // 画像の読み込みエラー時のイベントリスナー
+  img_1.onerror = () => {
+    console.error('画像の読み込みに失敗しました。');
+  };
+
+  // 画像の読み込み開始
+  img_1.src = imgUrl;
+
+
+
+    // 不要な img_url 属性を削除 (任意)
+    img.removeAttribute('img_url');
+  }
+});
+
+
+}, 100);
+
+
 /**
  * 小機能集合ゾーン
  * 

@@ -2118,7 +2118,7 @@ socket.on('got_room_list', function(res0) {
 
 //ロード画面撤去
 (function() {
-	if (selected_uid) {
+
 		const splashScreen = document.getElementById("splash-screen");
 		setTimeout(function() {
 			splashScreen.style.opacity = "0";
@@ -2127,12 +2127,4 @@ socket.on('got_room_list', function(res0) {
 				splashScreen.style.display = "none";
 			}, 500); // 0.5秒後に非表示
 		}, 1850); // 1.85秒後にフェードアウトを開始
-	}else{
-		setTimeout(function() {
-			createOverlay();
-			updateText(
-				"接続に失敗しました。<br><br><button onclick='window.location.reload();' style='font-size:22px;'><b>リロードする</b></button>"
-			);
-		}, 1850); // 1.85秒後にフェードアウトを開始
-	}
 })();

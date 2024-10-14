@@ -21,9 +21,10 @@
         }
 
         .slide img {
-            width: 100%;
-            height: auto; /* 高さは自動 */
-            display: block; /* 画像の周りに隙間ができないように */
+            width: 65%; /* 画像の幅を80%に変更 */
+            height: auto;
+            margin: 0 auto; /* 画像を中央に配置 */
+            border-radius: 15px;
         }
 
         .slide-content {
@@ -53,6 +54,40 @@
         .active-dot {
             background-color: gray; /* アクティブドットの色 */
         }
+
+                /* 中央寄せのスタイル */
+        #team, #form {
+            text-align: center;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        #team .team-members {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        #team .team-members li {
+            margin: 10px;
+        }
+
+        #team .team-member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -70,6 +105,8 @@
                 <ul>
                     <li>機能紹介</li>
                     <li>チーム紹介</li>
+                    <li>フォーム</li>
+                    <li>利用方法</li>
                 </ul>
             </nav>
         </div>
@@ -122,9 +159,16 @@
 
     <!-- ダウンロードセクション -->
     <section id="download">
-        <h2>ダウンロード</h2>
-        <p>今すぐ拡張機能をダウンロードして、あなたのチャット体験を向上させましょう！</p>
-        <a href="download-link-here" class="button">ダウンロード</a> <!-- ダウンロードリンク -->
+        <h2>体感する</h2>
+        <p>今すぐユーザースクリプトを利用して、あなたのチャット体験を向上させましょう！</p>
+        <a href="download-link-here" class="button">今すぐ利用</a> <!-- ダウンロードリンク -->
+    </section>
+
+　　    <!-- フォーム送信セクション -->
+    <section id="form">
+        <h2>お問い合わせ</h2>
+        <p>ご質問やお問い合わせがございましたら、以下のフォームよりお送りください。</p>
+        <a href="https://forms.gle/ctgEXRn1EJCcxm6D8" target="_blank" class="button">フォームを送信</a>
     </section>
 
     <!-- チーム紹介セクション -->
@@ -153,7 +197,6 @@
     </ul>
 </section>
 
-
     <footer id="contact">
         <p>2024 Netroom Extension</p>
     </footer>
@@ -161,4 +204,3 @@
     <script src="https://tanabesan.github.io/netroom_extension/script.js"></script>
 </body>
 </html>
-

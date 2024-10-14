@@ -1774,8 +1774,7 @@ socket.on('got_room_list', function (res0) {
 
 
 //ロード画面撤去
-
-window.addEventListener("load", function () {
+(function() {
     const splashScreen = document.getElementById("splash-screen");
     setTimeout(function () {
         splashScreen.style.opacity = "0";
@@ -1784,4 +1783,4 @@ window.addEventListener("load", function () {
             splashScreen.style.display = "none";
         }, 500); // 0.5秒後に非表示
     }, 1850); // 1.85秒後にフェードアウトを開始
-});
+})();

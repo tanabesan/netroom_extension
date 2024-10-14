@@ -128,7 +128,7 @@ let theme_c = "";
 if (dark == "dark") {
     theme_c = "000000";
 } else {
-    theme_c = "ffffff";
+    theme_c = "D8D8D8";
 }
 console.log(theme_l);
 

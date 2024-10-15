@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>AIチャットボット</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@huggingface/transformers"></script>
+</head>
+<body>
+    <div id="chat" style="border: 1px solid #ccc; height: 400px; overflow-y: scroll; padding: 10px;"></div>
+    <input type="text" id="userInput" placeholder="何か話しましょう..." />
+    <button id="sendBtn">送信</button>
+
+    <script>
+        const chat = document.getElementById('chat');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        // モデルをロード
+        async function loadModel() {
+            const model = await window.huggingface.load("distilgpt2");
+            return model;
+        }
+
+        // AIの応答を生成
+        async function generateResponse(input) {
+            const model = await loadModel();
+            const response = await model.generate(input);
+            return response[0];
+        }
+
+        sendBtn.addEventListener('click', async () => {
+            const userMessage = userInput.value;
+            chat.innerHTML += `<div><strong>あなた:</strong> ${userMessage}</div>`;
+            userInput.value = '';
+
+            // AIの応答を取得
+            const aiResponse = await generateResponse(userMessage);
+            chat.innerHTML += `<div><strong>AI:</strong> ${aiResponse}</div>`;
+        });
+    </script>
+</body>
+</html>

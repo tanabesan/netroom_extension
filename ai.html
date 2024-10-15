@@ -16,15 +16,16 @@
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
 
-        // モデルをロード
+        let model;
+
+        // モデルを一度だけロード
         async function loadModel() {
-            const model = await window.huggingface.load("distilgpt2");
-            return model;
+            model = await window.huggingface.load("distilgpt2");
         }
 
         // AIの応答を生成
         async function generateResponse(input) {
-            const model = await loadModel();
+            if (!model) return "AIモデルがロードされていません。";
             const response = await model.generate(input);
             return response[0];
         }
@@ -38,6 +39,9 @@
             const aiResponse = await generateResponse(userMessage);
             chat.innerHTML += `<div><strong>AI:</strong> ${aiResponse}</div>`;
         });
+
+        // 初期化
+        loadModel();
     </script>
 </body>
 </html>

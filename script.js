@@ -14,21 +14,22 @@ let autoSlideInterval;
 
 function showSlide(n) {
     const slides = document.getElementsByClassName("slide");
-    
-    // 次のスライドのインデックスを計算
-    let nextSlideIndex = (currentSlideIndex + n + slides.length) % slides.length;
+    currentSlideIndex += n;
 
-    // スライドの状態をリセット
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove('active', 'next', 'prev');
+    // スライドのインデックスを循環させる
+    if (currentSlideIndex < 0) {
+        currentSlideIndex = slides.length - 1;
+    } else if (currentSlideIndex >= slides.length) {
+        currentSlideIndex = 0;
     }
 
-    // 現在のスライドと次のスライドを設定
-    slides[currentSlideIndex].classList.add('active');
-    slides[nextSlideIndex].classList.add(n > 0 ? 'next' : 'prev');
+    // 全てのスライドを非表示にする
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
 
-    // スライドのインデックスを更新
-    currentSlideIndex = nextSlideIndex;
+    // 現在のスライドを表示する
+    slides[currentSlideIndex].style.display = "block";
 }
 
 // スライドを自動的に進める関数
@@ -60,4 +61,3 @@ document.getElementById("next").onclick = () => {
     showSlide(1);
     resetAutoSlide();
 };
-

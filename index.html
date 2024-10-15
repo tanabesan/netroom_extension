@@ -7,88 +7,6 @@
     <title>Netroom Extensions ホーム</title>
     <link rel="icon" href="https://tanabesan.github.io/netroom_extension/white_logo_official.png" type="image/png">
     <link rel="stylesheet" href="https://tanabesan.github.io/netroom_extension/styles.css">
-    <style>
-        /* CSSスタイルをここに埋め込む */
-        #slideshow {
-            position: relative;
-            max-width: 100%;
-            overflow: hidden; /* スライドがはみ出さないように */
-        }
-
-        .slide {
-            position: relative;
-            display: none; /* 初期状態で非表示 */
-        }
-
-        .slide img {
-            width: 65%; /* 画像の幅を80%に変更 */
-            height: auto;
-            margin: 0 auto; /* 画像を中央に配置 */
-            border-radius: 15px;
-        }
-
-        .slide-content {
-            position: absolute;
-            bottom: 0; /* 下に配置 */
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6); /* 半透明の背景 */
-            color: white; /* テキストを白に */
-        }
-
-        .slideshow-dots {
-            text-align: center; /* ドットを中央揃え */
-        }
-
-        .slideshow-dots span {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            margin: 5px;
-            background-color: lightgray; /* 非アクティブドットの色 */
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .active-dot {
-            background-color: gray; /* アクティブドットの色 */
-        }
-
-                /* 中央寄せのスタイル */
-        #team, #form {
-            text-align: center;
-            margin: 0 auto;
-            max-width: 800px;
-        }
-
-        #team .team-members {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 0;
-        }
-
-        #team .team-members li {
-            margin: 10px;
-        }
-
-        #team .team-member-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
 
@@ -99,41 +17,32 @@
 
     <!-- ヘッダー -->
     <header>
-        <div class="header-content">
-            <h1 class="logo">Netroom Extensions</h1>
-            <nav class="navbar">
-                <ul>
-                    <li>機能紹介</li>
-                    <li>チーム紹介</li>
-                    <li>フォーム</li>
-                    <li>利用方法</li>
-                </ul>
-            </nav>
-        </div>
+        <h1 class="logo">Netroom Extensions</h1>
+        <nav class="navbar">
+            <ul>
+                <li>機能紹介</li>
+                <li>チーム紹介</li>
+                <li>フォーム</li>
+                <li>利用方法</li>
+            </ul>
+        </nav>
     </header>
 
     <section id="main">
-    <div class="product-info">
-        <h2 class="product-name">Netroom Extensions</h2>
-    </div>      
-    <div class="product-image-container">
-        <img src="https://tanabesan.github.io/netroom_extension/img/loading_1_b.gif" class="product-image">
-    </div>
-        <h2>チャットをより便利に、快適に</h2>
-        <p>この拡張機能を使って、あなたのチャット体験を次のレベルへ。</p>
+        <h2>Netroom Extensions</h2>
+        <p>チャットをより便利に、快適に</p>
     </section>
 
     <div id="slideshow">
-        <!-- スライド1: 機能1の紹介 -->
-        <div class="slide">
+        <!-- スライド1 -->
+        <div class="slide active">
             <img src="https://tanabesan.github.io/netroom_extension/img/darkmode.jpeg" alt="Feature 1">
             <div class="slide-content">
                 <h2>ダークモード</h2>
                 <p>視覚的に優しい色合いで目を保護します。</p>
             </div>
         </div>
-
-        <!-- スライド2: 機能2の紹介 -->
+        <!-- スライド2 -->
         <div class="slide">
             <img src="https://tanabesan.github.io/netroom_extension/img/friend_favorite.jpeg" alt="Feature 2">
             <div class="slide-content">
@@ -141,8 +50,7 @@
                 <p>お気に入りのフレンドが1番上に表示されるように。</p>
             </div>
         </div>
-
-        <!-- スライド3: 機能3の紹介 -->
+        <!-- スライド3 -->
         <div class="slide">
             <img src="https://tanabesan.github.io/netroom_extension/img/friend_search.jpeg" alt="Feature 3">
             <div class="slide-content">
@@ -151,51 +59,12 @@
             </div>
         </div>
 
-    <div class="slideshow-dots">
-        <span onclick="showSlide(-1)"></span>
-        <span onclick="showSlide(0)"></span>
-        <span onclick="showSlide(1)"></span>
+        <div class="slideshow-dots">
+            <span onclick="showSlide(-1)" class="dot"></span>
+            <span onclick="showSlide(0)" class="dot active-dot"></span>
+            <span onclick="showSlide(1)" class="dot"></span>
+        </div>
     </div>
-
-    <!-- ダウンロードセクション -->
-    <section id="download">
-        <h2>体感する</h2>
-        <p>今すぐユーザースクリプトを利用して、あなたのチャット体験を向上させましょう！</p>
-        <a href="download-link-here" class="button">今すぐ利用</a> <!-- ダウンロードリンク -->
-    </section>
-
-　　    <!-- フォーム送信セクション -->
-    <section id="form">
-        <h2>お問い合わせ</h2>
-        <p>ご質問やお問い合わせがございましたら、以下のフォームよりお送りください。</p>
-        <a href="https://forms.gle/ctgEXRn1EJCcxm6D8" target="_blank" class="button">フォームを送信</a>
-    </section>
-
-    <!-- チーム紹介セクション -->
-<section id="team">
-    <h2>チーム紹介</h2>
-    <p>私たちのチームは、チャット体験を向上させるために情熱を持って開発しています。</p>
-    <ul class="team-members">
-        <li>
-            <a href="https://github.com/AAniki" target="_blank">
-                <img src="https://avatars.githubusercontent.com/u/176780978" alt="AAniki" class="team-member-photo">
-                <p class="team-member-name">AAAAAAAAAAAA</p>
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/fy1215" target="_blank">
-                <img src="https://avatars.githubusercontent.com/u/130588299" alt="baka" class="team-member-photo">
-                <p class="team-member-name">baka</p>
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/tanabesan" target="_blank">
-                <img src="https://avatars.githubusercontent.com/u/152053837" alt="田辺" class="team-member-photo">
-                <p class="team-member-name">ぬーん</p>
-            </a>
-        </li>
-    </ul>
-</section>
 
     <footer id="contact">
         <p>2024 Netroom Extension</p>

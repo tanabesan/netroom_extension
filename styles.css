@@ -35,10 +35,22 @@ body {
 
 .slide {
     display: none;
-    position: relative;
-    text-align: center;
-    transition: opacity 0.5s ease-in-out;
-    opacity: 0; /* 初期状態は透明 */
+    position: absolute;
+    width: 100%;
+    transition: transform 0.5s ease; /* スライドの移動アニメーション */
+}
+
+.slide.active {
+    display: block;
+    transform: translateX(0); /* 現在のスライドを中央に */
+}
+
+.slide.next {
+    transform: translateX(100%); /* 次のスライドを右に移動 */
+}
+
+.slide.prev {
+    transform: translateX(-100%); /* 前のスライドを左に移動 */
 }
 
 .slide img {
@@ -46,11 +58,6 @@ body {
     height: auto;
     margin: 0 auto;
     border-radius: 15px;
-}
-
-.active {
-    display: block;
-    opacity: 1; /* アクティブなスライドは不透明 */
 }
 
 .slideshow-dots {
@@ -87,10 +94,37 @@ header h1 {
     font-size: 2em;
 }
 
-/* セクションスタイル */
-section {
+/* メインセクション */
+#main {
     padding: 50px;
     text-align: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+#main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff0000, #ff7f7f, #007fff, #0000ff);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* フッター */
@@ -99,5 +133,3 @@ footer {
     text-align: center;
     padding: 20px;
 }
-
-/* 追加スタイル（必要に応じて） */

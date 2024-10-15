@@ -25,11 +25,11 @@ function showSlide(n) {
 
     // 全てのスライドを非表示にする
     for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+        slides[i].classList.remove('active');
     }
 
     // 現在のスライドを表示する
-    slides[currentSlideIndex].style.display = "block";
+    slides[currentSlideIndex].classList.add('active');
 }
 
 // スライドを自動的に進める関数
@@ -52,12 +52,10 @@ function resetAutoSlide() {
 }
 
 // ボタンを押したときにスライドを切り替えつつ自動スライドをリセット
-document.getElementById("prev").onclick = () => {
-    showSlide(-1);
-    resetAutoSlide();
-};
-
-document.getElementById("next").onclick = () => {
-    showSlide(1);
-    resetAutoSlide();
-};
+document.querySelector(".slideshow-dots").addEventListener("click", function(event) {
+    if (event.target.classList.contains("dot")) {
+        const index = Array.from(event.target.parentNode.children).indexOf(event.target) - 1;
+        showSlide(index);
+        resetAutoSlide();
+    }
+});

@@ -14,22 +14,21 @@ let autoSlideInterval;
 
 function showSlide(n) {
     const slides = document.getElementsByClassName("slide");
-    currentSlideIndex += n;
+    
+    // 次のスライドのインデックスを計算
+    let nextSlideIndex = (currentSlideIndex + n + slides.length) % slides.length;
 
-    // スライドのインデックスを循環させる
-    if (currentSlideIndex < 0) {
-        currentSlideIndex = slides.length - 1;
-    } else if (currentSlideIndex >= slides.length) {
-        currentSlideIndex = 0;
-    }
-
-    // 全てのスライドを非表示にする
+    // スライドの状態をリセット
     for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove('active');
+        slides[i].classList.remove('active', 'next', 'prev');
     }
 
-    // 現在のスライドを表示する
+    // 現在のスライドと次のスライドを設定
     slides[currentSlideIndex].classList.add('active');
+    slides[nextSlideIndex].classList.add(n > 0 ? 'next' : 'prev');
+
+    // スライドのインデックスを更新
+    currentSlideIndex = nextSlideIndex;
 }
 
 // スライドを自動的に進める関数
@@ -52,10 +51,13 @@ function resetAutoSlide() {
 }
 
 // ボタンを押したときにスライドを切り替えつつ自動スライドをリセット
-document.querySelector(".slideshow-dots").addEventListener("click", function(event) {
-    if (event.target.classList.contains("dot")) {
-        const index = Array.from(event.target.parentNode.children).indexOf(event.target) - 1;
-        showSlide(index);
-        resetAutoSlide();
-    }
-});
+document.getElementById("prev").onclick = () => {
+    showSlide(-1);
+    resetAutoSlide();
+};
+
+document.getElementById("next").onclick = () => {
+    showSlide(1);
+    resetAutoSlide();
+};
+

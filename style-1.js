@@ -72,6 +72,7 @@ if (dark_2 == "dark") {
 html {
     background-color: #1f1f1f !important;
     color: #ffffff !important;
+    user-select: none
 }
 
 #d_user_list,
@@ -281,6 +282,7 @@ if (dark_2 == "light") {
 html {
     background-color: #ffffff !important;
     color: #000000 !important;
+    user-select: none
 }
 
 #d_user_list,

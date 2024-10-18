@@ -179,7 +179,7 @@ nav ul li {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, #ff0000, #ff7f7f, #007fff, #0000ff);
+    background: linear-gradient(45deg, #30cfd0, #330867);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
     z-index: -1; /* 背景として表示 */

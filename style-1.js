@@ -66,9 +66,11 @@ let notice_mode = "";
 
 if (localStorage.hasOwnProperty("notice_mode")) {
 	notice_mode = localStorage.getItem('notice_mode');
+	console.log("str_notice_mode:" + notice_mode);
 } else {
 	localStorage.setItem('notice_mode', 'true');
 	notice_mode = "true";
+	console.log("def_notice_mode:" + notice_mode);
 }
 
 //css変更帯
@@ -725,8 +727,10 @@ var toolButtonA = document.createElement('button');
 toolButtonA.id = 'tool_btn_a';
 if (notice_mode == "true") {
 	toolButtonA.textContent = '通知オン';
+	console.log("notice_on-d");
 } else {
 	toolButtonA.textContent = '通知オフ';
+	console.log("notice_off-d");
 }
 toolButtonA.style.display = 'inline';
 var returnButton = document.getElementById('return_btn');
@@ -736,10 +740,12 @@ toolButtonA.addEventListener('click', function() {
 		toolButtonA.textContent = '通知オフ';
 		localStorage.setItem('notice_mode', "false");
 		notice_mode == "false";
+		console.log("notice_off");
 	} else {
 		toolButtonA.textContent = '通知オン';
 		localStorage.setItem('notice_mode', "true");
 		notice_mode == "true";
+		console.log("notice_on");
 	}
 });
 

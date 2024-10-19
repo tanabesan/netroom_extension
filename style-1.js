@@ -710,13 +710,21 @@ myinfowrap.insertBefore(clock, myinfowrap.firstChild);
 
 //リンク形式変更
 
+let col_u_to_a="";
+
+if (dark_2 == "dark") {
+	col_u_to_a = 'white';
+} else {
+	col_u_to_a = 'black';
+}
+
 function url_to_a(txt) {
   const regex = /((http|https):\/\/[^\s]+)/gi;
 
   let newText = txt.replace(regex, (match, url) => {
     const newUrl = new URL(url);
     const hostname = newUrl.hostname;
-    return `<a href="${url}" target="_blank" rel="nofollow" style="color:#777777; padding: 0;position: relative;top: 0;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 150px;"><div style="border-radius: 2px 2px 2px 2px; background-color:#ffffff;color:#777777 !important;"><img src="https://tanabesan.github.io/netroom_extension/img/link.png" width="18px" style="position: relative;bottom:7px;vertical-align: middle;"></img>${hostname}</div></a>`;
+    return `<a href="${url}" target="_blank" rel="nofollow" style="color:#777777; padding: 0;position: relative;top: 0;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 150px;"><div style="border-radius: 2px 2px 2px 2px; background-color:` + col_u_to_a + `;color:#777777 !important;"><img src="https://tanabesan.github.io/netroom_extension/img/link.png" width="18px" style="position: relative;bottom:7px;vertical-align: middle;"></img>${hostname}</div></a>`;
   });
 
   return newText;

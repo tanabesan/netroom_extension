@@ -740,14 +740,14 @@ toolButtonA.addEventListener('click', function() {
 	if (notice_mode == "true") {
 		toolButtonA.textContent = '通知オフ';
 		localStorage.setItem('notice_mode', "false");
-		notice_mode == "false";
+		notice_mode = "false";
 		console.log("notice_off");
 	} else {
 		toolButtonA.textContent = '通知オン';
 		localStorage.setItem('notice_mode', "true");
-		notice_mode == "true";
+		notice_mode = "true";
 		console.log("notice_on");
-		]console.log("notice_mode is diff!!;" + notice_mode);
+		console.log("notice_mode is diff!!;" + notice_mode);
 	}
 });
 

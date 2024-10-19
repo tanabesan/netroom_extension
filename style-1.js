@@ -731,6 +731,7 @@ if (notice_mode == "true") {
 } else {
 	toolButtonA.textContent = '通知オフ';
 	console.log("notice_off-d");
+	console.log("notice_mode is diff!!;" + notice_mode);
 }
 toolButtonA.style.display = 'inline';
 var returnButton = document.getElementById('return_btn');
@@ -746,6 +747,7 @@ toolButtonA.addEventListener('click', function() {
 		localStorage.setItem('notice_mode', "true");
 		notice_mode == "true";
 		console.log("notice_on");
+		]console.log("notice_mode is diff!!;" + notice_mode);
 	}
 });
 

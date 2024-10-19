@@ -62,6 +62,15 @@ function syn_theme() {
 	}
 }
 
+let notice_mode = "";
+
+if (localStorage.hasOwnProperty("notice_mode")) {
+	notice_mode = localStorage.getItem('notice_mode');
+} else {
+	localStorage.setItem('notice_mode', 'true');
+	notice_mode = "true";
+}
+
 //css変更帯
 
 let css = "";
@@ -697,19 +706,93 @@ setInterval(updateClock, 500);
 var myinfowrap = document.getElementById("myinfowrap");
 myinfowrap.insertBefore(clock, myinfowrap.firstChild);
 
-//twitter(旧X)消えろ
+//リンク形式変更
 
+function url_to_a(txt) { 
+	const regex = /((http|https):\/\/[^\s]+)/gi;
 
-//ツールボタンB
+	 
+	let newText = txt.replace(regex, (match, url) => {  
+		const newUrl = new URL(url);  
+		const hostname = newUrl.hostname;  
+		return
+			`<a href="${url}" target="_blank" rel="nofollow" style="color:#777777; padding: 0;position: relative;top: 0;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 150px;"><div style="border-radius: 2px 2px 2px 2px; background-color:#ffffff;color:#777777 !important;"><img src="https://tanabesan.github.io/netroom_extension/img/link.png" width="18px" style="position: relative;bottom:7px;vertical-align: middle;"></img>${hostname}</div></a>`; 
+	});
+
+	 
+	return newText;
+}
+
+//通知機能
 var toolButtonA = document.createElement('button');
 toolButtonA.id = 'tool_btn_a';
-toolButtonA.textContent = '仮ボタンa';
+if (notice_mode == "true") {
+	toolButtonA.textContent = '通知オン';
+} else {
+	toolButtonA.textContent = '通知オフ';
+}
 toolButtonA.style.display = 'inline';
 var returnButton = document.getElementById('return_btn');
 returnButton.parentNode.insertBefore(toolButtonA, returnButton.nextSibling);
 toolButtonA.addEventListener('click', function() {
-	//write code here
+	if (notice_mode == "true") {
+		toolButtonA.textContent = '通知オフ';
+		localStorage.setItem('notice_mode', "false");
+		notice_mode == "false";
+	} else {
+		toolButtonA.textContent = '通知オン';
+		localStorage.setItem('notice_mode', "true");
+		notice_mode == "true";
+	}
 });
+
+function sended(data) {
+	if (sound_on && (data[0].uid != uid || (data[0].uid == "guest" && uid ==
+			"guest"))) {
+		sound.play()
+	}
+	var room_id = data[0].room_id;
+	last_msg_seq[room_id] = data[0].seq;
+	if (window_focused == 0 && (data[0].uid != uid || (data[0].uid == "guest" &&
+			uid == "guest"))) {
+		title_counter(1);
+		if (notice_mode == "true") {
+			showNotification(data[0].uname, data[0].comment,
+				'https://netroom.oz96.com/img/user2/' + data[0].uid + '/' + data[0].img_no +
+				'.jpg');
+		}
+	}
+	if (disp_room_id == room_id) {
+		show_msg(room_id, data, 0)
+	} else {}
+}
+
+function showNotification(title, body, imageURL) {
+	// 通知の許可を求める
+	if (Notification.permission !== 'granted') {
+		Notification.requestPermission().then(permission => {
+			if (permission === 'granted') {
+				new Notification(title, {
+					body: body,
+					icon: imageURL
+				});
+			}
+		});
+	} else {
+		// 既に許可されている場合
+		new Notification(title, {
+			body: body,
+			icon: imageURL,
+			onClick: () => {
+				if (window.opener) {
+					window.opener.focus();
+				} else {
+					console.error("元のウィンドウが見つかりません");
+				}
+			}
+		});
+	}
+}
 
 // ツールボタンB
 var toolButtonB = document.createElement('button');
@@ -2121,12 +2204,14 @@ socket.on('got_room_list', function(res0) {
 //ロード画面撤去
 (function() {
 
-		const splashScreen = document.getElementById("splash-screen");
+
+	const splashScreen = document.getElementById("splash-screen");
+	setTimeout(function() {
+		splashScreen.style.opacity = "0";
+		splashScreen.style.transition = "opacity 0.5s ease";
 		setTimeout(function() {
-			splashScreen.style.opacity = "0";
-			splashScreen.style.transition = "opacity 0.5s ease";
-			setTimeout(function() {
-				splashScreen.style.display = "none";
-			}, 500); // 0.5秒後に非表示
-		}, 1850); // 1.85秒後にフェードアウトを開始
+			splashScreen.style.display = "none";
+		}, 500); // 0.5秒後に非表示
+	}, 1850); // 1.85秒後にフェードアウトを開始
+
 })();

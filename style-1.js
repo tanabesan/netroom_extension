@@ -2,7 +2,7 @@
 *定義系
 */
 
-let not_url="https://smar-tone.com/data/sm998.mp3";
+let not_url="https://netroom.oz96.com/sound/sound46.mp3";
 
 //ダークモード対応
 let dark_2;

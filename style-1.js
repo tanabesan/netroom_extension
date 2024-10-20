@@ -1,3 +1,9 @@
+/*
+*定義系
+*/
+
+let not_url="https://smar-tone.com/data/sm998.mp3";
+
 //ダークモード対応
 let dark_2;
 
@@ -106,7 +112,7 @@ a {
 
 .btn:not(#b_open_notice > span),
 .on {
-    background-color: #0067C0 !important;
+    background-color: #0067C0;
     color: #ffffff !important;
 }
 
@@ -254,6 +260,13 @@ img.selected {
 	cursor:pointer;
 }
 
+#room_listb .on {
+	background: #0067C0 !important;
+	border-radius: 3px;
+	color: #fff;
+	font-weight: bold;
+}
+
   #d_user_list3 {
         background-color :#1f1f1f;
 	border-radius: 3px;
@@ -283,6 +296,20 @@ body[data-isroom="0"] #box1{
 .ga {
     position: fixed;
     right: 0px;
+}
+
+#ul_myself_menu .btn {
+	background: 0 !important;
+ 	background-color: #777777 !important;
+	display: inline-block;
+	float: left;
+	font-size: 10px;
+	height: 46px;
+	margin-right: 3px;
+	width: 55px;
+	border-radius:3px;
+	margin-left:1px;
+	margin-top:2px;
 }
 
 `;
@@ -316,7 +343,7 @@ a {
 
 .btn:not(#b_open_notice > span),
 .on {
-    background-color: #0067C0 !important;
+    background-color: #0067C0;
     color: #000000 !important;
 }
 
@@ -489,6 +516,13 @@ img.selected {
 	cursor:pointer;
 }
 
+#room_listb .on {
+	background: #0067C0 !important;
+	border-radius: 3px;
+	color: #fff;
+	font-weight: bold;
+}
+
 #return_btn {
 	background: none repeat scroll 0 0 #dddddd;
 	color: #000;
@@ -535,6 +569,20 @@ body[data-isroom="0"] #box1{
     right: 0px;
 }
 
+
+#ul_myself_menu .btn {
+	background: 0 !important;
+ 	background-color: #777777 !important;
+	display: inline-block;
+	float: left;
+	font-size: 10px;
+	height: 46px;
+	margin-right: 3px;
+	width: 55px;
+	border-radius:3px;
+	margin-left:1px;
+	margin-top:2px;
+}
 `;
 }
 
@@ -787,7 +835,8 @@ function showNotification(title, body, imageURL) {
 			if (permission === 'granted') {
 				new Notification(title, {
 					body: body,
-					icon: imageURL
+					icon: imageURL,
+					sound: not_url
 				});
 			}
 		});
@@ -796,6 +845,7 @@ function showNotification(title, body, imageURL) {
 		new Notification(title, {
 			body: body,
 			icon: imageURL,
+			sound: not_url,
 			onClick: () => {
 				if (window.opener) {
 					window.opener.focus();
@@ -2213,6 +2263,10 @@ socket.on('got_room_list', function(res0) {
 	addStarMarks();
 });
 
+
+//通知音カスタム
+
+var sound = new Audio(not_url);
 
 //ロード画面撤去
 (function() {

@@ -4,6 +4,18 @@
 
 let not_url="https://netroom.oz96.com/sound/sound46.mp3";
 
+//PC判定
+
+function PC() {
+    if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+let isPC=PC();
+
 //ダークモード対応
 let dark_2;
 
@@ -777,7 +789,7 @@ function url_to_a(txt) {
 
   return newText;
 }
-
+if(isPC == true){
 //通知機能
 var toolButtonA = document.createElement('button');
 toolButtonA.id = 'tool_btn_a';
@@ -806,6 +818,7 @@ toolButtonA.addEventListener('click', function() {
 		console.log("notice_mode is diff!!;" + notice_mode);
 	}
 });
+}
 
 function sended(data) {
 	if (sound_on && (data[0].uid != uid || (data[0].uid == "guest" && uid ==
@@ -857,6 +870,7 @@ function showNotification(title, body, imageURL) {
 	}
 }
 
+if(isPC == true){
 // ツールボタンB
 var toolButtonB = document.createElement('button');
 toolButtonB.id = 'tool_btn_b';
@@ -885,6 +899,7 @@ tabother.id = "tab_setting";
 tabother.innerHTML = '<span>機能設定</span>';
 document.getElementById("box3").querySelector(".tabs").appendChild(tabother);
 
+}
 
 function switch_tab_user_or_friends(friends) {
 	if (friends == "b") {
@@ -1080,8 +1095,10 @@ function updateAuto() {
 
 setInterval(updateAuto, 1000);
 
+if(isPC==true){
 var myinfowrap = document.getElementById("reload_btn_wrap");
 myinfowrap.insertBefore(auto_l, myinfowrap.nextChild);
+}
 
 
 // 半透明な灰色の壁を作成する関数
@@ -1140,6 +1157,8 @@ function removeOverlay() {
 	}
 }
 
+if(isPC==true){
+
 //ホームのようこそ削除
 const home_uzai = document.getElementById('topimg_wrapper');
 home_uzai.remove();
@@ -1147,7 +1166,7 @@ home_uzai.remove();
 const fukidashi_uzai = document.getElementById('myinfowrap_fikidashi');
 fukidashi_uzai.remove();
 
-
+}
 //クラgif回避
 
 function img_users_pict(uid, img_no, status, selected) {

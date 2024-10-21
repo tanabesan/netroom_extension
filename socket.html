@@ -10,13 +10,22 @@
         const socket = io('https://netroom.oz96.com');
 
         socket.on('connect', () => {
-            alert('Connected to server');
+            console.log('Connected to server');
+        });
+
+        socket.on('connect_error', (error) => {
+            alert('Connection error: ' + error.message);
         });
 
         // 受信したいイベント名を指定
         socket.on('event_name', (data) => {
             console.log('Received data:', data);
         });
+
+        socket.on('error', (error) => {
+            alert('Socket error: ' + error.message);
+        });
     </script>
 </body>
 </html>
+

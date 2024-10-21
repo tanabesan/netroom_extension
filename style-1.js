@@ -961,7 +961,7 @@ if (localStorage.hasOwnProperty("e-ui")) {
 	var now_ui = localStorage.getItem("e-ui");
 } else {
 	var now_ui = "new";
-	localStorage.setItem('e-ui', e - ui);
+	localStorage.setItem('e-ui', e-ui);
 }
 let set_u_o = "";
 let set_u_n = "";

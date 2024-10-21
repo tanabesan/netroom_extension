@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.IO Example</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+    <script>
+        const socket = io('https://netroom.oz96.com');
+
+        socket.on('connect', () => {
+            alert('Connected to server');
+        });
+
+        // 受信したいイベント名を指定
+        socket.on('event_name', (data) => {
+            console.log('Received data:', data);
+        });
+    </script>
+</body>
+</html>

@@ -1480,6 +1480,8 @@ function show_msg(room_id, res, ini_flag, target, nowHeight) {
 // @run-at       document-idle
 // ==/UserScript==
 
+let clipboard_img_src = "";
+
 function change_disp_by_user_or_guest(data) {
 	clear_global();
 	if (data.uid) {
@@ -1500,11 +1502,11 @@ function change_disp_by_user_or_guest(data) {
 		add_user_store(uid_data);
 		socket.json.emit('get_friend_list');
 		if (cmd == "login" || cmd == "create_user") {
-			fsid.set(data.sid, data.keep_login)
+			fsid.set(data.sid, data.keep_login);
 		}
 		user_photo(data.imgs, data.uname, data.character_name);
 		if (data.created) {
-			show_photo_dialog()
+			show_photo_dialog();
 		}
 	} else {
 		data.uname = "ゲスト";
@@ -1518,16 +1520,18 @@ function change_disp_by_user_or_guest(data) {
 		$('#create_new_user').show();
 		$('.b_show_create_room').hide();
 		fsid.del();
-		user_photo(data.imgs, data.uname, data.character_name)
+		user_photo(data.imgs, data.uname, data.character_name);
 	}
 	get_page();
-	get_list(selected_category, searched_room_name, "")
+	get_list(selected_category, searched_room_name, "");
 };
 
 document.getElementById('comment').addEventListener('paste', function(event) {
 	const items = event.clipboardData.items;
+	let hasImage = false;
 	for (let item of items) {
 		if (item.type.indexOf('image') !== -1) {
+			hasImage = true;
 			const blob = item.getAsFile();
 			const reader = new FileReader();
 			reader.onload = function(event) {
@@ -1610,6 +1614,9 @@ document.getElementById('comment').addEventListener('paste', function(event) {
 			reader.readAsDataURL(blob);
 		}
 	}
+	if (!hasImage) {	
+		clipboard_img_src = "";	
+	}
 });
 
 document.getElementById('comment').addEventListener('keyup', function(event) {
@@ -1641,11 +1648,6 @@ function send() {
 		msg = trim_space(msg, max_br);
 		if (msg == false) {
 			fnc_validator('comment', 'comment_err', '入力欄が空白です');
-			return;
-		}
-	} else {
-		if (!img_src2 && !clipboard_img_src) {
-			fnc_validator('comment', 'comment_err', '入力欄が空欄です');
 			return;
 		}
 	}
@@ -1680,6 +1682,7 @@ function send() {
 		img_no: selected_my_icon,
 		character_name: character_name
 	};
+	if(!(msg == '' && clipboard_img_src == '')){
 	socket.json.emit('send', data);
 	send_anime(uid);
 	$('#comment').val("");
@@ -1702,6 +1705,7 @@ function send() {
 		ga('send', 'event', 'button', 'click', 'msg send');
 	}
 	check_room_list_update();
+}
 }
 
 

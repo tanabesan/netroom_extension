@@ -24,30 +24,21 @@ header h1 {
 /* メインセクション */
 #main {
     padding: 50px;
-    text-align: center;
     position: relative;
-}
-
-#main h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-
-#main p {
-    font-size: 1.2em;
 }
 
 /* プロダクトコンテナ */
 .product-container {
-    display: flex; /* 横並びにするための設定 */
+    display: flex; /* 横並びにする */
     align-items: center; /* 垂直方向に中央揃え */
-    justify-content: center; /* 水平方向に中央揃え */
+    justify-content: flex-start; /* 左寄せ */
     margin-top: 20px; /* 上にマージンを追加 */
 }
 
 /* プロダクト画像 */
 .product-image-container {
-    margin-right: 30px; /* 画像とテキストの間隔 */
+    margin-left: 20px; /* 左からのマージン */
+    margin-right: 30px; /* テキストとの間隔 */
 }
 
 .product-image {
@@ -58,7 +49,7 @@ header h1 {
 
 /* プロダクト情報 */
 .product-info {
-    text-align: center; /* テキストを中央揃え */
+    text-align: left; /* テキストを左揃え */
 }
 
 .product-name {
@@ -69,31 +60,6 @@ header h1 {
 .product-info p {
     color: #ccc; /* 説明文の色 */
     font-size: 1.2em; /* フォントサイズ */
-}
-
-/* スライドショースタイル */
-#slideshow {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
-}
-
-.slide {
-    display: none; /* スライドを非表示にする */
-    position: relative;
-    text-align: center;
-}
-
-.slide img {
-    width: 300px; /* 幅を固定 */
-    height: 200px; /* 高さを固定 */
-    object-fit: cover; /* アスペクト比を維持しつつ、指定したサイズに収める */
-}
-
-/* スライドの表示 */
-.active {
-    display: block; /* アクティブなスライドを表示 */
 }
 
 /* フッター */
@@ -112,9 +78,6 @@ footer {
 
     .product-image-container {
         margin-bottom: 20px; /* 下にマージンを追加 */
-    }
-
-    #main h2 {
-        font-size: 2em; /* 小さい画面用にフォントサイズを調整 */
+        margin-left: 0; /* 左のマージンをリセット */
     }
 }

@@ -19,9 +19,10 @@
         });
         
         socket.on('sended', (data) => {
-            alert(data[0]);
-            document.body.innerHTML = data[0];
+            console.log('Received sended event:', data);
+            alert('Data received: ' + JSON.stringify(data));
         });
+
 
         socket.on('error', (error) => {
             alert('Socket error: ' + error.message);

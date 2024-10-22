@@ -19,8 +19,8 @@
         });
 
         // 受信したいイベント名を指定
-        socket.on('event_name', (data) => {
-            console.log('Received data:', data);
+        socket.on('sended', function(data) {
+            alert(data)
         });
 
         socket.on('error', (error) => {

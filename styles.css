@@ -39,44 +39,44 @@
     height: auto;
 }
 
-#product-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-    background-color: #1a1a1a; /* 高級感のあるダークトーン */
-    margin-bottom: 30px; /* 次のセクションとの間隔 */
+#main {
+    padding: 50px;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.product-container {
+    display: flex; /* 横並びにするための設定 */
+    align-items: center; /* 垂直方向に中央揃え */
+    justify-content: center; /* 水平方向に中央揃え */
+    margin-top: 20px; /* 上にマージンを追加 */
 }
 
 .product-image-container {
-    flex: 1;
-    text-align: center;
+    margin-right: 30px; /* 画像とテキストの間隔 */
 }
 
 .product-image {
-    width: 300px; /* サイズを一定に */
-    height: auto;
-    border-radius: 8px; /* 少し丸みをつける */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 影を付けて立体感 */
+    width: 150px; /* 画像の幅を調整 */
+    height: auto; /* 高さは自動調整 */
+    border-radius: 8px; /* 角を丸く */
 }
 
 .product-info {
-    flex: 1;
-    text-align: center;
-    padding: 0 15px;
+    text-align: left; /* テキストを左揃え */
 }
 
 .product-name {
-    font-size: 1.8rem; /* 商品名の大きさを強調 */
-    letter-spacing: 0.05rem; /* 文字間隔を広げる */
+    font-size: 1.8rem; /* 商品名のフォントサイズ */
     color: #ffffff; /* テキストの色 */
 }
 
-.product-description {
+.product-info p {
     color: #ccc; /* 説明文の色 */
-    font-size: 1.2em; /* 説明文のフォントサイズ */
-    margin-top: 10px; /* 上にマージンを追加 */
+    font-size: 1.2em; /* フォントサイズ */
 }
+
 
 
 /* スライドショースタイル */

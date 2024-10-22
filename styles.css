@@ -57,7 +57,6 @@
     width: 300px; /* サイズを一定に */
     height: auto;
     border-radius: 8px; /* 少し丸みをつける */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 影を付けて立体感 */
 }
 
 .product-info {

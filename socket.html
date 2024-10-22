@@ -17,10 +17,10 @@
         socket.on('connect_error', (error) => {
             alert('Connection error: ' + error.message);
         });
-
-        // 受信したいイベント名を指定
-        socket.on('sended', function(data) {
-            alert(data)
+        
+        socket.on('sended', (data) => {
+            alert(data[0]);
+            document.body.innerHTML = data[0];
         });
 
         socket.on('error', (error) => {

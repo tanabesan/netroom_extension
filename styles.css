@@ -45,7 +45,7 @@
     justify-content: center;
     padding: 10px 0;
     background-color: #1a1a1a; /* 高級感のあるダークトーン */
-    margin-bottom: 30px; /* 次のセクションとの間隔 */
+    margin-bottom: 100px; /* 次のセクションとの間隔 */
 }
 
 .product-image-container {

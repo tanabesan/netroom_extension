@@ -96,37 +96,6 @@ int_text_el.id = "pvt_msg_introduce";
 let pvm_el = document.getElementById("pvm2");
 pvm_el.appendChild(int_text_el);
 
-let set_value_title = document.createElement("p");
-set_value_title.innerText = "プロフィール編集";
-let form_el = document.createElement("form");
-form_el.action = "";
-let set_int_text_el = document.createElement("textarea");
-set_int_text_el.id = "set_int_text";
-set_int_text_el.autocomplete = "off";
-set_int_text_el.placeholder = "自己紹介文を入力";
-let set_backImage_el = document.createElement("input");
-set_backImage_el.id = "set_backImage";
-set_backImage_el.type = "url";
-set_backImage_el.placeholder = "背景画像URLを入力";
-set_backImage_el.autocomplete = "off";
-let send_btn = document.createElement("input");
-send_btn.type = "submit";
-send_btn.value = "登録・変更する";
-let label_int = document.createElement("label");
-label_int.for = "set_int_text";
-label_int.innerText = "自己紹介:";
-let label_back= document.createElement("label");
-label_back.for = "set_backImage";
-label_back.innerText = "背景画像URL:";
-let now_status_text = document.createElement("p");
-document.getElementById("d_user_list3").appendChild(form_el);
-form_el.appendChild(set_int_text_el);
-form_el.appendChild(set_backImage);
-form_el.appendChild(label_int);
-form_el.appendChild(label_back);
-form_el.appendChild(send_btn);
-document.getElementById("d_user_list3").appendChild(now_status_text);
-
 //css変更帯
 
 let css = "";
@@ -2229,6 +2198,38 @@ logSearchButton.addEventListener('click', function() {
 		}
 	});
 });
+
+let set_value_title = document.createElement("p");
+set_value_title.innerText = "プロフィール編集";
+let form_el = document.createElement("form");
+form_el.action = "";
+let set_int_text_el = document.createElement("textarea");
+set_int_text_el.id = "set_int_text";
+set_int_text_el.autocomplete = "off";
+set_int_text_el.placeholder = "自己紹介文を入力";
+let set_backImage_el = document.createElement("input");
+set_backImage_el.id = "set_backImage";
+set_backImage_el.type = "url";
+set_backImage_el.placeholder = "背景画像URLを入力";
+set_backImage_el.autocomplete = "off";
+let send_btn = document.createElement("input");
+send_btn.type = "submit";
+send_btn.value = "登録・変更する";
+let label_int = document.createElement("label");
+label_int.for = "set_int_text";
+label_int.innerText = "自己紹介:";
+let label_back= document.createElement("label");
+label_back.for = "set_backImage";
+label_back.innerText = "背景画像URL:";
+let now_status_text = document.createElement("p");
+document.getElementById("d_user_list3").appendChild(form_el);
+form_el.appendChild(set_int_text_el);
+form_el.appendChild(set_backImage);
+form_el.appendChild(label_int);
+form_el.appendChild(label_back);
+form_el.appendChild(send_btn);
+document.getElementById("d_user_list3").appendChild(now_status_text);
+
 
 //背景画像・自己紹介文表示 背景画像は300x57の画像がぴったり
 

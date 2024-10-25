@@ -2236,7 +2236,7 @@ var obs = new MutationObserver(() => {
     var duid = element.querySelector(".user").getAttribute("data-uid");
     int_text_el.innerText = '読み込み中...';
     document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
-    fetch("gas_url", {
+    fetch(gas_url, {
       'method': 'POST',
       'Content-Type' : 'application/x-www-form-urlencoded',
       'body': JSON.stringify({
@@ -2275,7 +2275,7 @@ document.getElementById("send_int").addEventListener('click', () => {
 	  set_int_text_el.value = "";
 	  set_backImage_el.value = "";
 	  now_status_text.innerText = "登録中..."
-	  fetch("gas_url", {
+	  fetch(gas_url, {
       'method': 'POST',
       'Content-Type' : 'application/x-www-form-urlencoded',
       'body': JSON.stringify({

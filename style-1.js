@@ -94,6 +94,7 @@ if (localStorage.hasOwnProperty("notice_mode")) {
 let int_text_el = document.createElement("span");
 int_text_el.id = "pvt_msg_introduce";
 int_text_el.innerText = '(自己紹介文が入る予定)';
+//int_text_el.style.backgroundImage = url("ここに背景画像が入る予定");
 let pvm_el = document.getElementById("pvm2");
 pvm_el.appendChild(int_text_el);
 

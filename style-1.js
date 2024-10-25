@@ -2224,7 +2224,7 @@ label_back.innerText = "背景画像URL:";
 let now_status_text = document.createElement("p");
 document.getElementById("d_user_list3").appendChild(form_el);
 form_el.appendChild(set_int_text_el);
-form_el.appendChild(set_backImage);
+form_el.appendChild(set_backImage_el);
 form_el.appendChild(label_int);
 form_el.appendChild(label_back);
 form_el.appendChild(send_btn);

@@ -185,7 +185,13 @@ nav,
 #pvm1:hover {
     background-color: #1f1f1f;
 }
-.clearfix.pv_box_r {
+
+.pv_box_l,
+.pv_box_r,
+#pvt_msg_uname,
+#pvt_msg_isFriend,
+#pvt_msg_isOnline,
+.req_f_bt_wrap {
     background-color: transparent !important;
 }
 

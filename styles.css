@@ -88,6 +88,38 @@ nav ul li {
     }
 }
 
+.additional-section {
+    display: flex; /* フレックスボックスを使用 */
+    align-items: center; /* 垂直方向の中央揃え */
+    margin-top: 50px; /* 上のセクションとの間隔 */
+    padding: 20px;
+    background-color: #222; /* 背景色を設定（任意） */
+}
+
+.additional-section:nth-child(even) {
+    flex-direction: row-reverse; /* 偶数番目のセクションを左右反転 */
+}
+
+.description {
+    flex: 1; /* 左側の説明部分を広げる */
+    text-align: left; /* 左揃え */
+    color: #fff; /* テキストの色 */
+    margin-right: 20px; /* 画像との間隔 */
+}
+
+.image-container {
+    flex: 1; /* 右側の画像部分を広げる */
+    text-align: center; /* 中央揃え */
+}
+
+.additional-image {
+    width: 100%; /* 幅を100%に */
+    max-width: 300px; /* 最大幅を設定 */
+    height: auto; /* 高さを自動に */
+    border-radius: 8px; /* 少し丸みをつける */
+}
+
+
 /* その他のセクション */
 .team-members {
     list-style: none;

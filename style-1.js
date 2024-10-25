@@ -2250,6 +2250,7 @@ var obs = new MutationObserver(() => {
   var disp = element.style.display;
   if (disp == "block") {
 	  if (now_disp == false) {
+	      now_disp = true;
         var duid = element.querySelector(".user").getAttribute("data-uid");
         int_text_el.innerText = '読み込み中...';
         document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
@@ -2273,6 +2274,8 @@ var obs = new MutationObserver(() => {
         })
       .catch(err => console.error(err));
     }
+  } else if (disp == "none") {
+    now_disp = false;
   }
 });
 

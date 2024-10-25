@@ -355,6 +355,12 @@ body[data-isroom="0"] #box1{
 	margin-top:2px;
 }
 
+#pvt_msg_uname,
+.online.online_1 {
+  -webkit-text-stroke: 2px #000000;
+  text-stroke: 2px #000000;
+}
+
 `;
 }
 if (dark_2 == "light") {

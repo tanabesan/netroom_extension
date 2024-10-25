@@ -93,8 +93,6 @@ if (localStorage.hasOwnProperty("notice_mode")) {
 
 let int_text_el = document.createElement("span");
 int_text_el.id = "pvt_msg_introduce";
-int_text_el.innerText = '(自己紹介文が入る予定)';
-//int_text_el.style.backgroundImage = url("ここに背景画像が入る予定");
 let pvm_el = document.getElementById("pvm2");
 pvm_el.appendChild(int_text_el);
 
@@ -2199,6 +2197,43 @@ logSearchButton.addEventListener('click', function() {
 		}
 	});
 });
+
+//背景画像・自己紹介文表示
+
+var observer = new MutationObserver(() => {
+  var disp = elem.style.display;
+  if (disp == "block") {
+    var duid = elem.querySelector(".user").getAttribute("data-uid");
+    int_text_el.innerText = '読み込み中...';
+    document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
+    fetch("https://script.google.com/macros/s/AKfycbwgwLofUNUBBt12krPTKI8zgHDM0canzC92v3SmmKHS_wiKGR_msk6MEp40atudLfyX5g/exec", {
+      'method': 'POST',
+      'Content-Type' : 'application/json',
+      'body': JSON.stringify({
+          'cmd': 'get',
+          'uid': 'duid'
+      })
+    })
+    .then(res => return res.json();)
+    .then(data => {
+        int_text_el.innerText = data.intText;
+        document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = url(data.backImg);
+    })
+    .catch(err => console.error(err););
+  }
+});
+
+var elem = document.getElementById('d_pvt_msg');
+
+var config = { 
+  attributes: true, 
+  childList: false, 
+  characterData: false,
+  attributeFilter: "style"
+};
+ 
+/** 要素の変化監視をスタート */
+observer.observe(elem, config);
 
 
 //部屋お気に入り

@@ -630,7 +630,9 @@ body[data-isroom="0"] #box1{
 #pvt_msg_uname,
 .online.online_1 {
   -webkit-text-stroke: 2px #000000;
+  text-stroke: 2px #000000;
 }
+
 `;
 }
 

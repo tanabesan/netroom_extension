@@ -2201,7 +2201,7 @@ logSearchButton.addEventListener('click', function() {
 //背景画像・自己紹介文表示
 
 var obs = new MutationObserver(() => {
-  var disp = elem.style.display;
+  var disp = element.style.display;
   if (disp == "block") {
     var duid = elem.querySelector(".user").getAttribute("data-uid");
     int_text_el.innerText = '読み込み中...';

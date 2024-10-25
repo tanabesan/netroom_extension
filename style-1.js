@@ -2208,7 +2208,7 @@ var obs = new MutationObserver(() => {
     document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
     fetch("https://script.google.com/macros/s/AKfycbw7M_r87cKI0uNkMBSzNxX8I0XxUlbPOOMatIYoFEBQNrizIEHHCJOvphtKup5OxaG71Q/exec", {
       'method': 'POST',
-      'Content-Type' : 'application/json',
+      'Content-Type' : 'application/x-www-form-urlencoded',
       'body': JSON.stringify({
           'cmd': 'get',
           'uid': 'duid'

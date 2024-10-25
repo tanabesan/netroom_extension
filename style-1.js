@@ -178,6 +178,10 @@ nav,
     color: #87cefa !important;
 }
 
+#room_desc_wrap {
+    background-color: #1f1f1f !important;
+}
+
 #pvm1:hover {
     background-color: #1f1f1f;
 }

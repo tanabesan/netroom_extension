@@ -2219,7 +2219,7 @@ var obs = new MutationObserver(() => {
         if (data.intText == undefined) {
           int_text_el.innerText = '';
 	} else {
-          int_text_el.innerText = String(data.intText);
+          int_text_el.innerHTML = String(data.intText);
 	}
         document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
     })

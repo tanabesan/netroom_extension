@@ -356,9 +356,10 @@ body[data-isroom="0"] #box1{
 }
 
 #pvt_msg_uname,
-.online.online_1 {
-  -webkit-text-stroke: 1px #000000;
-  text-stroke: 1px #000000;
+.online.online_1,
+.online.online_2 {
+  -webkit-text-stroke: 0.5px #000000;
+  text-stroke: 0.5px #000000;
 }
 
 `;
@@ -634,9 +635,10 @@ body[data-isroom="0"] #box1{
 }
 
 #pvt_msg_uname,
-.online.online_1 {
-  -webkit-text-stroke: 1px #000000;
-  text-stroke: 1px #000000;
+.online.online_1,
+.online.online_2 {
+  -webkit-text-stroke: 0.5px #000000;
+  text-stroke: 0.5px #000000;
 }
 
 `;

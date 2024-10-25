@@ -2217,7 +2217,7 @@ var obs = new MutationObserver(() => {
     .then(res => res.json())
     .then(data => {
         int_text_el.innerText = data.intText;
-        document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = URL(data.backImg);
+        document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = new URL(data.backImg);
     })
     .catch(err => console.error(err));
   }

@@ -1,11 +1,84 @@
+/* リセットスタイル */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow-x: hidden; /* 横スクロールを防ぐ */
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
 }
 
+/* ボックスモデルの設定 */
+*, *::before, *::after {
+    box-sizing: border-box; /* ボックスモデルの設定 */
+}
+
+/* ヘッダー */
+header {
+    background-color: #111;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+/* メインセクション */
+#main {
+    width: 100vw;  /* 画面の幅に合わせる */
+    height: 100vh; /* 画面の高さに合わせる */
+    position: relative; /* ::before要素を正しく配置するため */
+    overflow: hidden; /* はみ出した部分を隠す */
+    padding: 50px;
+    text-align: center; /* 中央揃え */
+    color: white; /* テキストが見やすいように色を変更 */
+    z-index: 1; /* 他の要素より前面に表示 */
+}
+
+#main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    z-index: -1; /* 背景として表示 */
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* その他のセクション */
 .team-members {
     list-style: none;
     display: flex;
@@ -41,27 +114,12 @@ html, body {
     z-index: 9999; /* 他の要素の上に表示されるように */
 }
 
-/* ロゴ画像のスタイル */
 #splash-screen .logo {
     max-width: 50%;
     height: auto;
 }
 
-#main {
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 100px; /* 次のセクションとの間隔 */
-    text-align: center; /* 中央揃え */
-}
-
-#main {
-    width: 100vw;  /* 画面の幅に合わせる */
-    height: 100vh; /* 画面の高さに合わせる */
-    position: relative; /* ::before要素を正しく配置するため */
-    overflow: hidden; /* はみ出した部分を隠す */
-}
-
-
+/* プロダクト画像 */
 .product-image-container {
     flex: 1;
     text-align: center;
@@ -90,7 +148,6 @@ html, body {
     font-size: 1.2em; /* 説明文のフォントサイズ */
     margin-top: 10px; /* 上にマージンを追加 */
 }
-
 
 /* スライドショースタイル */
 #slideshow {
@@ -134,92 +191,6 @@ html, body {
 /* スライドの表示 */
 .active {
     display: block; /* アクティブなスライドを表示 */
-}
-
-/* ベーススタイル */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-}
-
-a {
-    color: #fff;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #ddd;
-}
-
-/* ヘッダー */
-header {
-    background-color: #111;
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2em;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-/* メインセクション */
-#main {
-    padding: 50px;
-    text-align: center;
-    color: white; /* テキストが見やすいように色を変更 */
-    overflow: hidden;
-    z-index: 1; /* 他の要素より前面に表示 */
-}
-
-#main::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
-    background-size: 400% 550%;
-    animation: gradientAnimation 10s ease infinite;
-    z-index: -1; /* 背景として表示 */
-}
-
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-#main h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-
-#main p {
-    font-size: 1.2em;
 }
 
 /* 機能紹介セクション */
@@ -325,48 +296,6 @@ footer p {
 .navbar li {
     margin-right: 15px; /* リスト項目の間隔 */
     color: white; /* リスト項目の色 */
-}
-
-/* スライドショースタイル */
-.slideshow-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
-}
-
-.slides {
-    display: none;
-    position: relative;
-    text-align: center;
-}
-
-.slides img {
-    width: 100%;
-    height: auto;
-}
-
-.slideshow-container .active {
-    display: block;
-}
-
-.dot-container {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.dot {
-    height: 15px;
-    width: 15px;
-    margin: 0 5px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-
-.active-dot {
-    background-color: #717171;
 }
 
 /* レスポンシブ対応 */

@@ -101,14 +101,14 @@ nav ul li {
 }
 
 .description {
-    flex: 1; /* 左側の説明部分を広げる */
+    flex: 1; /* 説明部分を広げる */
     text-align: left; /* 左揃え */
     color: #fff; /* テキストの色 */
     margin-right: 20px; /* 画像との間隔 */
 }
 
 .image-container {
-    flex: 1; /* 右側の画像部分を広げる */
+    flex: 1; /* 画像部分を広げる */
     text-align: center; /* 中央揃え */
 }
 
@@ -118,6 +118,7 @@ nav ul li {
     height: auto; /* 高さを自動に */
     border-radius: 8px; /* 少し丸みをつける */
 }
+
 
 
 /* その他のセクション */

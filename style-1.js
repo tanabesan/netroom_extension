@@ -2216,7 +2216,7 @@ var obs = new MutationObserver(() => {
     })
     .then(res => res.json())
     .then(data => {
-        if (data.intText == undefinded) {
+        if (data.intText == undefined) {
           int_text_el.innerText = '';
 	} else {
           int_text_el.innerText = String(data.intText);

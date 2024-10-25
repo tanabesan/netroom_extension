@@ -2200,7 +2200,7 @@ logSearchButton.addEventListener('click', function() {
 });
 
 let set_value_title = document.createElement("p");
-set_value_title.innerText = "プロフィール編集";
+set_value_title.innerText = "プロフィール編集\n 背景画像サイズは300x57がぴったりです。\nそれ以上のサイズは左上が優先されます。";
 let form_el = document.createElement("form");
 form_el.action = "";
 let set_int_text_el = document.createElement("textarea");
@@ -2216,7 +2216,6 @@ let send_btn = document.createElement("input");
 send_btn.id = "send_int";
 send_btn.type = "button";
 send_btn.value = "登録・変更する";
-send_btn.onclick = "post_inp()";
 let now_status_text = document.createElement("p");
 
 document.getElementById("d_user_list3").appendChild(set_value_title);
@@ -2227,7 +2226,7 @@ form_el.appendChild(send_btn);
 document.getElementById("d_user_list3").appendChild(now_status_text);
 
 
-//背景画像・自己紹介文表示 背景画像は300x57の画像がぴったり
+//背景画像・自己紹介文表示
 
 var obs = new MutationObserver(() => {
   var disp = element.style.display;
@@ -2267,8 +2266,8 @@ var con = {
 
 obs.observe(element, con);
 
-//背景画像・自己紹介文設定
-function post_inp() {
+//背景画像・自己紹介文設定 背景画像は300x57の画像がぴったり
+document.getElementById("send_int").addEventListener('click', () => {
     var int = set_int_text_el.value;
     var backUrl = set_backImage_el.value;
 	  set_int_text_el.value = "";
@@ -2290,7 +2289,7 @@ function post_inp() {
 			setTimeout(() => now_status_text.innerText = "", 3000);
 		})
     .catch(err => console.error(err));
-}
+});
 
 
 //部屋お気に入り

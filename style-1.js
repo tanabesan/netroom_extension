@@ -2228,8 +2228,7 @@ var element = document.getElementById('d_pvt_msg');
 var con = { 
   attributes: true, 
   childList: false, 
-  characterData: false,
-  attributeFilter: "style"
+  characterData: false
 };
  
 /** 要素の変化監視をスタート */

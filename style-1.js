@@ -91,6 +91,12 @@ if (localStorage.hasOwnProperty("notice_mode")) {
 	console.log("def_notice_mode:" + notice_mode);
 }
 
+let int_text_el = document.createElement("span");
+int_text_el.id = "pvt_msg_introduce";
+int_text_el.innerText = '(自己紹介文が入る予定)';
+let pvm_el = document.getElementById("pvm2");
+pvm_el.appendChild(int_text_el);
+
 //css変更帯
 
 let css = "";
@@ -158,12 +164,21 @@ nav,
 .tab,
 .menu,
 .tabs,
-.clearfix,
 .category,
 .sidebar {
     background-color: #1f1f1f !important;
     border-color: #333 !important;
     color: #87cefa !important;
+}
+
+.clearfix {
+    background-color: #1f1f1f;
+    border-color: #333 !important;
+    color: #87cefa !important;
+}
+
+.clearfix.pv_box_r {
+    backkground-color: transparent !important;
 }
 
 img {

@@ -42,7 +42,7 @@
 #main {
     align-items: center;
     padding: 10px;
-    margin-bottom: 100px; /* 次のセクションとの間隔 */
+    margin-bottom: 300px; /* 次のセクションとの間隔 */
 }
 
 .product-image-container {

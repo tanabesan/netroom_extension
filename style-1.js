@@ -165,7 +165,8 @@ nav,
 .menu,
 .tabs,
 .category,
-.sidebar {
+.sidebar,
+.li_items {
     background-color: #1f1f1f !important;
     border-color: #333 !important;
     color: #87cefa !important;

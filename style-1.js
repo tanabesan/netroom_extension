@@ -2213,9 +2213,9 @@ set_backImage_el.type = "url";
 set_backImage_el.placeholder = "背景画像URLを入力";
 set_backImage_el.autocomplete = "off";
 let send_btn = document.createElement("input");
+send_btn.id = "send_int";
 send_btn.type = "submit";
 send_btn.value = "登録・変更する";
-send_btn.onsubmit = "post_int()";
 let label_int = document.createElement("label");
 label_int.for = "set_int_text";
 label_int.innerText = "自己紹介:";
@@ -2273,7 +2273,7 @@ var con = {
 obs.observe(element, con);
 
 //背景画像・自己紹介文設定
-function post_int() {
+$('#send_int').submit(() => {
     var int = set_int_text_el.value;
     var backUrl = set_backImage_el.value;
 	  set_int_text_el.value = "";
@@ -2295,7 +2295,7 @@ function post_int() {
 			setTimeout(() => now_status_text.innerText = "", 3000);
 		})
     .catch(err => console.error(err));
-}
+});
 
 
 //部屋お気に入り

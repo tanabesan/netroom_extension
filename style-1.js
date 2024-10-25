@@ -2285,8 +2285,8 @@ function post_int() {
       'body': JSON.stringify({
         'cmd': 'add',
         'uid': uid,
-	      'intText': int,
-	      'backImg': backUrl
+        'intText': int,
+        'backImg': backUrl
       })
     })
     .then(res => res.text())

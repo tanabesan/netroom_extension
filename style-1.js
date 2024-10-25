@@ -4,6 +4,8 @@
 
 let not_url="https://netroom.oz96.com/sound/sound46.mp3";
 
+let gas_url = "https://script.google.com/macros/s/AKfycbz4VQWVZooqZJyzNKWsNGL7IaQjmiWx9MIq5CXoCwNJG7aspuFPg1BoQFhD8_qmki8Y2Q/exec";
+
 //PC判定
 
 function PC() {
@@ -2234,7 +2236,7 @@ var obs = new MutationObserver(() => {
     var duid = element.querySelector(".user").getAttribute("data-uid");
     int_text_el.innerText = '読み込み中...';
     document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
-    fetch("https://script.google.com/macros/s/AKfycbxwuchaCCafZykv3-Alf2JGENmThCG6qC9wnDAOHzu7kgo0I18Vv-O2SVeyDNqyq714YA/exec", {
+    fetch("gas_url", {
       'method': 'POST',
       'Content-Type' : 'application/x-www-form-urlencoded',
       'body': JSON.stringify({
@@ -2273,7 +2275,7 @@ document.getElementById("send_int").addEventListener('click', () => {
 	  set_int_text_el.value = "";
 	  set_backImage_el.value = "";
 	  now_status_text.innerText = "登録中..."
-	  fetch("https://script.google.com/macros/s/AKfycbxwuchaCCafZykv3-Alf2JGENmThCG6qC9wnDAOHzu7kgo0I18Vv-O2SVeyDNqyq714YA/exec", {
+	  fetch("gas_url", {
       'method': 'POST',
       'Content-Type' : 'application/x-www-form-urlencoded',
       'body': JSON.stringify({

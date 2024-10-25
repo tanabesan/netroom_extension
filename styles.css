@@ -39,12 +39,11 @@
     height: auto;
 }
 
-#product-section {
+#main {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 0;
-    background-color: #1a1a1a; /* 高級感のあるダークトーン */
+    padding: 10px;
     margin-bottom: 100px; /* 次のセクションとの間隔 */
 }
 

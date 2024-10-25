@@ -186,7 +186,7 @@ nav,
     background-color: #1f1f1f;
 }
 .clearfix.pv_box_r {
-    backkground-color: transparent !important;
+    background-color: transparent !important;
 }
 
 img {

@@ -2206,7 +2206,7 @@ var obs = new MutationObserver(() => {
     var duid = element.querySelector(".user").getAttribute("data-uid");
     int_text_el.innerText = '読み込み中...';
     document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
-    fetch("https://script.google.com/macros/s/AKfycbwgwLofUNUBBt12krPTKI8zgHDM0canzC92v3SmmKHS_wiKGR_msk6MEp40atudLfyX5g/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbw7M_r87cKI0uNkMBSzNxX8I0XxUlbPOOMatIYoFEBQNrizIEHHCJOvphtKup5OxaG71Q/exec", {
       'method': 'POST',
       'Content-Type' : 'application/json',
       'body': JSON.stringify({

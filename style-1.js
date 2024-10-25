@@ -2288,10 +2288,10 @@ document.getElementById("send_int").addEventListener('click', () => {
     .then(res => res.text())
     .then(data => {
       now_status_text.innerText = data;
-			setTimeout(() => now_status_text.innerText = "", 3000);
-      return false;
+      setTimeout(() => now_status_text.innerText = "", 3000);
 		})
     .catch(err => console.error(err));
+    return false;
 });
 
 

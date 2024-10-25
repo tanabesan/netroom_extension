@@ -51,6 +51,16 @@ nav ul li {
     text-align: center; /* 中央揃え */
     color: white; /* テキストが見やすいように色を変更 */
     z-index: 1; /* 他の要素より前面に表示 */
+    margin-bottom: 100px; /* 次のセクションとの間隔を確保 */
+}
+
+#main h2 {
+    font-size: 2.5em; /* 元のサイズに戻す */
+    margin-bottom: 20px; /* セクション間の間隔 */
+}
+
+#main p {
+    font-size: 1.2em; /* 元のサイズに戻す */
 }
 
 #main::before {
@@ -195,6 +205,7 @@ nav ul li {
 
 /* 機能紹介セクション */
 #features {
+    margin-top: 50px; /* 上のセクションとの間隔 */
     padding: 50px;
     background-color: #111;
     text-align: center;
@@ -238,6 +249,7 @@ nav ul li {
 
 /* ダウンロードセクション */
 #download {
+    margin-top: 50px; /* 上のセクションとの間隔 */
     padding: 50px;
     text-align: center;
 }
@@ -257,6 +269,7 @@ nav ul li {
 
 /* サポートセクション */
 #support {
+    margin-top: 50px; /* 上のセクションとの間隔 */
     padding: 50px;
     background-color: #111;
     text-align: center;
@@ -296,6 +309,48 @@ footer p {
 .navbar li {
     margin-right: 15px; /* リスト項目の間隔 */
     color: white; /* リスト項目の色 */
+}
+
+/* スライドショースタイル */
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slides {
+    display: none;
+    position: relative;
+    text-align: center;
+}
+
+.slides img {
+    width: 100%;
+    height: auto;
+}
+
+.slideshow-container .active {
+    display: block;
+}
+
+.dot-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active-dot {
+    background-color: #717171;
 }
 
 /* レスポンシブ対応 */

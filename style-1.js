@@ -2200,7 +2200,7 @@ logSearchButton.addEventListener('click', function() {
 
 //背景画像・自己紹介文表示
 
-var observer = new MutationObserver(() => {
+var obs = new MutationObserver(() => {
   var disp = elem.style.display;
   if (disp == "block") {
     var duid = elem.querySelector(".user").getAttribute("data-uid");
@@ -2223,9 +2223,9 @@ var observer = new MutationObserver(() => {
   }
 });
 
-var elem = document.getElementById('d_pvt_msg');
+var element = document.getElementById('d_pvt_msg');
 
-var config = { 
+var con = { 
   attributes: true, 
   childList: false, 
   characterData: false,
@@ -2233,7 +2233,7 @@ var config = {
 };
  
 /** 要素の変化監視をスタート */
-observer.observe(elem, config);
+obs.observe(element, con);
 
 
 //部屋お気に入り

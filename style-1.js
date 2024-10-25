@@ -2440,6 +2440,124 @@ socket.on('got_room_list', function(res0) {
 });
 
 
+//引用カスタム
+
+let link;
+let or;
+let ankaCount;
+let isInRange;
+let targetSeq;
+let lastSeq;
+let decodedComment;
+
+let hisB = function () {
+    if (!isInRange) {
+        history.back();
+        targetSeq.style.color = '';
+        targetSeq.innerHTML = targetSeq.textContent.replace(" (クリックで戻る)", "");
+    } else {
+        set_url_mode(disp_room_id, 0, "", "prev");
+        targetSeq.style.color = '';
+        targetSeq.innerHTML = targetSeq.textContent.replace(" (クリックで戻る)", "");
+    }
+}
+
+$(document).on(_E.clickd, 'a.link', function (event) {
+    link = this;
+    or = false;
+});
+
+socket.on("sended", data => {
+    const comment = data[0].comment;
+    if (comment.includes('&gt;')) {
+        decodedComment = comment.replace(/&gt;/g, '>').match(/\d+/g);
+    }
+    if (decodedComment) {
+        const match = decodedComment.map(Number);
+        console.log(match);
+        socket.json.emit('one_msg', {
+            'seq': match[0],
+            'room_id': disp_room_id
+        });
+        or = true;
+
+        ankaCount = match.length;
+    }
+});
+
+socket.on("one_msg_", data => {
+    let lastLinkElement;
+    let lastIndex;
+    let lastElement;
+
+    lastLinkElement = document.getElementsByClassName("link");
+
+    if (data.comment.includes("&gt;")) {
+        lastIndex = lastLinkElement.length - ankaCount - data.comment.split(",").length;
+    } else if (!data.comment.includes("&gt;") && ankaCount > 1) {
+        lastIndex = lastLinkElement.length - ankaCount;
+    } else {
+        lastIndex = lastLinkElement.length - ankaCount;
+    }
+
+    lastIndex = Math.max(lastIndex, 0);
+    lastElement = lastLinkElement[lastIndex];
+
+    let imgdata = "";
+    if (data.img) {
+        imgdata = `<img class="click_img" src="/img/tmp/${disp_room_id}_${data.seq}.jpg">`;
+    }
+
+    let newHTML = `
+       <div class="msg-item" data-seq="${data.seq}" style="display:flex;align-items:center;padding:10px 15px;background-color:rgba(200, 200, 200, 0.1);border:1px solid black;border-radius:5px;font-size:13px;color:black;">
+            <div style="margin-left:10px; font-family: 'ＭＳ Ｐゴシック', Osaka, 'ヒラギノ角ゴ Pro W3';">
+                <span style="color:white;font-weight:normal;">${data.seq} </span>
+                <span style="color:white;font-weight:bold;">${data.uname} </span>
+                <span style="color:white;font-weight:normal;">${date_f(data.time)}</span><br>
+                <span style="color:white;font-weight:normal;">${comvert_msg(data.comment)} </span>
+                ${imgdata}
+            </div>
+        </div>
+    `;
+    $(document).off('contextmenu', '.msg-item');
+    $(document).on('contextmenu', '.msg-item', function (event) {
+        event.preventDefault();
+        lastSeq = Number(Array.from(document.getElementsByClassName("m_no")).filter(el => el.textContent.trim()).slice(-2, -1)[0].textContent);
+        let lowerBound = Math.floor(lastSeq / 100) * 100;
+        let upperBound = lowerBound + 100;
+        isInRange = $(this).data('seq') >= lowerBound && $(this).data('seq') < upperBound;
+
+        set_url_mode(disp_room_id, Number(String(data.seq).slice(0, -2)) + 1, "", "prev");
+        let jump = true;
+
+        socket.on("got_page", () => {
+            to_bottom('div_view', 0);
+            if (jump) {
+                targetSeq = Array.from(document.getElementsByClassName("m_no")).find(el => el.textContent.trim() === String($(this).data('seq')));
+                if (targetSeq) {
+                    targetSeq.style.setProperty('color', 'red', 'important');
+                    targetSeq.innerHTML = targetSeq.textContent.replace(" (クリックで戻る)", "") + " <span style='color: white;'> (クリックで戻る)</span>";
+                    targetSeq.removeEventListener("click", hisB);
+                    targetSeq.addEventListener('click', hisB);
+                    targetSeq.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                jump = false;
+            }
+        })
+    });
+
+    if (or) {
+        lastElement.outerHTML = newHTML;
+    } else {
+        if (link && link.parentNode) {
+            link.outerHTML = newHTML;
+        }
+    }
+    $('#d_msg_one').hide();
+});
+
+
+
 //通知音カスタム
 
 var sound = new Audio(not_url);

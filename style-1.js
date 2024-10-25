@@ -2214,20 +2214,15 @@ set_backImage_el.placeholder = "背景画像URLを入力";
 set_backImage_el.autocomplete = "off";
 let send_btn = document.createElement("input");
 send_btn.id = "send_int";
-send_btn.type = "submit";
+send_btn.type = "button";
 send_btn.value = "登録・変更する";
-let label_int = document.createElement("label");
-label_int.for = "set_int_text";
-label_int.innerText = "自己紹介:";
-let label_back= document.createElement("label");
-label_back.for = "set_backImage";
-label_back.innerText = "背景画像URL:";
+send_btn.onclick = "post_inp()";
 let now_status_text = document.createElement("p");
+
+document.getElementById("d_user_list3").appendChild(set_value_title);
 document.getElementById("d_user_list3").appendChild(form_el);
 form_el.appendChild(set_int_text_el);
 form_el.appendChild(set_backImage_el);
-form_el.appendChild(label_int);
-form_el.appendChild(label_back);
 form_el.appendChild(send_btn);
 document.getElementById("d_user_list3").appendChild(now_status_text);
 
@@ -2273,7 +2268,7 @@ var con = {
 obs.observe(element, con);
 
 //背景画像・自己紹介文設定
-$('#send_int').submit(() => {
+function post_inp() {
     var int = set_int_text_el.value;
     var backUrl = set_backImage_el.value;
 	  set_int_text_el.value = "";
@@ -2295,7 +2290,7 @@ $('#send_int').submit(() => {
 			setTimeout(() => now_status_text.innerText = "", 3000);
 		})
     .catch(err => console.error(err));
-});
+}
 
 
 //部屋お気に入り

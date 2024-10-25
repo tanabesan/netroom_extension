@@ -2214,7 +2214,7 @@ var obs = new MutationObserver(() => {
           'uid': 'duid'
       })
     })
-    .then(res => return res.json();)
+    .then(res => res.json();)
     .then(data => {
         int_text_el.innerText = data.intText;
         document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = url(data.backImg);

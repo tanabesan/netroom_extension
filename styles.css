@@ -45,6 +45,14 @@
     margin-bottom: 100px; /* 次のセクションとの間隔 */
 }
 
+#main {
+    width: 100vw;  /* 画面の幅に合わせる */
+    height: 100vh; /* 画面の高さに合わせる */
+    position: relative; /* ::before要素を正しく配置するため */
+    overflow: hidden; /* はみ出した部分を隠す */
+}
+
+
 .product-image-container {
     flex: 1;
     text-align: center;

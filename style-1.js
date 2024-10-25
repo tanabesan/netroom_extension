@@ -2269,6 +2269,12 @@ var con = {
 obs.observe(element, con);
 
 //背景画像・自己紹介文設定 背景画像は300x57の画像がぴったり
+document.getElementById("set_backImage").onkeypress = (e) => {
+  const key = e.keyCode || e.charCode || 0;
+  if (key == 13) {
+    e.preventDefault();
+  }
+}
 document.getElementById("send_int").addEventListener('click', () => {
     var int = set_int_text_el.value;
     var backUrl = set_backImage_el.value;

@@ -51,6 +51,7 @@ html, body {
     align-items: center;
     padding: 10px;
     margin-bottom: 100px; /* 次のセクションとの間隔 */
+    text-align: center; /* 中央揃え */
 }
 
 #main {

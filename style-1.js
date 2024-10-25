@@ -2206,7 +2206,7 @@ var obs = new MutationObserver(() => {
     var duid = element.querySelector(".user").getAttribute("data-uid");
     int_text_el.innerText = '読み込み中...';
     document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
-    fetch("https://script.google.com/macros/s/AKfycbw7M_r87cKI0uNkMBSzNxX8I0XxUlbPOOMatIYoFEBQNrizIEHHCJOvphtKup5OxaG71Q/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxwuchaCCafZykv3-Alf2JGENmThCG6qC9wnDAOHzu7kgo0I18Vv-O2SVeyDNqyq714YA/exec", {
       'method': 'POST',
       'Content-Type' : 'application/x-www-form-urlencoded',
       'body': JSON.stringify({
@@ -2230,8 +2230,7 @@ var con = {
   childList: false, 
   characterData: false
 };
- 
-/** 要素の変化監視をスタート */
+
 obs.observe(element, con);
 
 

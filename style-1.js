@@ -358,8 +358,8 @@ body[data-isroom="0"] #box1{
 #pvt_msg_uname,
 .online.online_1,
 .online.online_2 {
-  -webkit-text-stroke: 0.5px #000000;
-  text-stroke: 0.5px #000000;
+  -webkit-text-stroke: 0.3px #000000;
+  text-stroke: 0.3px #000000;
 }
 
 `;
@@ -637,8 +637,8 @@ body[data-isroom="0"] #box1{
 #pvt_msg_uname,
 .online.online_1,
 .online.online_2 {
-  -webkit-text-stroke: 0.5px #000000;
-  text-stroke: 0.5px #000000;
+  -webkit-text-stroke: 0.3px #000000;
+  text-stroke: 0.3px #000000;
 }
 
 `;

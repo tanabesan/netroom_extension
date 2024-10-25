@@ -2289,6 +2289,7 @@ document.getElementById("send_int").addEventListener('click', () => {
     .then(data => {
       now_status_text.innerText = data;
 			setTimeout(() => now_status_text.innerText = "", 3000);
+      return false;
 		})
     .catch(err => console.error(err));
 });

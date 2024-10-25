@@ -2244,32 +2244,35 @@ document.getElementById("d_user_list3").appendChild(now_status_text);
 
 
 //背景画像・自己紹介文表示
+let now_disp = false;
 
 var obs = new MutationObserver(() => {
   var disp = element.style.display;
   if (disp == "block") {
-    var duid = element.querySelector(".user").getAttribute("data-uid");
-    int_text_el.innerText = '読み込み中...';
-    document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
-    fetch(gas_url, {
-      'method': 'POST',
-      'Content-Type' : 'application/x-www-form-urlencoded',
-      'body': JSON.stringify({
-          'cmd': 'get',
-          'uid': duid
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.intText == undefined) {
-          int_text_el.innerText = '';
-	} else {
-          data.intText = data.intText.replace(/\\n/g, '<br>');
-          int_text_el.innerHTML = data.intText;
-	}
-        document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
-    })
-    .catch(err => console.error(err));
+	  if (now_disp == false) {
+        var duid = element.querySelector(".user").getAttribute("data-uid");
+        int_text_el.innerText = '読み込み中...';
+        document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
+        fetch(gas_url, {
+          'method': 'POST',
+          'Content-Type' : 'application/x-www-form-urlencoded',
+          'body': JSON.stringify({
+              'cmd': 'get',
+              'uid': duid
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.intText == undefined) {
+              int_text_el.innerText = '';
+  	      } else {
+            data.intText = data.intText.replace(/\\n/g, '<br>');
+            int_text_el.innerHTML = data.intText;
+	        }
+          document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
+        })
+      .catch(err => console.error(err));
+    }
   }
 });
 
@@ -2290,6 +2293,7 @@ document.getElementById("set_backImage").onkeypress = (e) => {
     e.preventDefault();
   }
 }
+
 document.getElementById("send_int").addEventListener('click', () => {
     var int = set_int_text_el.value;
     var backUrl = set_backImage_el.value;

@@ -2211,7 +2211,7 @@ var obs = new MutationObserver(() => {
       'Content-Type' : 'application/x-www-form-urlencoded',
       'body': JSON.stringify({
           'cmd': 'get',
-          'uid': 'duid'
+          'uid': duid
       })
     })
     .then(res => res.json())

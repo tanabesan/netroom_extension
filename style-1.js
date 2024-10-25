@@ -181,7 +181,8 @@ nav,
     background-color: #1f1f1f !important;
 }
 
-#pvm1:hover {
+#pvm1:hover,
+.h.clearfix.ipop_title:hover {
     background-color: #1f1f1f;
 }
 

@@ -96,8 +96,12 @@ nav ul li {
     background-color: #222; /* 背景色を設定（任意） */
 }
 
+.additional-section:nth-child(odd) {
+    flex-direction: row; /* 奇数番目のセクションは左側が説明 */
+}
+
 .additional-section:nth-child(even) {
-    flex-direction: row-reverse; /* 偶数番目のセクションを左右反転 */
+    flex-direction: row-reverse; /* 偶数番目のセクションは右側が説明 */
 }
 
 .description {
@@ -118,9 +122,6 @@ nav ul li {
     height: auto; /* 高さを自動に */
     border-radius: 8px; /* 少し丸みをつける */
 }
-
-
-
 
 /* その他のセクション */
 .team-members {

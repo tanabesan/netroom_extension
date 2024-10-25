@@ -2199,7 +2199,7 @@ logSearchButton.addEventListener('click', function() {
 	});
 });
 
-//背景画像・自己紹介文表示
+//背景画像・自己紹介文表示 背景画像は300x57の画像がぴったり
 
 var obs = new MutationObserver(() => {
   var disp = element.style.display;

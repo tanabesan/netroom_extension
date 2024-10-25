@@ -2216,7 +2216,11 @@ var obs = new MutationObserver(() => {
     })
     .then(res => res.json())
     .then(data => {
-        int_text_el.innerText = data.intText;
+        if (data.intText == undefinded) {
+          int_text_el.innerText = '';
+	} else {
+          int_text_el.innerText = data.intText;
+	}
         document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
     })
     .catch(err => console.error(err));

@@ -428,12 +428,32 @@ nav,
 .menu,
 .clearfix,
 .category,
-.sidebar {
+.sidebar,
+.li_items {
     background-color: #ffffff !important;
     border-color: #333 !important;
     color: #87cefa;
 }
-
+.clearfix {
+    background-color: #ffffff;
+    border-color: #333 !important;
+    color: #87cefa !important;
+}
+#room_desc_wrap {
+    background-color: #ffffff !important;
+}
+#pvm1:hover,
+.h.clearfix.ipop_title:hover {
+    background-color: #ffffff;
+}
+.pv_box_l,
+.pv_box_r,
+#pvt_msg_uname,
+#pvt_msg_isFriend,
+#pvt_msg_isOnline,
+.req_f_bt_wrap {
+    background-color: transparent !important;
+}
 .front_menu {
 	font-size:12px;
 	color:#87cefa;
@@ -637,10 +657,15 @@ body[data-isroom="0"] #box1{
 #pvt_msg_uname,
 .online.online_1,
 .online.online_2 {
-  -webkit-text-stroke: 0.3px #000000;
-  text-stroke: 0.3px #000000;
+  -webkit-text-stroke: 0.3px #ffffff;
+  text-stroke: 0.3px #ffffff;
 }
-
+#pvt_msg_uname,
+.online.online_1,
+.online.online_2 {
+  -webkit-text-stroke: 0.3px #ffffff;
+  text-stroke: 0.3px #ffffff;
+  }
 `;
 }
 

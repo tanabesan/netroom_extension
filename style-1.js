@@ -2284,7 +2284,7 @@ var obs = new MutationObserver(() => {
             document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
 
             var date = new Date();
-            var save_data = JSON.parse(localStorage.getItem('introduce'));
+            var save_data = JSON.parse(localStorage.getItem('introduce') || '{}');
             save_data[duid] = {
               "intText": data.intText,
               "backImg": data.backImg,
@@ -2297,8 +2297,7 @@ var obs = new MutationObserver(() => {
         if (last_get_data[duid].intText == undefined) {
           int_text_el.innerText = '';
         } else {
-          last_get_data[duid].intText = last_get_data[duid].intText.replace(
-            /\\n/g, '<br>');
+          last_get_data[duid].intText = last_get_data[duid].intText.replace(/\\n/g, '<br>');
           int_text_el.innerHTML = last_get_data[duid].intText;
         }
         document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + last_get_data[duid].backImg + ')';

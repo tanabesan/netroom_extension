@@ -2256,7 +2256,9 @@ var obs = new MutationObserver(() => {
       int_text_el.innerText = '読み込み中...';
       document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
       var last_get_data = JSON.parse(localStorage.getItem('introduce'));
-      if (last_get_data == 'undefined' || last_get_data[duid] == 'undefined') {
+      if (last_get_data == 'undefined') {
+        var last_date = new Date('1970-1-1');
+      } else if (last_get_data[duid] == 'undefined') {
         var last_date = new Date('1970-1-1');
       } else {
         var last_date = last_get_data[duid].date;

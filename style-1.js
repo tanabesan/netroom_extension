@@ -2262,7 +2262,7 @@ var obs = new MutationObserver(() => {
         var last_date = new Date(last_get_data[duid].date);
       }
       
-      last_date.setMinutes(last_date.getMinutes() + 2);
+      last_date.setMinutes(last_date.getMinutes() + 15);
       if (new Date().getTime() > last_date.getTime()) {
         fetch(gas_url, {
             'method': 'POST',

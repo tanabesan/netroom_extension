@@ -2274,16 +2274,25 @@ var obs = new MutationObserver(() => {
           })
           .then(res => res.json())
           .then(data => {
+            var date = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' });
             if (data.intText == undefined) {
               int_text_el.innerText = '';
               data.intText = '';
             } else {
               data.intText = data.intText.replace(/\\n/g, '<br>');
+              var hh = date.getHours();
+              var mm = date.getMinutes();
+              if (hh < 10) {
+              hh = "0" + hh;
+              }
+              if (mm < 10) {
+                mm = "0" + mm;
+              }
+              data.intText += '<br>' + hh + '時' + mm + '分更新';
               int_text_el.innerHTML = data.intText;
             }
             document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
 
-            var date = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' });
             var save_data = JSON.parse(localStorage.getItem('introduce') || '{}');
             save_data[duid] = {
               "intText": data.intText,

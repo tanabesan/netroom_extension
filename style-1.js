@@ -2264,10 +2264,10 @@ var obs = new MutationObserver(() => {
       } else {
         if (last_get_data[duid] == 'undefined') {
         var last_date = new Date('1970-1-1');
-        } else {
-          var last_date = last_get_data[duid];
-          last_date = last_date.date;
         }
+      }
+      if (last_date == undefined) {
+        var last_date = last_get_data[duid].date;
       }
       last_date.setMinutes(last_date.getMinutes() + 2);
       if (new Date().getTime() > last_date.getTime()) {

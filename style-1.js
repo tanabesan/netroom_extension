@@ -2255,6 +2255,9 @@ var obs = new MutationObserver(() => {
       var duid = element.querySelector(".user").getAttribute("data-uid");
       int_text_el.innerText = '読み込み中...';
       document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
+      if (!localStorage.hasOwnProperty('introduce')) {
+        localStorage.setItem('introduce', '{}');
+      }
       var last_get_data = JSON.parse(localStorage.getItem('introduce'));
       if (last_get_data == 'undefined') {
         var last_date = new Date('1970-1-1');

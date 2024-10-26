@@ -2255,20 +2255,13 @@ var obs = new MutationObserver(() => {
       var duid = element.querySelector(".user").getAttribute("data-uid");
       int_text_el.innerText = '読み込み中...';
       document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
-      if (!localStorage.hasOwnProperty('introduce')) {
-        localStorage.setItem('introduce', '{}');
-      }
-      var last_get_data = JSON.parse(localStorage.getItem('introduce'));
-      if (last_get_data == 'undefined') {
+      var last_get_data = JSON.parse(localStorage.getItem('introduce') || '{}');
+      if (!last_get_data[duid]) {
         var last_date = new Date('1970-1-1');
       } else {
-        if (last_get_data[duid] == 'undefined') {
-        var last_date = new Date('1970-1-1');
-        }
+        var last_date = new Date(last_get_data[duid].date);
       }
-      if (last_date == undefined) {
-        var last_date = last_get_data[duid].date;
-      }
+      
       last_date.setMinutes(last_date.getMinutes() + 2);
       if (new Date().getTime() > last_date.getTime()) {
         fetch(gas_url, {

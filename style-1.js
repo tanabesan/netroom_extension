@@ -2274,7 +2274,7 @@ var obs = new MutationObserver(() => {
           })
           .then(res => res.json())
           .then(data => {
-            var date = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' });
+            var date = new Date(new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }));
             if (data.intText == undefined) {
               int_text_el.innerText = '';
               data.intText = '';
@@ -2297,7 +2297,7 @@ var obs = new MutationObserver(() => {
             save_data[duid] = {
               "intText": data.intText,
               "backImg": data.backImg,
-              "date": date
+              "date": date.toLocaleString({ timeZone: 'Asia/Tokyo' })
             };
             localStorage.setItem('introduce', JSON.stringify(save_data));
           })

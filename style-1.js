@@ -2217,7 +2217,8 @@ logSearchButton.addEventListener('click', function() {
 });
 
 let set_value_title = document.createElement("p");
-set_value_title.innerText = "プロフィール編集\n 背景画像サイズは300x57がぴったりです。\nそれ以上のサイズは左上が優先されます。";
+set_value_title.innerText =
+  "プロフィール編集\n 背景画像サイズは300x57がぴったりです。\nそれ以上のサイズは左上が優先されます。";
 let form_el = document.createElement("form");
 form_el.action = "";
 let set_int_text_el = document.createElement("textarea");
@@ -2249,30 +2250,59 @@ let now_disp = false;
 var obs = new MutationObserver(() => {
   var disp = element.style.display;
   if (disp == "block") {
-	  if (now_disp == false) {
-	      now_disp = true;
-        var duid = element.querySelector(".user").getAttribute("data-uid");
-        int_text_el.innerText = '読み込み中...';
-        document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
+    if (now_disp == false) {
+      now_disp = true;
+      var duid = element.querySelector(".user").getAttribute("data-uid");
+      int_text_el.innerText = '読み込み中...';
+      document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
+      var last_get_data = JSON.parse(localStorage.getItem('introduce'));
+      var last_date = last_get_data[duid].date;
+      if (last_date == undefined) {
+        last_date = new Date('1970-1-1');
+      }
+      last_date.setMinutes(last_date.getMinutes() + 2);
+      if (new Date().getTime() > last_date.getTime()) {
         fetch(gas_url, {
-          'method': 'POST',
-          'Content-Type' : 'application/x-www-form-urlencoded',
-          'body': JSON.stringify({
+            'method': 'POST',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'body': JSON.stringify({
               'cmd': 'get',
               'uid': duid
+            })
           })
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.intText == undefined) {
+          .then(res => res.json())
+          .then(data => {
+            if (data.intText == undefined) {
               int_text_el.innerText = '';
-  	      } else {
-            data.intText = data.intText.replace(/\\n/g, '<br>');
-            int_text_el.innerHTML = data.intText;
-	        }
-          document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
-        })
-      .catch(err => console.error(err));
+              data.intText = '';
+            } else {
+              data.intText = data.intText.replace(/\\n/g, '<br>');
+              int_text_el.innerHTML = data.intText;
+            }
+            document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
+
+            var date = new Date();
+            var save_data = {};
+            save_data[duid] = {
+              "intText": data.intText,
+              "backImg": data.backImg,
+              "date": date
+            };
+            localStorage.setItem('introduce', JSON.stringify(save_data));
+          })
+          .catch(err => console.error(err));
+      } else {
+        if (last_get_data[duid].intText == undefined) {
+          int_text_el.innerText = '';
+        } else {
+          last_get_data[duid].intText = last_get_data[duid].intText.replace(
+            /\\n/g, '<br>');
+          int_text_el.innerHTML = last_get_data[duid].intText;
+        }
+        document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + last_get_data[duid].backImg + ')';
+      }
+
+
     }
   } else if (disp == "none") {
     now_disp = false;
@@ -2281,9 +2311,9 @@ var obs = new MutationObserver(() => {
 
 var element = document.getElementById('d_pvt_msg');
 
-var con = { 
-  attributes: true, 
-  childList: false, 
+var con = {
+  attributes: true,
+  childList: false,
   characterData: false
 };
 
@@ -2298,14 +2328,14 @@ document.getElementById("set_backImage").onkeypress = (e) => {
 }
 
 document.getElementById("send_int").addEventListener('click', () => {
-    var int = set_int_text_el.value;
-    var backUrl = set_backImage_el.value;
-	  set_int_text_el.value = "";
-	  set_backImage_el.value = "";
-	  now_status_text.innerText = "登録中..."
-	  fetch(gas_url, {
+  var int = set_int_text_el.value;
+  var backUrl = set_backImage_el.value;
+  set_int_text_el.value = "";
+  set_backImage_el.value = "";
+  now_status_text.innerText = "登録中..."
+  fetch(gas_url, {
       'method': 'POST',
-      'Content-Type' : 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'body': JSON.stringify({
         'cmd': 'add',
         'uid': uid,
@@ -2317,11 +2347,10 @@ document.getElementById("send_int").addEventListener('click', () => {
     .then(data => {
       now_status_text.innerText = data;
       setTimeout(() => now_status_text.innerText = "", 3000);
-		})
+    })
     .catch(err => console.error(err));
-    return false;
+  return false;
 });
-
 
 //部屋お気に入り
 

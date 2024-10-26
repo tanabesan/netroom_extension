@@ -2283,7 +2283,7 @@ var obs = new MutationObserver(() => {
             }
             document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = 'url(' + data.backImg + ')';
 
-            var date = new Date();
+            var date = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' });
             var save_data = JSON.parse(localStorage.getItem('introduce') || '{}');
             save_data[duid] = {
               "intText": data.intText,

@@ -2265,7 +2265,8 @@ var obs = new MutationObserver(() => {
         if (last_get_data[duid] == 'undefined') {
         var last_date = new Date('1970-1-1');
         } else {
-          var last_date = last_get_data[duid]['date'];
+          var last_date = last_get_data[duid];
+          last_date = last_date.date;
         }
       }
       last_date.setMinutes(last_date.getMinutes() + 2);

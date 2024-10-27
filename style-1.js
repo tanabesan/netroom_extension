@@ -2394,7 +2394,7 @@ setTimeout( () => {
   my_icon.addEventListener('click', () => {
     open_pvm(uid, icon_n);
   });
-}, 1500);
+}, 2000);
 
 //背景画像・自己紹介文設定 背景画像は300x57の画像がぴったり
 document.getElementById("set_backImage").onkeypress = (e) => {

@@ -179,6 +179,10 @@ nav,
     color: #87cefa !important;
 }
 
+#pvm1 b {
+    color: #87cefa !important;
+}
+
 #room_desc_wrap {
     background-color: #1f1f1f !important;
 }
@@ -434,11 +438,17 @@ nav,
     border-color: #333 !important;
     color: #87cefa;
 }
+
 .clearfix {
     background-color: #ffffff;
     border-color: #333 !important;
     color: #87cefa !important;
 }
+
+#pvm1 b {
+    color: #87cefa !important;
+}
+
 #room_desc_wrap {
     background-color: #ffffff !important;
 }

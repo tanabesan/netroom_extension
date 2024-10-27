@@ -2290,7 +2290,7 @@ var obs = new MutationObserver(() => {
     if (now_disp == false || duid != now_uid) {
       now_disp = true;
       now_uid = duid;
-      int_text_el.innerText = `<br>読み込み中...`;
+      int_text_el.innerHTML = '<br>読み込み中...';
       document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
       var last_get_data = JSON.parse(localStorage.getItem('introduce') || '{}');
       if (!last_get_data[duid]) {

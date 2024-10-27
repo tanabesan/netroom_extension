@@ -2388,13 +2388,17 @@ var con = {
 
 obs.observe(element, con);
 
-setTimeout( () => {
-  let my_icon = document.querySelector(`#user_list img.user[data-uid='${uid}']`);
-  let icon_n = Number(my_icon.getAttribute('data-img_no'));
-  my_icon.addEventListener('click', () => {
-    open_pvm(uid, icon_n);
-  });
-}, 2000);
+socket.on('logined_common', data => {
+  if (data) {
+    if (data.uid == uid) {
+      let my_icon = document.querySelector(`#user_list img.user[data-uid='${uid}']`);
+      let icon_n = Number(my_icon.getAttribute('data-img_no'));
+      my_icon.addEventListener('click', () => {
+        open_pvm(uid, icon_n);
+      });
+    }
+  }
+});
 
 //背景画像・自己紹介文設定 背景画像は300x57の画像がぴったり
 document.getElementById("set_backImage").onkeypress = (e) => {

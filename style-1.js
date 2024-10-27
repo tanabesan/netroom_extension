@@ -861,7 +861,7 @@ function extractYouTubeId(url) {
 function url_to_a(txt) {
   const regex = /((http|https):\/\/[^\s]+)/gi;
   let newText="";
-  if(txt.match("watch?")){
+  if(txt.match(/(www\.youtube\.com\/watch?|youtu\.be\/)/)){
     newText = txt.replace(regex, (match, url) => {
 	    
     const newUrl = new URL(url);

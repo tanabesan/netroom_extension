@@ -2281,13 +2281,15 @@ document.getElementById("d_user_list3").appendChild(now_status_text);
 
 //背景画像・自己紹介文表示
 let now_disp = false;
+let now_uid = '';
 
 var obs = new MutationObserver(() => {
   var disp = element.style.display;
   if (disp == "block") {
-    if (now_disp == false) {
+    var duid = element.querySelector(".user").getAttribute("data-uid");
+    if (now_disp == false || duid != now_uid) {
       now_disp = true;
-      var duid = element.querySelector(".user").getAttribute("data-uid");
+      now_uid = duid;
       int_text_el.innerText = '読み込み中...';
       document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
       var last_get_data = JSON.parse(localStorage.getItem('introduce') || '{}');

@@ -8,15 +8,7 @@ let gas_url = "https://script.google.com/macros/s/AKfycbz4VQWVZooqZJyzNKWsNGL7Ia
 
 //PC判定
 
-function PC() {
-    if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-let isPC=PC();
+let isPC = !(navigator.userAgent.match(/iPhone|Android.+Mobile/));
 
 //ダークモード対応
 let dark_2;

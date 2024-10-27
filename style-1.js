@@ -2388,6 +2388,12 @@ var con = {
 
 obs.observe(element, con);
 
+let my_icon = document.querySelector(`#user_list img.user[data-uid='${uid}']`);
+let icon_n = Number(my_icon.getAttribute('data-img_no'));
+my_icon.addEventListener('click', () => {
+  open_pvm(uid, icon_n);
+});
+
 //背景画像・自己紹介文設定 背景画像は300x57の画像がぴったり
 document.getElementById("set_backImage").onkeypress = (e) => {
   const key = e.keyCode || e.charCode || 0;

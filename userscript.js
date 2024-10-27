@@ -150,7 +150,7 @@ if (e_ui == "old") {
             justify-content: center;
             align-items: center;
             z-index: 99;
-            
+
             display: flex;
             flex-direction: column;
         }
@@ -160,7 +160,7 @@ if (e_ui == "old") {
             max-height: 50%;
             height: auto;
         }
-        
+
         #splash-screen .logo_l_2 {
             max-width: 50%;
             max-height: 50%;
@@ -174,7 +174,7 @@ if (e_ui == "old") {
     const splashScreenHtml = `
             <img src="https://tanabesan.github.io/netroom_extension/img/FLASH_LOGO_` + theme_l + `.gif" alt="Logo" class="logo_l">
             <br>
-            <img src="https://tanabesan.github.io/netroom_extension/img/loading_2.gif" class="logo_l_2" id="logo_l_2"></img>
+            <img src="https://tanabesan.github.io/netroom_extension/img/loading_2.gif" class="logo_l_2"></img>
     `;
 
     console.log(`https://tanabesan.github.io/netroom_extension/img/FLASH_LOGO_` + theme_l + `.gif`);
@@ -182,24 +182,13 @@ if (e_ui == "old") {
     splashScreenElement.id = "splash-screen";
     splashScreenElement.style.zIndex = "99";
     splashScreenElement.innerHTML = splashScreenHtml;
+
     // bodyの最初の子要素の前に挿入
     document.body.insertBefore(splashScreenElement, document.body.firstChild);
-    	const lo_2 = document.getElementById("logo_l_2");
-    lo_2.style.display = "none";
 } else {
     //document.documentElement.innerHTML = main_html;
     document.head.appendChild(script);
 }
-
-
-//load2をフェードイン
-	setTimeout(function() {
-		lo_2.style.opacity = "0";
-		lo_2.style.transition = "opacity 0.5s ease";
-		setTimeout(function() {
-			lo_2.style.display = "";
-		}, 250); // 0.5秒後に非表示
-	}, 500); // 1.85秒後にフェードアウトを開始
 
 //favicon変更
 

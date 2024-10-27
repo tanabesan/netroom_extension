@@ -867,11 +867,9 @@ function extractYouTubeId(url) {
 }
 
 function url_to_a(txt) {
-	console.log(txt);
   const regex = /((http|https):\/\/[^\s]+)/gi;
   let newText="";
   if(txt.match("watch?")){
-	  console.log("youtubeで認識");
     newText = txt.replace(regex, (match, url) => {
 	    
     const newUrl = new URL(url);
@@ -880,7 +878,6 @@ function url_to_a(txt) {
     return `<a href="${url}" target="_blank" rel="nofollow" style="color:#777777; padding: 0;position: relative;top: 0;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 150px;"><div style="border-radius: 2px 2px 2px 2px; background-color:` + col_u_to_a + `;color:#777777 !important;"><img src="https://tanabesan.github.io/netroom_extension/img/link.png" width="18px" style="position: relative;bottom:7px;vertical-align: middle;"></img>${hostname}</div></a><br><img style="height:120px" src="http://img.youtube.com/vi/${y_id}/default.jpg" onclick="open_youtube('https://www.youtube.com/embed/${y_id}')">`;
     });
   }else{
-	  console.log("youtubeで認せず");
   newText = txt.replace(regex, (match, url) => {
     const newUrl = new URL(url);
     const hostname = newUrl.hostname;

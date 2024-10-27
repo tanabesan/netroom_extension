@@ -2387,6 +2387,26 @@ var con = {
 
 obs.observe(element, con);
 
+var old_url = '';
+
+var obs_url = new MutationObserver( () => {
+  if (location.href != old_url) {
+    old_url = location.href;
+    let my_icon = document.querySelector(`#user_list img.user[data-uid='${uid}']`);
+    let icon_n = Number(my_icon.dataset.img_no);
+    my_icon.addEventListener('click', () => {
+      open_pvm(uid, icon_n);
+    });
+  }
+});
+
+obs_url.observe(document.body, {
+    subtree: true,
+    childList: true, 
+    attributes: true,
+    characterData: true
+});
+
 socket.on('logined_common', data => {
   if (data) {
     change_disp_by_user_or_guest(data);

@@ -860,17 +860,41 @@ if (dark_2 == "dark") {
 	col_u_to_a = 'black';
 }
 
-function url_to_a(txt) {
-  const regex = /((http|https):\/\/[^\s]+)/gi;
+function extractYouTubeId(url) {
+  const regex = /(?:\?v=|\/embed\/|\/v\/|youtu\.be\/)([^#&?]*)/;
+  const match = url.match(regex);
+  return match && match[1] ? match[1] : null;
+}
 
-  let newText = txt.replace(regex, (match, url) => {
+function url_to_a(txt) {
+	console.log(txt);
+  const regex = /((http|https):\/\/[^\s]+)/gi;
+  let newText="";
+  if(txt.match("watch?")){
+	  console.log("youtubeで認識");
+    newText = txt.replace(regex, (match, url) => {
+	    
+    const newUrl = new URL(url);
+    const hostname = newUrl.hostname;
+    const y_id = extractYouTubeId(url);
+    return `<a href="${url}" target="_blank" rel="nofollow" style="color:#777777; padding: 0;position: relative;top: 0;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 150px;"><div style="border-radius: 2px 2px 2px 2px; background-color:` + col_u_to_a + `;color:#777777 !important;"><img src="https://tanabesan.github.io/netroom_extension/img/link.png" width="18px" style="position: relative;bottom:7px;vertical-align: middle;"></img>${hostname}</div></a><br><img style="height:120px" src="http://img.youtube.com/vi/${y_id}/default.jpg" onclick="open_youtube('https://www.youtube.com/embed/${y_id}')">`;
+    });
+  }else{
+	  console.log("youtubeで認せず");
+  newText = txt.replace(regex, (match, url) => {
     const newUrl = new URL(url);
     const hostname = newUrl.hostname;
     return `<a href="${url}" target="_blank" rel="nofollow" style="color:#777777; padding: 0;position: relative;top: 0;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 150px;"><div style="border-radius: 2px 2px 2px 2px; background-color:` + col_u_to_a + `;color:#777777 !important;"><img src="https://tanabesan.github.io/netroom_extension/img/link.png" width="18px" style="position: relative;bottom:7px;vertical-align: middle;"></img>${hostname}</div></a>`;
-  });
+  });}
 
   return newText;
 }
+
+function open_youtube(url_y){
+	$('#gallery').html('<div class="click_img_wrap"><iframe frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="background:white;margin-top:20px;width:60vw;height:60vh;text-align:center" width="100%" src="' + url_y + '"></iframe><span id="close_pict_window" class="close">×</span></div>');
+	$('#pict_window').show();
+}
+
 if(isPC == true){
 //通知機能
 var toolButtonA = document.createElement('button');

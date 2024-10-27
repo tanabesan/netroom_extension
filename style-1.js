@@ -2360,8 +2360,9 @@ var element = document.getElementById('d_pvt_msg');
 
 var con = {
   attributes: true,
-  childList: false,
-  characterData: false
+  childList: true,
+  characterData: false,
+  subtree: true
 };
 
 obs.observe(element, con);

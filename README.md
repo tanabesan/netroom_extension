@@ -4,8 +4,7 @@
 ## NETROOM extensions とは?
 - 小澤氏によって10年以上前に作られたチャットサイト、[NETROOM](https://netroom.oz96.com)のために有志 [@tanabesan](https://github.com/tanabesan/)(通称:ぬーん。),[@AAniki](https://github.com/AAniki/)(通称:AAAAAAAAAAAA),[@bakantrm](https://github.com/bakantrm/)(通称:baka),[@FFTdareka](https://github.com/FFTdareka/)(通称:FFT_dareka) によって開発中の拡張機能。
 
-## どんな機能が実装されている(る予定)なの?
-### 実装済、あるいは開発途中
+## どんな機能が実装されているの?
 - テーマカラー変更(@AAniki、@tanabesan)
 > ライトモードとダークモードを実装。自由に設定可能。
 > <br>@tanabesan  :デザイン原案作成、ダークモード作成
@@ -35,7 +34,7 @@
 > 非表示の時にポップアップ通知で新しいメッセージを受信。
 > <br>@AAniki  :プログラム作成
 
-### 実装予定、あるいは案
+## これ以外にどんな機能が追加予定なの？
 - ブロック機能
 > 詳細未定。指定のユーザーからのフレンド申請を受け取らないようにしたりそのユーザーのコメントを非表示にしたりなどする機能。実装は検討中。
 - 通知削除機能

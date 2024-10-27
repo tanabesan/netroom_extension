@@ -2316,7 +2316,7 @@ var obs = new MutationObserver(() => {
               int_text_el.innerText = '';
               data.intText = '';
             } else {
-              data.intText = data.intText.replace(/\\n/g, '<br>');
+              data.intText = '<br>' + data.intText.replace(/\\n/g, '<br>');
               var hh = date.getHours();
               var mm = date.getMinutes();
               if (hh < 10) {

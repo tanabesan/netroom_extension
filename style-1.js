@@ -180,7 +180,7 @@ nav,
 }
 
 #pvm1 b {
-    color: #87cefa !important;
+    color: #0067c0 !important;
 }
 
 #room_desc_wrap {
@@ -446,7 +446,7 @@ nav,
 }
 
 #pvm1 b {
-    color: #87cefa !important;
+    color: #0067c0 !important;
 }
 
 #room_desc_wrap {

@@ -2691,6 +2691,13 @@ socket.on("one_msg_", data => {
 
 var sound = new Audio(not_url);
 
+//バグ解消
+
+		$("#d_user_list").show();
+		$("#d_user_list2").hide();
+		$('#tab_user_in_room').show()
+		$("#d_user_list3").hide();
+
 //ロード画面撤去
 (function() {
 

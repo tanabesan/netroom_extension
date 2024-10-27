@@ -1578,7 +1578,6 @@ let img_src2 = "";
 
 function change_disp_by_user_or_guest(data) {
     clear_global();
-    let uid;
     if (data.uid) {
         uid = data.uid;
         const cmd = data.cmd;

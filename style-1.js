@@ -2389,6 +2389,7 @@ obs.observe(element, con);
 
 socket.on('logined_common', data => {
   if (data) {
+    change_disp_by_user_or_guest(data);
     if (data.uid == uid) {
       let my_icon = document.querySelector(`#user_list img.user[data-uid='${uid}']`);
       let icon_n = Number(my_icon.getAttribute('data-img_no'));

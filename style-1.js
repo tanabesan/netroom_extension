@@ -2122,6 +2122,7 @@ logSearchButton.addEventListener('click', function() {
   if (!resultsContainer) {
     resultsContainer = document.createElement('div');
     resultsContainer.style.marginTop = '10px';
+    resultsContainer.style.color = '#000000';
     popup.appendChild(resultsContainer);
   } else {
     resultsContainer.innerHTML = '';

@@ -2568,16 +2568,6 @@ socket.on('got_room_list', function(res0) {
 
 //引用カスタム
 
-// ==UserScript==
-// @name        安価
-// @namespace   http://tampermonkey.net/
-// @version     none
-// @author      baka
-// @match       https://netroom.oz96.com/*
-// @grant       none
-// @run-at      document-idle
-// ==/UserScript==
-
 let link;
 let or;
 let ankaCount;
@@ -2644,7 +2634,7 @@ socket.on("one_msg_", data => {
     let lastIndex;
     let lastElement;
     let oneankaCount;
-    let buttonHTML = `<button style="position: absolute; top: -22px; right: 3px; z-index: 1000; font-size: 15px;">▲</button>`;
+    let foldingHTML = `<button style="position: absolute; top: -22px; right: 3px; z-index: 1; font-size: 15px;">▲</button>`;
     let imgdata = "";
     if (data.img) {
         imgdata = `<img class="click_img" src="/img/tmp/${disp_room_id}_${data.seq}.jpg">`;
@@ -2652,7 +2642,7 @@ socket.on("one_msg_", data => {
 
     let newHTML = `
        <div class="msg-item" data-seq="${data.seq}" style="position: relative; display: flex; align-items: center; padding: 10px 15px; background-color: rgba(200, 200, 200, 0.1); border: 1px solid black; border-radius: 5px; font-size: 13px; color: black;">
-                       ${buttonHTML}
+                       ${foldingHTML}
             <div style="margin-left:10px; font-family: 'ＭＳ Ｐゴシック', Osaka, 'ヒラギノ角ゴ Pro W3';">
                 <span style="color:white;font-weight:normal;">${data.seq} </span>
                 <span style="color:white;font-weight:bold;">${data.uname} </span>
@@ -2742,10 +2732,11 @@ socket.on("one_msg_", data => {
     }
     $('#d_msg_one').hide();
 });
-let isCollapsed = false;
+document.getElementById('d_pvt_msg').style.zIndex = '1';
 $(document).on('click', '.msg-item button', function (event) {
     let msgItem = $(this).closest('.msg-item')[0];
-    msgItem.style.position = "relative";
+    let isCollapsed = msgItem.dataset.collapsed === 'true';
+
     if (isCollapsed) {
         Array.from(msgItem.children).forEach((child) => {
             if (child !== this) {
@@ -2761,9 +2752,9 @@ $(document).on('click', '.msg-item button', function (event) {
         });
         this.innerHTML = "▼";
     }
-    isCollapsed = !isCollapsed;
-});
 
+    msgItem.dataset.collapsed = !isCollapsed;
+});
 
 
 

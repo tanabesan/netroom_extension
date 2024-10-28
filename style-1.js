@@ -2567,15 +2567,6 @@ socket.on('got_room_list', function(res0) {
 
 
 //引用カスタム
-// ==UserScript==
-// @name        安価
-// @namespace   http://tampermonkey.net/
-// @version     none
-// @author      baka
-// @match       https://netroom.oz96.com/*
-// @grant       none
-// @run-at      document-idle
-// ==/UserScript==
 
 let link;
 let or;
@@ -2766,7 +2757,6 @@ $(document).on('click', '.msg-item button', function (event) {
 });
 
 
-
 //通知音カスタム
 
 var sound = new Audio(not_url);
@@ -2790,5 +2780,6 @@ $("#d_user_list3").hide();
       splashScreen.style.display = "none";
     }, 500); // 0.5秒後に非表示
   }, 1850); // 1.85秒後にフェードアウトを開始
+document.documentElement.style.touchAction = "manipulation";
 
 })();

@@ -2567,6 +2567,16 @@ socket.on('got_room_list', function(res0) {
 
 
 //引用カスタム
+// ==UserScript==
+// @name        安価
+// @namespace   http://tampermonkey.net/
+// @version     none
+// @author      baka
+// @match       https://netroom.oz96.com/*
+// @grant       none
+// @run-at      document-idle
+// ==/UserScript==
+
 let link;
 let or;
 let ankaCount;
@@ -2593,11 +2603,12 @@ let hisB = function () {
 $(document).on(_E.clickd, 'a.link', function (event) {
     link = this;
     or = false;
-    $(link).parent()[0].childNodes.forEach((node, index) => {
-        if (node.nodeType === 3) {
-            node.remove();
-        }
-    });
+$(link).parent()[0].childNodes.forEach((node, index) => {
+    if (node.nodeType === 3 && node.textContent.trim() === ',') {
+        node.remove();
+    }
+});
+
 });
 
 

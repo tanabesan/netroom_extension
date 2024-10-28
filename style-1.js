@@ -2429,7 +2429,7 @@ document.getElementById("send_int").addEventListener('click', () => {
   var backUrl = set_backImage_el.value;
   set_int_text_el.value = "";
   set_backImage_el.value = "";
-  now_status_text.innerText = "登録中..."
+  now_status_text.innerText = "登録中...";
   fetch(gas_url, {
       'method': 'POST',
       'Content-Type': 'application/x-www-form-urlencoded',

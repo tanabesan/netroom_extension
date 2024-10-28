@@ -1284,10 +1284,7 @@ function img_users_pict(uid, img_no, status, selected) {
 	} else {
 		selected = ''
 	}
-	return '<img class="user' + selected + '" data-uid="' + uid +
-		'" data-img_no="' + img_no + '" img_url="https://netroom.oz96.com/img/user2/' +
-		img + '/' + img_no +
-		'.jpg" src="https://tanabesan.github.io/netroom_extension/img/loading_img.png">'
+	return '<img class="user' + selected + '" data-uid="' + uid + '" data-img_no="' + img_no + '" img_url="https://netroom.oz96.com/img/user2/' + img + '/' + img_no + '.jpg" src="https://tanabesan.github.io/netroom_extension/img/loading_img.png">'
 }
 
 
@@ -1313,8 +1310,7 @@ setInterval(() => {
 				let height = img_1.height;
 
 				if (width > 5000 || height > 5000) {
-					img.src =
-						"https://tanabesan.github.io/netroom_extension/img/blocked.jpg";
+					img.src = "https://tanabesan.github.io/netroom_extension/img/blocked.jpg";
 					show_notice({
 							'msg': 'クラッシュgifをブロックしました！'
 						})
@@ -1400,10 +1396,7 @@ function show_msg(room_id, res, ini_flag, target, nowHeight) {
 			}
 			if (data.img) {
 				var file = data.img;
-				var imgdata =
-					'<br><img class="click_img" img_url="https://netroom.oz96.com/img/tmp/' +
-					room_id + '_' + data["seq"] +
-					'.jpg"  src="https://tanabesan.github.io/netroom_extension/img/loading_img.png">'
+				var imgdata = '<br><img class="click_img" img_url="https://netroom.oz96.com/img/tmp/' + room_id + '_' + data["seq"] + '.jpg"  src="https://tanabesan.github.io/netroom_extension/img/loading_img.png">'
 			} else {
 				var imgdata = ""
 			}
@@ -1414,11 +1407,8 @@ function show_msg(room_id, res, ini_flag, target, nowHeight) {
 			html += '<div id="' + id_head + data["seq"] + '" class="comment clearfix" >';
 			html += '<div class="l">' + img_users_pict(data.uid, data.img_no) + '</div>';
 			html += '<div class="r">';
-			html += '<div class="comment_head"><span class="m_no">' + data["seq"] +
-				'</span><span class="m_uname">' + name + '</span><span class="m_time">' +
-				date_f(data.time) + '</span></div>';
-			html += '<div class="comd' + is_aa + '">' + comvert_msg(data.comment) +
-				imgdata + '</div>';
+			html += '<div class="comment_head"><span class="m_no">' + data["seq"] + '</span><span class="m_uname">' + name + '</span><span class="m_time">' + date_f(data.time) + '</span></div>';
+			html += '<div class="comd' + is_aa + '">' + comvert_msg(data.comment) + imgdata + '</div>';
 			html += '</div>';
 			html += '</div>';
 			last_id = 'c' + data["seq"];
@@ -1990,6 +1980,7 @@ commandDescription.innerHTML =
 	'コマンド（任意、複数可、未指定の場合自動で全て検索）: <br> @user[ユーザー名] - 検索するユーザーの指定 <br> @page[最初のページ数-最後のページ数] - 検索するページの指定 <br>@page[100-x] の形式で指定すると、100ページ以降の結果を取得します。<br> 例 @user[baka]あ　@page[1-100]あ　@user[baka]@page[100-x]あ <br> ';
 commandDescription.style.fontSize = '12px';
 commandDescription.style.marginBottom = '10px';
+commandDescription.style.color = '#000000';
 
 const inputField = document.createElement('input');
 inputField.type = 'text';

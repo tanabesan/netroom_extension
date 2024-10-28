@@ -4,7 +4,7 @@
 
 let not_url = "https://netroom.oz96.com/sound/sound46.mp3";
 
-let gas_url = "https://script.google.com/macros/s/AKfycbzIhj-lc8NQrpIpoGLSKfVPRdTooq9ypHLqR8_0-Smali6WN1MmbjJkOsb6gGFpzf4vvQ/exec";
+let gas_url = "https://script.google.com/macros/s/AKfycbzQp_ysnNU4wJRjtndwsZJu0_mAqm_XqH-0rsWgwfqURQ-4_xjjMsrmrMs69eQHyyvpFg/exec";
 
 //PC判定
 
@@ -2263,7 +2263,7 @@ logSearchButton.addEventListener('click', function() {
 
 let set_value_title = document.createElement("p");
 set_value_title.innerText =
-  "プロフィール編集\n 背景画像サイズは300x57がぴったりです。\nそれ以上のサイズは左上が優先されます。";
+  "プロフィール編集\n 背景画像サイズは300x57がぴったりです。\nそれ以上のサイズは左上が優先されます。\n変更したくない項目は、\n「変更なし」と入力してください。";
 let form_el = document.createElement("form");
 form_el.action = "";
 let set_int_text_el = document.createElement("textarea");

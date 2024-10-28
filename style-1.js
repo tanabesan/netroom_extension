@@ -2567,7 +2567,6 @@ socket.on('got_room_list', function(res0) {
 
 
 //引用カスタム
-
 let link;
 let or;
 let ankaCount;
@@ -2732,7 +2731,6 @@ socket.on("one_msg_", data => {
     }
     $('#d_msg_one').hide();
 });
-document.getElementById('d_pvt_msg').style.zIndex = '1';
 $(document).on('click', '.msg-item button', function (event) {
     let msgItem = $(this).closest('.msg-item')[0];
     let isCollapsed = msgItem.dataset.collapsed === 'true';

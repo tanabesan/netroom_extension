@@ -698,9 +698,6 @@ function show_room_name(res) {
   leaved_room = "";
   view_at_join_room(w_permition);
   $('#room_title').replaceWith('<div id="room_title"></div>');
-  $('#room_title').html(
-    '<marquee style="display:inline-block; width: 100%;" scrollamount="6">' +
-    res.room_name + '</marquee>');
   $('#room_title').css({
     'width': '90%',
     'box-sizing': 'border-box'

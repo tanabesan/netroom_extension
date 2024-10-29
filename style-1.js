@@ -700,7 +700,8 @@ function show_room_name(res) {
   $('#room_title').replaceWith('<div id="room_title"></div>');
   $('#room_title').css({
     'width': '90%',
-    'box-sizing': 'border-box'
+    'box-sizing': 'border-box',
+    'color': '#ffffff !important'
   });
 
   if (_MY_SP_ == '1') {

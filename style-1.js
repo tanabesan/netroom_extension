@@ -699,6 +699,7 @@ function show_room_name(res) {
   view_at_join_room(w_permition);
 
   if (_MY_SP_ == '1') {
+    $('#room_title').replaceWith('');
     $('#room_title2').html('<marquee style="display:inline-block; width: 100%; color: #ffffff !important;" scrollamount="6">' + res.room_name + '</marquee>')
   } else {
   $('#room_title').replaceWith('<div id="room_title"></div>');

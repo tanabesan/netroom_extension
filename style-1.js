@@ -1577,7 +1577,7 @@ function change_disp_by_user_or_guest(data) {
     document.getElementById('b_open_notice').style.display = 'block';
     document.getElementById('li_change_photo').style.display = 'block';
     document.getElementById('li_change_passwd').style.display = 'block';
-    document.getElementById('create_new_user').style.display = 'none';
+    if (isPC) document.getElementById('create_new_user').style.display = 'none';
     document.querySelectorAll('.b_show_create_room').forEach(elem => elem.style.display = 'block');
 
     const uid_data = {};
@@ -1600,7 +1600,7 @@ function change_disp_by_user_or_guest(data) {
     document.getElementById('b_open_notice').style.display = 'none';
     document.getElementById('li_change_photo').style.display = 'none';
     document.getElementById('li_change_passwd').style.display = 'none';
-    document.getElementById('create_new_user').style.display = 'block';
+    if (isPC) document.getElementById('create_new_user').style.display = 'block';
     document.querySelectorAll('.b_show_create_room').forEach(elem => elem.style.display = 'none');
     fsid.del();
     user_photo(data.imgs, data.uname, data.character_name);

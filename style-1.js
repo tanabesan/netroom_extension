@@ -231,7 +231,8 @@ img {
 }
 
 #comment,
-#i_pvt_msg {
+#i_pvt_msg,
+#room_title2_wrap {
     background: #1f1f1f;
     color: #FFFFFF;
 }

@@ -106,7 +106,7 @@ html {
 #d_user_list,
 .dialog,
 .mes_wrap,
-nonroom,
+.nonroom,
 .inshadow,
 .in_ui,
 .d_inner,

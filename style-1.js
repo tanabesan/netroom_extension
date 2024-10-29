@@ -265,6 +265,10 @@ img.user,
     display: none;
 }
 
+#room_title {
+    display: block;
+}
+
 img.selected {
 	border: 3px solid #0067C0 !important;
 }
@@ -702,11 +706,12 @@ function show_room_name(res) {
     'box-sizing': 'border-box'
   });
 
-
   if (_MY_SP_ == '1') {
-    $('#room_title2').html('<h1 id="room_title">' + res.room_name +
-      '</h1>')
+    $('#room_title').html('<h1 id="room_title">' + res.room_name + '</h1>')
+  } else {
+    $('#room_title').html('<marquee style="display:inline-block; width: 100%;" scrollamount="6">' + res.room_name + '</marquee>');
   }
+  
   var imgdata = "";
   var html = "";
   html += '<div class="comment"><div class="l">' + img_users_pict(res.a_admi[0],

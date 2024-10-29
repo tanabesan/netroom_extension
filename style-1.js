@@ -707,7 +707,7 @@ function show_room_name(res) {
   });
 
   if (_MY_SP_ == '1') {
-    $('#room_title').html('<h1 id="room_title">' + res.room_name + '</h1>')
+    $('#room_title2').html('<marquee style="display:inline-block; width: 100%;" scrollamount="6">' + res.room_name + '</marquee>')
   } else {
     $('#room_title').html('<marquee style="display:inline-block; width: 100%;" scrollamount="6">' + res.room_name + '</marquee>');
   }

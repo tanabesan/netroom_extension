@@ -704,8 +704,8 @@ function show_room_name(res) {
 
 
   if (_MY_SP_ == '1') {
-    $('#room_title2').html('<marquee><h1 id="room_title">' + res.room_name +
-      '</h1></marquee>')
+    $('#room_title2').html('<h1 id="room_title">' + res.room_name +
+      '</h1>')
   }
   var imgdata = "";
   var html = "";

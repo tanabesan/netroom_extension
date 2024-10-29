@@ -108,6 +108,7 @@ html {
 .mes_wrap,
 nonroom,
 .inshadow,
+.in_ui,
 .d_inner,
 .dialog_small {
     background-color: #1f1f1f !important;

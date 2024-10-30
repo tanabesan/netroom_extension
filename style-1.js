@@ -2408,6 +2408,8 @@ obs_url.observe(document.body, {
   characterData: true
 });
 
+//自分のプロフィールを閲覧可能に
+
 socket.on('logined_common', data => {
   if (data) {
     change_disp_by_user_or_guest(data);

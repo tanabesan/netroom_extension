@@ -4,7 +4,7 @@ window.addEventListener("load", function() {
     if (load === null) {
         load = 0;
         const splashScreen = document.getElementById("splash-screen");
-        splashScreen.style.display = "block"; 
+        splashScreen.style.display = "flex"; 
 
         setTimeout(function() {
             splashScreen.style.opacity = "0";

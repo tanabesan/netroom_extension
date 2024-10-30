@@ -2266,6 +2266,8 @@ logSearchButton.addEventListener('click', function() {
   });
 });
 
+//プロフィール用要素の追加
+
 let set_value_title = document.createElement("p");
 set_value_title.innerText =
   "プロフィール編集\n 背景画像サイズは300x57がぴったりです。\nそれ以上のサイズは左上が優先されます。\n変更したくない項目は、\n「変更なし」と入力してください。";

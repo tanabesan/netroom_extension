@@ -2339,7 +2339,9 @@ let profile_el = `
   <p>プロフィール編集<br>背景画像サイズは300x57がぴったりです。<br>それ以上のサイズは左上が優先されます。<br>変更したくない項目は、<br>「変更なし」と入力してください。</p>
   <form action="">
     <textarea id="set_int_text" autocomplete="off" placeholder="自己紹介文を入力"></textarea>
+    <br>
     <input id="set_backImage" type="url" placeholder="背景画像URLを入力" autocomplete="off"></input>
+    <br>
     <input id="send_int" type="button" value="登録・変更する"></input>
 `;
 let now_status_text = document.createElement("p");

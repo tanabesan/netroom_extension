@@ -338,6 +338,10 @@ body[data-isroom="0"] #box1{
 	max-width:100%;
 }
 
+body[data-isroom="0"] #box3 .tabs, body[data-isroom="0"] #box3 .list {
+  display: block !important;
+}
+
 .ga {
     position: fixed;
     right: 0px;
@@ -640,6 +644,10 @@ img.selected {
 body[data-isroom="0"] #box1{
 	float:left;
 	max-width:100%;
+}
+
+body[data-isroom="0"] #box3 .tabs, body[data-isroom="0"] #box3 .list {
+  display: block !important;
 }
 
 .ga {

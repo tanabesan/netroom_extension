@@ -2335,34 +2335,16 @@ logSearchButton.addEventListener('click', function() {
 
 //プロフィール用要素の追加
 
-let set_value_title = document.createElement("p");
-set_value_title.innerText =
-  "プロフィール編集\n 背景画像サイズは300x57がぴったりです。\nそれ以上のサイズは左上が優先されます。\n変更したくない項目は、\n「変更なし」と入力してください。";
-let form_el = document.createElement("form");
-form_el.action = "";
-let set_int_text_el = document.createElement("textarea");
-set_int_text_el.id = "set_int_text";
-set_int_text_el.autocomplete = "off";
-set_int_text_el.placeholder = "自己紹介文を入力";
-let set_backImage_el = document.createElement("input");
-set_backImage_el.id = "set_backImage";
-set_backImage_el.type = "url";
-set_backImage_el.placeholder = "背景画像URLを入力";
-set_backImage_el.autocomplete = "off";
-let send_btn = document.createElement("input");
-send_btn.id = "send_int";
-send_btn.type = "button";
-send_btn.value = "登録・変更する";
+let profile_el = `
+  <p>"プロフィール編集\n 背景画像サイズは300x57がぴったりです。\nそれ以上のサイズは左上が優先されます。\n変更したくない項目は、\n「変更なし」と入力してください。"</p>
+  <form action="">
+    <textarea id="set_int_text" autocomplete="off" placeholder="自己紹介文を入力"></textarea>
+    <input id="set_backImage" type="url" placeholder="背景画像URLを入力" autocomplete="off"></input>
+    <input id="send_int" type="button" value="登録・変更する"></input>
+`;
 let now_status_text = document.createElement("p");
 
-document.getElementById("d_user_list3").appendChild(set_value_title);
-document.getElementById("d_user_list3").appendChild(form_el);
-form_el.appendChild(set_int_text_el);
-form_el.appendChild('<br>');
-form_el.appendChild(set_backImage_el);
-form_el.appendChild('<br>');
-form_el.appendChild(send_btn);
-form_el.appendChild('<br>');
+document.getElementById("d_user_list3").appendChild(profile_el);
 document.getElementById("d_user_list3").appendChild(now_status_text);
 
 

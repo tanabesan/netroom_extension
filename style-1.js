@@ -1130,34 +1130,45 @@ if (now_ui == "old") {
 }
 
 // 要素を生成（テキストで要素を作る場合）
+
+if (!isPC) {
+  var setting_el = 
+    `
+      <div class="tab tab_setting">
+      <img class="ic" width="25" height="25" src="https://tanabesan.github.io/netroom_extension/img/remo_logo.png">
+      <span>機能設定</span>
+      </div>
+    `;
+}
+
 const element_b = document.querySelector('#box3');
 const createElement_b =
   `
-        <div id="d_user_list3" style="display: block;">
-          <center><h1 class="col">NETROOM extension 機能設定</h1></center>
-             <center>
-<fieldset>
-<legend>テーマカラー</legend>
-<label><input type="radio" name="col" value="light"` +
+    <div id="d_user_list3" style="display: block;">
+    <center><h1 class="col">NETROOM extension 機能設定</h1></center>
+    <center>
+    <fieldset>
+    <legend>テーマカラー</legend>
+    <label><input type="radio" name="col" value="light"` +
   set_w_d +
   ` onClick="change_theme('dark');">ライト</label>
-<label><input type="radio" name="col" value="dark"` +
+  <label><input type="radio" name="col" value="dark"` +
   set_d_d +
   ` onClick="change_theme('light');">ダーク</label>
-</fieldset>
-<fieldset>
-<legend>テーマカラー</legend>
-<label><input type="radio" name="ui" value="old"` +
+  </fieldset>
+  <fieldset>
+  <legend>テーマカラー</legend>
+  <label><input type="radio" name="ui" value="old"` +
   set_u_o +
   ` onClick="change_ui('old');">UI1</label>
-<label><input type="radio" name="ui" value="new"` +
+  <label><input type="radio" name="ui" value="new"` +
   set_u_n +
   ` onClick="change_ui('new');">UI2</label>
-</fieldset>
-           </center>
+  </fieldset>
+  </center>
 
-          </ul>
-	</div>
+  </ul>
+  </div>
 `;
 
 // 最初の子要素として追加

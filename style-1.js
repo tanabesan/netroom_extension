@@ -364,6 +364,10 @@ body[data-isroom="0"] #box3 .tabs, body[data-isroom="0"] #box3 .list {
   text-stroke: 0.3px #000000;
 }
 
+#room_title2 {
+  color: #ffffff !important;
+}
+
 `;
 }
 if (dark_2 == "light") {

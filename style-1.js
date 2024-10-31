@@ -1139,6 +1139,7 @@ if (!isPC) {
       <span>機能設定</span>
       </div>
     `;
+  document.querySelector('.intab_box.clearfix').insertAdjacentHTML('beforeend', setting_el);
 }
 
 const element_b = document.querySelector('#box3');

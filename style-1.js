@@ -2344,11 +2344,13 @@ let profile_el = `
     <br>
     <input id="send_int" type="button" value="登録・変更する"></input>
     <br>
+    <p id="now_status"></p>
 `;
-let now_status_text = document.createElement("p");
+let now_status_text = document.getElementById("now_status");
+let set_int_text_el = document.getElementById("set_int_text");
+let set_backImage_el = document.getElementById("set_backImage");
 
 document.getElementById("d_user_list3").insertAdjacentHTML('beforeend', profile_el);
-document.getElementById("d_user_list3").appendChild(now_status_text);
 
 
 //背景画像・自己紹介文表示

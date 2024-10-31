@@ -2338,8 +2338,11 @@ let now_status_text = document.createElement("p");
 document.getElementById("d_user_list3").appendChild(set_value_title);
 document.getElementById("d_user_list3").appendChild(form_el);
 form_el.appendChild(set_int_text_el);
+form_el.appendChild('<br>');
 form_el.appendChild(set_backImage_el);
+form_el.appendChild('<br>');
 form_el.appendChild(send_btn);
+form_el.appendChild('<br>');
 document.getElementById("d_user_list3").appendChild(now_status_text);
 
 

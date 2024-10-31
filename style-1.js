@@ -711,6 +711,10 @@ if (_MY_SP_ == '0') {
   .usersd_count {
     margin-top: 0px;
   }
+
+  #tab_friends {
+    display: none !important;
+  }
   `;
 }
 

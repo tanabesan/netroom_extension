@@ -2343,6 +2343,7 @@ let profile_el = `
     <input id="set_backImage" type="url" placeholder="背景画像URLを入力" autocomplete="off"></input>
     <br>
     <input id="send_int" type="button" value="登録・変更する"></input>
+    <br>
 `;
 let now_status_text = document.createElement("p");
 
@@ -2488,6 +2489,31 @@ document.getElementById("set_backImage").onkeypress = (e) => {
 }
 
 document.getElementById("send_int").addEventListener('click', () => {
+  var int = set_int_text_el.value;
+  var backUrl = set_backImage_el.value;
+  set_int_text_el.value = "";
+  set_backImage_el.value = "";
+  now_status_text.innerText = "登録中...";
+  fetch(gas_url, {
+      'method': 'POST',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'body': JSON.stringify({
+        'cmd': 'add',
+        'uid': uid,
+        'intText': int,
+        'backImg': backUrl
+      })
+    })
+    .then(res => res.text())
+    .then(data => {
+      now_status_text.innerText = data;
+      setTimeout(() => now_status_text.innerText = "", 3000);
+    })
+    .catch(err => console.error(err));
+  return false;
+});
+
+document.getElementById("send_int").addEventListener('touchstart', () => {
   var int = set_int_text_el.value;
   var backUrl = set_backImage_el.value;
   set_int_text_el.value = "";

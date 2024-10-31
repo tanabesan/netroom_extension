@@ -704,7 +704,7 @@ if (_MY_SP_ == '0') {
     justify-content: center;
   }
 
-  .usersd_count {
+  .usersd_count:not(.tab_user_in_room_2 .usersd_count) {
     margin-top: 0px;
   }
 

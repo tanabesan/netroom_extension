@@ -265,10 +265,6 @@ img.user,
     display: none;
 }
 
-#room_title {
-    display: block;
-}
-
 img.selected {
 	border: 3px solid #0067C0 !important;
 }
@@ -683,6 +679,20 @@ body[data-isroom="0"] #box3 .tabs, body[data-isroom="0"] #box3 .list {
   text-stroke: 0.3px #ffffff;
   }
 `;
+}
+
+if (_MY_SP_ == '0') {
+  css += `
+  #room_title {
+    display: block;
+  }
+  `;
+} else {
+  css += `
+  #room_title {
+    display: none;
+  }
+  `;
 }
 
 const style = document.createElement('style');

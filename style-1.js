@@ -704,7 +704,7 @@ if (_MY_SP_ == '0') {
   }
 
   .tabs.clearfix {
-    display: flex;
+    display: flex !important;
     justify-content: center;
   }
 

@@ -334,10 +334,6 @@ body[data-isroom="0"] #box1{
 	max-width:100%;
 }
 
-body[data-isroom="0"] #box3 .tabs, body[data-isroom="0"] #box3 .list {
-  display: block !important;
-}
-
 .ga {
     position: fixed;
     right: 0px;
@@ -646,10 +642,6 @@ body[data-isroom="0"] #box1{
 	max-width:100%;
 }
 
-body[data-isroom="0"] #box3 .tabs, body[data-isroom="0"] #box3 .list {
-  display: block !important;
-}
-
 .ga {
     position: fixed;
     right: 0px;
@@ -689,6 +681,10 @@ if (_MY_SP_ == '0') {
   css += `
   #room_title {
     display: block;
+  }
+
+  body[data-isroom="0"] #box3 .tabs, body[data-isroom="0"] #box3 .list {
+    display: block !important;
   }
   `;
 } else {

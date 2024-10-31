@@ -1094,26 +1094,45 @@ function switch_tab_user_or_friends(friends) {
   }
 }
 
+if (_MY_SP_ == '0') {
+  $('.tab_user_in_room_2').off(_E.clickd, switch_tab_user_or_friends);
 
-$('.tab_user_in_room_2').off(_E.clickd, switch_tab_user_or_friends);
+  $('.tab_user_in_room_2').on("click", function(e) {
+    //		e.preventDefault();
+    switch_tab_user_or_friends("a");
+  });
 
-$('.tab_user_in_room_2').on("click", function(e) {
-  //		e.preventDefault();
-  switch_tab_user_or_friends("a");
-});
+  $('.tab_friends').off(_E.clickd, switch_tab_user_or_friends);
 
-$('.tab_friends').off(_E.clickd, switch_tab_user_or_friends);
+  $('.tab_friends').on("click", function(e) {
+    //		e.preventDefault();
+    switch_tab_user_or_friends("b");
+  });
 
-$('.tab_friends').on("click", function(e) {
-  //		e.preventDefault();
-  switch_tab_user_or_friends("b");
-});
+  $('.tab_setting').on("click", function(e) {
+    //		e.preventDefault();
+    switch_tab_user_or_friends("c");
+  });
 
+} else {
+  $('.tab_user_in_room_2').off('touchstart', switch_tab_user_or_friends);
 
-$('.tab_setting').on("click", function(e) {
-  //		e.preventDefault();
-  switch_tab_user_or_friends("c");
-});
+  $('.tab_user_in_room_2').on("touchstart", function(e) {
+    //		e.preventDefault();
+    switch_tab_user_or_friends("a");
+  });
+
+  $('.tab_friends').off('touchstatrt', switch_tab_user_or_friends);
+
+  $('.tab_friends').on("touchstart", function(e) {
+    //		e.preventDefault();
+    switch_tab_user_or_friends("b");
+  });
+
+  $('.tab_setting').on("touchstart", function(e) {
+    //		e.preventDefault();
+    switch_tab_user_or_friends("c");
+}
 
 let set_w_d = "";
 let set_d_d = "";

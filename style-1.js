@@ -2344,7 +2344,7 @@ let profile_el = `
 `;
 let now_status_text = document.createElement("p");
 
-document.getElementById("d_user_list3").appendChild(profile_el);
+document.getElementById("d_user_list3").insertAdjacentHTML('beforeend', profile_el);
 document.getElementById("d_user_list3").appendChild(now_status_text);
 
 

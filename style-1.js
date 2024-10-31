@@ -2346,12 +2346,10 @@ let profile_el = `
     <br>
     <p id="now_status"></p>
 `;
+document.getElementById("d_user_list3").insertAdjacentHTML('beforeend', profile_el);
 let now_status_text = document.getElementById("now_status");
 let set_int_text_el = document.getElementById("set_int_text");
 let set_backImage_el = document.getElementById("set_backImage");
-
-document.getElementById("d_user_list3").insertAdjacentHTML('beforeend', profile_el);
-
 
 //背景画像・自己紹介文表示
 let now_disp = false;
@@ -2490,55 +2488,57 @@ document.getElementById("set_backImage").onkeypress = (e) => {
   }
 }
 
-document.getElementById("send_int").addEventListener('click', () => {
-  var int = set_int_text_el.value;
-  var backUrl = set_backImage_el.value;
-  set_int_text_el.value = "";
-  set_backImage_el.value = "";
-  now_status_text.innerText = "登録中...";
-  fetch(gas_url, {
-      'method': 'POST',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'body': JSON.stringify({
-        'cmd': 'add',
-        'uid': uid,
-        'intText': int,
-        'backImg': backUrl
+if (_MY_SP_ == "0") {
+  document.getElementById("send_int").addEventListener('click', () => {
+    var int = set_int_text_el.value;
+    var backUrl = set_backImage_el.value;
+    set_int_text_el.value = "";
+    set_backImage_el.value = "";
+    now_status_text.innerText = "登録中...";
+    fetch(gas_url, {
+        'method': 'POST',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'body': JSON.stringify({
+          'cmd': 'add',
+          'uid': uid,
+          'intText': int,
+          'backImg': backUrl
+        })
       })
-    })
-    .then(res => res.text())
-    .then(data => {
-      now_status_text.innerText = data;
-      setTimeout(() => now_status_text.innerText = "", 3000);
-    })
-    .catch(err => console.error(err));
-  return false;
-});
-
-document.getElementById("send_int").addEventListener('touchstart', () => {
-  var int = set_int_text_el.value;
-  var backUrl = set_backImage_el.value;
-  set_int_text_el.value = "";
-  set_backImage_el.value = "";
-  now_status_text.innerText = "登録中...";
-  fetch(gas_url, {
-      'method': 'POST',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'body': JSON.stringify({
-        'cmd': 'add',
-        'uid': uid,
-        'intText': int,
-        'backImg': backUrl
+      .then(res => res.text())
+      .then(data => {
+        now_status_text.innerText = data;
+        setTimeout(() => now_status_text.innerText = "", 3000);
       })
-    })
-    .then(res => res.text())
-    .then(data => {
-      now_status_text.innerText = data;
-      setTimeout(() => now_status_text.innerText = "", 3000);
-    })
-    .catch(err => console.error(err));
-  return false;
-});
+      .catch(err => console.error(err));
+    return false;
+  });
+} else {
+  document.getElementById("send_int").addEventListener('touchstart', () => {
+    var int = set_int_text_el.value;
+    var backUrl = set_backImage_el.value;
+    set_int_text_el.value = "";
+    set_backImage_el.value = "";
+    now_status_text.innerText = "登録中...";
+    fetch(gas_url, {
+        'method': 'POST',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'body': JSON.stringify({
+          'cmd': 'add',
+          'uid': uid,
+          'intText': int,
+          'backImg': backUrl
+        })
+      })
+      .then(res => res.text())
+      .then(data => {
+        now_status_text.innerText = data;
+        setTimeout(() => now_status_text.innerText = "", 3000);
+      })
+      .catch(err => console.error(err));
+    return false;
+  });
+}
 
 //部屋お気に入り
 

@@ -699,7 +699,8 @@ if (_MY_SP_ == '0') {
     justify-content: space-between;
   }
 
-  .tabs.clearfix {
+  .tabs.clearfix,
+  #tab_user_in_room {
     display: flex !important;
     justify-content: center;
   }

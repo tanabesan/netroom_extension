@@ -1132,6 +1132,7 @@ if (_MY_SP_ == '0') {
   $('.tab_setting').on("touchstart", function(e) {
     //		e.preventDefault();
     switch_tab_user_or_friends("c");
+  });
 }
 
 let set_w_d = "";

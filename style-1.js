@@ -696,6 +696,21 @@ if (_MY_SP_ == '0') {
   #room_title {
     display: none;
   }
+
+  #body .tabs .tab, #bullet_list .tab {
+    width:auto;
+	  display: flex;
+	  justify-content: space-between;
+  }
+
+  #top_tabs {
+    display: flex;
+    justify-content: center;
+  }
+
+  .usersd_count {
+    margin-top: 0px;
+  }
   `;
 }
 

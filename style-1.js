@@ -1013,7 +1013,7 @@ function showNotification(title, body, imageURL) {
   }
 }
 
-if (isPC == true) {
+if (isPC) {
   // ツールボタンB
   var toolButtonB = document.createElement('button');
   toolButtonB.id = 'tool_btn_b';
@@ -1042,6 +1042,15 @@ if (isPC == true) {
   tabother.innerHTML = '<span>機能設定</span>';
   document.getElementById("box3").querySelector(".tabs").appendChild(tabother);
 
+} else {
+  var setting_el = 
+    `
+      <div class="tab tab_setting">
+      <img class="ic" width="25" height="25" src="https://tanabesan.github.io/netroom_extension/img/remo_logo.png">
+      <span>機能設定</span>
+      </div>
+    `;
+  document.querySelector('.intab_box.clearfix').insertAdjacentHTML('beforeend', setting_el);
 }
 
 function switch_tab_user_or_friends(friends) {
@@ -1130,17 +1139,6 @@ if (now_ui == "old") {
 }
 
 // 要素を生成（テキストで要素を作る場合）
-
-if (!isPC) {
-  var setting_el = 
-    `
-      <div class="tab tab_setting">
-      <img class="ic" width="25" height="25" src="https://tanabesan.github.io/netroom_extension/img/remo_logo.png">
-      <span>機能設定</span>
-      </div>
-    `;
-  document.querySelector('.intab_box.clearfix').insertAdjacentHTML('beforeend', setting_el);
-}
 
 const element_b = document.querySelector('#box3');
 const createElement_b =

@@ -2355,6 +2355,7 @@ let set_backImage_el = document.getElementById("set_backImage");
 //背景画像・自己紹介文表示
 let now_disp = false;
 let now_uid = '';
+var element = document.getElementById('d_pvt_msg');
 
 var obs = new MutationObserver(() => {
   var disp = element.style.display;
@@ -2432,8 +2433,6 @@ var obs = new MutationObserver(() => {
     now_disp = false;
   }
 });
-
-var element = document.getElementById('d_pvt_msg');
 
 var con = {
   attributes: true,

@@ -257,7 +257,7 @@ img.user,
 
 #d_user_list2 {
     position: fixed;
-    height: 480px;
+    height: 430px;
     background: 0;
 }
 

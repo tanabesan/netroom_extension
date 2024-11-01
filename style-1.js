@@ -92,7 +92,7 @@ pvm_el.appendChild(int_text_el);
 
 //css変更帯
 
-let wh = 1261 - Number(innerHeight);
+let wh = -261 + Number(innerHeight);
 document.documentElement.style.setProperty('--wh', wh + 'px');
 
 let css = "";

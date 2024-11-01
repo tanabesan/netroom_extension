@@ -92,6 +92,9 @@ pvm_el.appendChild(int_text_el);
 
 //css変更帯
 
+let wh = 1261 - Number(innerHeight);
+document.documentElement.style.setProperty('--wh', wh);
+
 let css = "";
 
 if (dark_2 == "dark") {
@@ -258,6 +261,7 @@ img.user,
 #d_user_list2 {
     position: fixed;
     background: 0;
+    height: var(--wh);
 }
 
 #twitter-widget-0 {

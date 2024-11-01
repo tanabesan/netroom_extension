@@ -2369,12 +2369,16 @@ var obs = new MutationObserver(() => {
       document.querySelector(".pd_msg_wrap.clearfix").style.backgroundImage = "";
       console.log("delete backImage ok");
       var last_get_data = JSON.parse(localStorage.getItem('introduce') || '{}');
+      console.log(last_get_data);
       if (!last_get_data[duid]) {
         var last_date = new Date('1970-1-1');
       } else {
         var last_date = new Date(last_get_data[duid].date);
       }
       last_date.setMinutes(last_date.getMinutes() + 15);
+      console.log(last_date.getTime());
+      console.log(new Date().getTime());
+      console.log(new Date().getTime() > last_date.getTime());
       console.log("fetch前までok");
       if (new Date().getTime() > last_date.getTime()) {
         console.log("fetch条件ok");

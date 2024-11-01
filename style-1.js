@@ -2377,6 +2377,7 @@ var obs = new MutationObserver(() => {
       last_date.setMinutes(last_date.getMinutes() + 15);
       console.log("fetch前までok");
       if (new Date().getTime() > last_date.getTime()) {
+        console.log("fetch条件ok");
         fetch(gas_url, {
             'method': 'POST',
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -2420,6 +2421,7 @@ var obs = new MutationObserver(() => {
           })
           .catch(err => console.error(err));
       } else {
+        console.log("fetch条件ng");
         if (last_get_data[duid].intText == undefined) {
           int_text_el.innerText = '';
         } else {

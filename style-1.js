@@ -2375,6 +2375,8 @@ var obs = new MutationObserver(() => {
       } else {
         var last_date = new Date(last_get_data[duid].date);
       }
+      console.log(last_date.getTime());
+      console.log(last_date.getMinutes() + 15);
       last_date.setMinutes(last_date.getMinutes() + 15);
       console.log(last_date.getTime());
       console.log(new Date().getTime());

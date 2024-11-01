@@ -5,10 +5,11 @@
 - 小澤氏によって10年以上前に作られたチャットサイト、[NETROOM](https://netroom.oz96.com)のために有志 [@tanabesan](https://github.com/tanabesan/)(通称:ぬーん。),[@AAniki](https://github.com/AAniki/)(通称:AAAAAAAAAAAA),[@bakantrm](https://github.com/bakantrm/)(通称:baka),[@FFTdareka](https://github.com/FFTdareka/)(通称:FFT_dareka) によって開発中の拡張機能。
 
 ## どんな機能が実装されているの?
-- テーマカラー変更(@AAniki、@tanabesan)
+- テーマカラー変更(@AAniki、@tanabesan、@FFTdareka)
 > ライトモードとダークモードを実装。自由に設定可能。
 > <br>@tanabesan  :デザイン原案作成、ダークモード作成
 > <br>@AAniki  :ライトモード作成、全体的なUI作成、システム組み込み
+> <br>@FFTdareka  :スマホ版に対応
 - フレンド検索(@tanabesan)
 > フレンド一覧から簡単にフレンドを検索できる機能。
 > <br>@tanabesan  :プログラム作成

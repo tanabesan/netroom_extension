@@ -2371,11 +2371,12 @@ var obs = new MutationObserver(() => {
       var last_get_data = JSON.parse(localStorage.getItem('introduce') || '{}');
       console.log(last_get_data);
       if (!last_get_data[duid]) {
-        var last_date = new Date('1970-1-1');
+        var last_date = new Date('1970/1/1');
+        console.log("1970/1/1");
       } else {
         var last_date = new Date(last_get_data[duid].date);
+        console.log(last_get_data[duid].date);
       }
-      console.log(last_date);
       console.log(last_date.getTime());
       console.log(last_date.getMinutes() + 15);
       last_date.setMinutes(last_date.getMinutes() + 15);

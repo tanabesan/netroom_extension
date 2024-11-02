@@ -102,6 +102,7 @@ if (dark_2 == "dark") {
     ` body,
 html {
     background-color: #1f1f1f !important;
+    background: #1f1f1f !important;
     color: #ffffff !important;
     user-select: none
 }

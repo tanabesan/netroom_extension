@@ -2451,7 +2451,7 @@ var obs_url = new MutationObserver(() => {
   if (location.href != old_url) {
     old_url = location.href;
     let my_icon = document.querySelector(`#user_list img.user[data-uid='${uid}']`);
-    let icon_n = Number(my_icon.dataset.img_no);
+    let icon_n = Number(my_icon.getAttribute('data-img_no'));
     my_icon.addEventListener('click', () => {
       open_pvm(uid, icon_n);
     });

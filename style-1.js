@@ -91,8 +91,11 @@ let pvm_el = document.getElementById("pvm2");
 pvm_el.appendChild(int_text_el);
 
 //css変更帯
-
-let wh = -261 + Number(innerHeight);
+if (isPC) {
+  var wh = -120 + innerHeight;
+} else {
+  var wh = -261 + innerHeight;
+}
 document.documentElement.style.setProperty('--wh', wh + 'px');
 
 let css = "";

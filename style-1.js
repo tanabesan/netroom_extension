@@ -122,7 +122,7 @@ a {
 }
 
 .clearfix,
-.h.clearfix.ipop_title {
+.h.clearfix.ipop_title b {
     color: #0067C0 !important;
 }
 

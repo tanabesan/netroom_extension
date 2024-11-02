@@ -2455,6 +2455,16 @@ var obs_url = new MutationObserver(() => {
     my_icon.addEventListener('click', () => {
       open_pvm(uid, icon_n);
     });
+    let cmt_icon_list = document.querySelectorAll(`.comment.clearfix`);
+    cmt_icon_list.forEach( el => {
+      let img = el.querySelector('.user');
+      let uid = img.getAttribute('data-uid');
+      let inum = img.getAttribute('data-img_no');
+      let cnum = el.querySelector('m_no').innerText;
+      img.addEventListener( () => {
+        open_pvm(uid, inum, cnum);
+      });
+    });
   }
 });
 

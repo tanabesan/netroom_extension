@@ -2450,11 +2450,13 @@ var old_url = '';
 var obs_url = new MutationObserver(() => {
   if (location.href != old_url) {
     old_url = location.href;
-    let my_icon = document.querySelector(`#user_list img.user[data-uid='${uid}']`);
-    let icon_n = Number(my_icon.getAttribute('data-img_no'));
-    my_icon.addEventListener('click', () => {
-      open_pvm(uid, icon_n);
-    });
+    if (uid != 'guest') {
+      let my_icon = document.querySelector(`#user_list img.user[data-uid='${uid}']`);
+      let icon_n = Number(my_icon.getAttribute('data-img_no'));
+      my_icon.addEventListener('click', () => {
+        open_pvm(uid, icon_n);
+      });
+    }
     let cmt_icon_list = document.querySelectorAll(`.comment.clearfix`);
     cmt_icon_list.forEach( el => {
       let img = el.querySelector('.user');

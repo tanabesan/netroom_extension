@@ -121,7 +121,8 @@ a {
     color: #87cefa !important;
 }
 
-.clearfix {
+.clearfix,
+.h.clearfix.ipop_title {
     color: #0067C0 !important;
 }
 

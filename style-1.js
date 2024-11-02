@@ -723,8 +723,6 @@ const style = document.createElement('style');
 style.appendChild(document.createTextNode(css));
 document.head.appendChild(style);
 $('#box3, .tabs.clearfix, #d_user_list, #d_user_list2, #d_userlist3, #user_list, #user_list2').show();
-$('body').css('background-image',
-  'url("https://yinkya.github.io/ip/IMG_0379.jpeg")');
 
 
 function show_room_name(res) {

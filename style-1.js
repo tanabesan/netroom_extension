@@ -263,7 +263,6 @@ img.user,
 #d_user_list2 {
     position: fixed;
     background: 0;
-    height: var(--wh);
 }
 
 #twitter-widget-0 {
@@ -716,6 +715,10 @@ if (_MY_SP_ == '0') {
 
   #tab_friends {
     display: none !important;
+  }
+
+  #d_user_list2 {
+    height: var(--wh);
   }
   `;
 }

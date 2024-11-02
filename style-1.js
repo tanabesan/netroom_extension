@@ -2462,7 +2462,7 @@ var obs_url = new MutationObserver(() => {
       let img = el.querySelector('.user');
       let uid = img.getAttribute('data-uid');
       let inum = img.getAttribute('data-img_no');
-      let cnum = el.querySelector('m_no').innerText;
+      let cnum = el.querySelector('.m_no').innerText;
       img.addEventListener( () => {
         open_pvm(uid, inum, cnum);
       });

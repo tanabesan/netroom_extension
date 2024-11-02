@@ -2470,12 +2470,14 @@ var obs_url = new MutationObserver(() => {
   }
 });
 
-obs_url.observe(document.body, {
-  subtree: true,
-  childList: true,
-  attributes: true,
-  characterData: true
-});
+setTimeout( () => {
+  obs_url.observe(document.body, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    characterData: true
+  })
+}, 2000);
 
 //自分のプロフィールを閲覧可能に
 

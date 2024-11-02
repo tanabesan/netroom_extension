@@ -261,8 +261,9 @@ img.user,
 }
 
 #d_user_list2 {
-    position: fixed;
-    background: 0;
+  position: fixed;
+  background: 0;
+  height: var(--wh);
 }
 
 #twitter-widget-0 {
@@ -312,12 +313,12 @@ img.selected {
 	font-weight: bold;
 }
 
-  #d_user_list3 {
-        background-color :#1f1f1f;
-	border-radius: 3px;
-  }
+#d_user_list3 {
+  background-color :#1f1f1f;
+  border-radius: 3px;
+}
 
-  .col{
+.col{
 	color: #ffffff;
 }
 
@@ -715,12 +716,6 @@ if (_MY_SP_ == '0') {
 
   #tab_friends {
     display: none !important;
-  }
-
-  #d_user_list2 {
-    position: fixed;
-    background: 0;
-    height: var(--wh);
   }
   `;
 }

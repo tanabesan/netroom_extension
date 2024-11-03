@@ -2870,6 +2870,27 @@ $(document).on('click', '.msg-item button', function (event) {
     msgItem.dataset.collapsed = !isCollapsed;
 });
 
+//通知のタイトル設定可能に
+
+function show_notice(res, time, title) {
+  var type = res.type;
+  var add_html = drow_notice(res);
+  if (add_html == "") {
+    return
+  }
+  clear_notice();
+  $('#notice_msg').append(add_html);
+  if (!title) title = 'お知らせ';
+  var add_title = document.createElement('b');
+  add_title.innerText = title;
+  $('.h.clearfix.ipop_title b').replaceWith(add_title);
+  to_bottom('div_notice_in', 1);
+  position_notice();
+  $('#div_notice').show();
+  if (type == 2 || type == 0 || type == undefined) {
+      erase_notice(time)
+  }
+}
 
 //通知音カスタム
 

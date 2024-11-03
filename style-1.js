@@ -362,7 +362,7 @@ body[data-isroom="0"] #box1{
 }
 
 #pvt_msg_uname,
-.online:not(.l.clearfix .online) {
+.online:not(.l.clearfix .online, #div_notice .online) {
   -webkit-text-stroke: 0.3px #000000;
   text-stroke: 0.3px #000000;
 }

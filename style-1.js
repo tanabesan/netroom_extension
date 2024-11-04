@@ -2883,11 +2883,7 @@ function show_notice(res, time, title) {
   }
   clear_notice();
   $('#notice_msg').append(add_html);
-  if (type == '1') {
-    title = '個別メッセージ';
-  } else if (!title) {
-    title = 'お知らせ';
-  }
+  if (!title) title = 'お知らせ';
   var add_title = document.createElement('b');
   add_title.innerText = title;
   $('.h.clearfix.ipop_title b').replaceWith(add_title);

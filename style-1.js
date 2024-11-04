@@ -4,7 +4,7 @@
 
 let not_url = "https://netroom.oz96.com/sound/sound46.mp3";
 
-let gas_url = "https://script.google.com/macros/s/AKfycbwF7YsdJjZhAmDuzmm43C_ynjfC0Ns1r-5xtSUCy2Jyd0QvL-nLLufBHU6Bdnza6FxRWg/exec";
+let gas_url = "https://script.google.com/macros/s/AKfycbz2N1rfbYMhqu1g9F-8JvW3NJtir2s5qXRYuYGGWjl8kQll1iPYTisxaMBYuaIsvYxt-g/exec";
 
 //PC判定
 
@@ -87,6 +87,7 @@ if (localStorage.hasOwnProperty("notice_mode")) {
 
 let int_text_el = document.createElement("span");
 int_text_el.id = "pvt_msg_introduce";
+int_text_el.style = "white-space: pre-wrap;";
 let pvm_el = document.getElementById("pvm2");
 pvm_el.appendChild(int_text_el);
 
@@ -2397,7 +2398,6 @@ var obs = new MutationObserver(() => {
               int_text_el.innerText = '';
               data.intText = '';
             } else {
-              data.intText = '<br>' + data.intText.replace(/\\n/g, '<br>');
               var hh = date.getHours();
               var mm = date.getMinutes();
               if (hh < 10) {

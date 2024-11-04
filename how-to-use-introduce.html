@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>自己紹介機能の使い方 | Netroom Extensions</title>
+        <link rel="icon" href="https://tanabesan.github.io/netroom_extension/img/favicon.ico" type="image/png">
+        <style>
+            body {
+                background-color: #1f1f1f;
+                color: #ffffff;
+            }
+
+            .important {
+                color: #ff0000;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            let isPC = !(navigator.userAgent.match(/iPhone|Android.+Mobile/));
+            if (isPC) {
+                var el = `
+                    <h1>自己紹介機能</h1>
+                    <h2>使い方</h2>
+                    <div>1. Netroom Extension 機能設定タブを開く。
+                    <br>2. プロフィール編集の自己紹介文・背景画像URL入力欄にそれぞれ入れたいものを入れる。
+                    <br>3. 登録・変更するボタンを押す。
+                    <br>4. 登録・変更が完了したら、「追加が完了しました。」と表示される。
+                    <br>この時、入力条件に満たなかった場合、理由とともにエラー文が表示される。
+                    </div>
+                    <h2>自己紹介文・背景画像URLの入力条件</h2>
+                    <div>・自己紹介文は、<b class="important">最大100文字</b>まで入力できる。
+                    <br>　文を簡単に装飾できるよう、コマンドを作成予定。
+                    <br>・背景画像のサイズは、<b class="important">300x57がぴったり</b>となる。
+                    <br>　それ以下の場合、<b class="important">左上詰め</b>で表示され、足りない部分は背景色と同じ色で塗りつぶされる。
+                    <br>　逆にそれ以上の場合、<b class="important">画像の左上部分が優先</b>され、はみ出た部分は<b class="important">表示されない。</b>
+                    <br>・変更したくない項目がある場合、入力欄に<b class="important">「変更なし」</b>と入力する。
+                    <br>・空白のまま登録した項目がある場合、その項目は<b class="important">何も表示されなくなる</b>。
+                    </div>
+                `;
+            } else {
+                var el = `
+                    <h1>自己紹介機能</h1>
+                    <h2>使い方</h2>
+                    <div>1. Netroom Extension 機能設定タブを<br>　開く。
+                    <br>2. プロフィール編集の<br>　自己紹介文・背景画像URL入力欄に<br>　それぞれ入れたいものを入れる。
+                    <br>3. 登録・変更するボタンを押す。
+                    <br>4. 登録・変更が完了したら、<br>　「追加が完了しました。」<br>　と表示される。
+                    <br>　この時、入力条件に満たなかった場合、<br>　理由とともにエラー文が表示される。
+                    </div>
+                    <h2>自己紹介文・背景画像URLの入力条件</h2>
+                    <div>・自己紹介文は、<br>　<b class="important">最大100文字</b>まで入力できる。
+                    <br>　文を簡単に装飾できるよう、<br>　コマンドを作成予定。
+                    <br>・背景画像のサイズは、<br>　<b class="important">300x57がぴったり</b>となる。
+                    <br>　それ以下の場合、<b class="important">左上詰め</b>で表示され、<br>　足りない部分は背景色と同じ色で塗りつぶされる。
+                    <br>　逆にそれ以上の場合、<br>　<b class="important">画像の左上部分が優先</b>され、<br>　はみ出た部分は<b class="important">表示されない。</b>
+                    <br>・変更したくない項目がある場合、<br>　入力欄に<b class="important">「変更なし」</b>と入力する。
+                    <br>・空白のまま登録した項目がある場合、<br>　その項目は<b class="important">何も表示されなくなる</b>。
+                    </div>
+                `;
+            }
+            document.body.insertAdjacentHTML('beforeend', el);
+        </script>
+    </body>
+</html>

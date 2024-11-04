@@ -2398,6 +2398,9 @@ var obs = new MutationObserver(() => {
               int_text_el.innerText = '';
               data.intText = '';
             } else {
+              if (duid == uid) {
+                data.intText = '<br>' + data.intText;
+              }
               var hh = date.getHours();
               var mm = date.getMinutes();
               if (hh < 10) {

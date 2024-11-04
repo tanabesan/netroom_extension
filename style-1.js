@@ -2343,7 +2343,7 @@ logSearchButton.addEventListener('click', function() {
 //プロフィール用要素の追加
 
 let profile_el = `
-  <p>プロフィール編集<br>使い方等は、<a href="https://tanabesan.github.io/netroom_extension/how-to-use-introduce.html">こちら</a></p>
+  <p>プロフィール編集<br>使い方等は、<a href="https://tanabesan.github.io/netroom_extension/how-to-use-introduce.html" target="_blank">こちら</a></p>
   <form action="">
     <textarea id="set_int_text" autocomplete="off" placeholder="自己紹介文を入力"></textarea>
     <br>

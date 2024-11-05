@@ -2520,7 +2520,10 @@ document.getElementById("set_backImage").onkeypress = (e) => {
 
 if (_MY_SP_ == "0") {
   document.getElementById("send_int").addEventListener('click', () => {
-    var int = set_int_text_el.value.replace('\\', '\\\\');
+    var int = set_int_text_el.value;
+    while(int.includes('/')) {
+      int.replace('/', '\\');
+    }
     var backUrl = set_backImage_el.value;
     set_int_text_el.value = "";
     set_backImage_el.value = "";
@@ -2545,7 +2548,10 @@ if (_MY_SP_ == "0") {
   });
 } else {
   document.getElementById("send_int").addEventListener('touchstart', () => {
-    var int = set_int_text_el.value.replace('\\', '\\\\');
+    var int = set_int_text_el.value;
+    while(int.includes('/')) {
+      int.replace('/', '\\');
+    }
     var backUrl = set_backImage_el.value;
     set_int_text_el.value = "";
     set_backImage_el.value = "";

@@ -113,6 +113,7 @@ html {
 
 #d_user_list,
 .dialog,
+.dialog2
 .mes_wrap,
 .nonroom,
 .inshadow,

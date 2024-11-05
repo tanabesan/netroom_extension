@@ -112,8 +112,6 @@ html {
 }
 
 #d_user_list,
-.dialog,
-.dialog2
 .mes_wrap,
 .nonroom,
 .inshadow,
@@ -121,6 +119,11 @@ html {
 .d_inner,
 .dialog_small {
     background-color: #1f1f1f !important;
+}
+
+.dialog,
+.dialog2 {
+    background: #1f1f1f !important;
 }
 
 a {

@@ -2522,7 +2522,7 @@ if (_MY_SP_ == "0") {
   document.getElementById("send_int").addEventListener('click', () => {
     var int = set_int_text_el.value;
     while(int.includes('/')) {
-      int = int.replace('/', '\\');
+      int = int.replace('/', '\\\\');
     }
     var backUrl = set_backImage_el.value;
     set_int_text_el.value = "";
@@ -2550,7 +2550,7 @@ if (_MY_SP_ == "0") {
   document.getElementById("send_int").addEventListener('touchstart', () => {
     var int = set_int_text_el.value;
     while(int.includes('/')) {
-      int = int.replace('/', '\\');
+      int = int.replace('/', '\\\\');
     }
     var backUrl = set_backImage_el.value;
     set_int_text_el.value = "";

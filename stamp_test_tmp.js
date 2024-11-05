@@ -87,7 +87,7 @@ function view_at_join_room(w_permition) {
     }
 }
 
-const i_shu = /^==N-E_setting_script==\\n@-version:.*\\n@-type:.*\\n@-time:.*\\n@-key:.*\\n==N-E_setting_script==\\n(\\n.*)+$/igm;
+const i_shu = /^==N-E_setting_script==\\n@-version:.*\\n@-type:.*\\n@-time:.*\\n@-key:.*\\n@-user:.*\\n==N-E_setting_script==\\n(\\n.*)+$/igm;
 document.querySelector('#i_file3').addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (!file) {
@@ -104,8 +104,6 @@ document.querySelector('#i_file3').addEventListener('change', (e) => {
                 $('#err_stamp_u').hide();
                 let j_sons = pickup_json(text);
                 let j_sons_con = pickup_conf(text);
-                console.log(j_sons);
-                console.log(j_sons_con);
                 try {
                     let j_sons_1 = JSON.parse(j_sons);
                     import_conf(j_sons_1,j_sons_con);
@@ -145,12 +143,15 @@ function pickup_conf(text) {
 function import_conf(j_son, j_con) {
     //config抽出
     let version_s = j_con.replace(/^@-version:/g, '');
-    version_s = version_s.replace(/@-type:.*@-time:.*@-key:.*$/, '');
+    version_s = version_s.replace(/@-type:.*@-time:.*@-key:.*@-user:.*$/, '');
     let type_s = j_con.replace(/^@-version:.*@-type:/g, '');
-    type_s = type_s.replace(/@-time:.*@-key:.*$/, '');
+    type_s = type_s.replace(/@-time:.*@-key:.*@-user:.*$/, '');
     let time_s = j_con.replace(/^@-version:.*@-type:.*@-time:/g, '');
-    time_s = time_s.replace(/@-key:.*$/, '');
+    time_s = time_s.replace(/@-key:.*@-user:.*$/, '');
     let key_s = j_con.replace(/^@-version:.*@-type:.*@-time:.*@-key:/g, '');
+    key_s = key_s.replace(/@-user:.*$/g, '');
+    let user_s = j_con.replace(/^@-version:.*@-type:.*@-time:.*@-key:.*@-user:/g, '');
+
     //中身抽出
     if (j_son.stamp) {
         let stamp_s = j_son.stamp;

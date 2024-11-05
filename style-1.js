@@ -4,7 +4,7 @@
 
 let not_url = "https://netroom.oz96.com/sound/sound46.mp3";
 
-let gas_url = "https://script.google.com/macros/s/AKfycbxziUlsAn6BUEjPwe3K9jdncL6M-dolQExI5-Ww_MOvXOYRswImdfmw2tklstWSsEn6Iw/exec";
+let gas_url = "https://script.google.com/macros/s/AKfycbxCa5WIucy3P-6_o5HbtyuC95iy1tmOmaslSA3fZPiTXmiwxT6-G-BZqHICTXfxoLmDcA/exec";
 
 //PC判定
 

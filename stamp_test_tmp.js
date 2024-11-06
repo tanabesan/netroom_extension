@@ -1,16 +1,25 @@
-const newHTML = `
-	<div class="h clearfix ipop_title" id="ipop_title_1"><b>スタンプ</b>
-	  <div class="d_close"><span id="close_stamp_1" class="close">　×　</span></div>
-	</div>
+/*
+*
+*
+*▼SCRIPT OF IMPORT FUNCTION
+*/
 
-          <div style="margin: 0px !important;">
-            <input type="file" id="i_file3" accept=".txt,.stp" style="display:none">
-            <button id="fileSelect" type="button" style="height:11px !important;">スタンプをインポート</button>
-            <a href="https://tanabesan.github.io/netroom_extension/help/stamp" target="_blank">ℹ️</a>
-            <br><p style="display:none; color:#ff4444;" id="err_stamp_u">×ファイルが不正です！！</p>
-        </div>
-        	<div class="dialog_contents">
-          <br>あいうえおあお
+const newHTML = `
+<div class="h clearfix ipop_title" id="ipop_title_1">
+	<b>スタンプ</b>
+	<div class="d_close">
+		<span id="close_stamp_1" class="close">　×　</span>
+	</div>
+</div>
+
+	<div style="margin: 0px !important;">
+		<input type="file" id="i_file3" accept=".txt,.stp" style="display:none">
+		<button id="fileSelect" type="button" style="height:11px !important;">スタンプをインポート</button>
+		<a href="https://tanabesan.github.io/netroom_extension/help/stamp" target="_blank">ℹ️</a>
+		<br>
+		<p style="display:none; color:#ff4444;" id="err_stamp_u">×ファイルが不正です！！</p>
+	</div>
+	<div class="dialog_contents" id="stamps">
     </div>
 `;
 const parentElement = document.getElementById('body');
@@ -51,7 +60,7 @@ document.addEventListener('mouseup', () => {
 closeButton_1.addEventListener('click', () => {
   ipop_test.style.display = 'none';
 });
-ipop_test.style.display = 'block';
+ipop_test.style.display = 'none';
 $('#err_stamp_u').hide();
 
 const fileSelect = document.getElementById("fileSelect");
@@ -72,7 +81,6 @@ function view_at_join_room(w_permition) {
         $('#comment').removeAttr("disabled");
         $('#b_send').removeAttr("disabled");
         $('#i_file2').show();
-        $('#i_file3').show();
         $('#comment').attr("placeholder", 'この部屋は作成者のフレンドのみ書き込みができます');
     } else {
         $('div.non_uid').hide();
@@ -81,7 +89,6 @@ function view_at_join_room(w_permition) {
         $('#comment').removeAttr("disabled");
         $('#b_send').removeAttr("disabled");
         $('#i_file2').show();
-        $('#i_file3').show();
         $('.photoicon').show();
         $('.comment_err').html("")
     }
@@ -104,13 +111,16 @@ document.querySelector('#i_file3').addEventListener('change', (e) => {
                 $('#err_stamp_u').hide();
                 let j_sons = pickup_json(text);
                 let j_sons_con = pickup_conf(text);
+                console.log(j_sons);
+                
                 try {
                     let j_sons_1 = JSON.parse(j_sons);
-                    import_conf(j_sons_1,j_sons_con);
+                    import_conf(j_sons_1,j_sons_con,text);
 
                 } catch (e) {
                     $('#err_stamp_u').html("×jsonが不正です！！<a href='https://tanabesan.github.io/netroom_extension/help/stamp/err_1' target='_blank'>ℹ️</a>");
                     $('#err_stamp_u').show();
+                    console.error(e);
                 }
                 return true
             } else {
@@ -140,7 +150,7 @@ function pickup_conf(text) {
     return text
 }
 
-function import_conf(j_son, j_con) {
+function import_conf(j_son, j_con, code) {
     //config抽出
     let version_s = j_con.replace(/^@-version:/g, '');
     version_s = version_s.replace(/@-type:.*@-time:.*@-key:.*@-user:.*$/, '');
@@ -152,33 +162,74 @@ function import_conf(j_son, j_con) {
     key_s = key_s.replace(/@-user:.*$/g, '');
     let user_s = j_con.replace(/^@-version:.*@-type:.*@-time:.*@-key:.*@-user:/g, '');
 
-    //中身抽出
-    if (j_son.stamp) {
-        let stamp_s = j_son.stamp;
-        //stampインポート
-        if (localStorage.hasOwnProperty("stamp")||stamp_s==!"") {
-            let stamp_old = JSON.parse(localStorage.getItem("stamp"));
-            for (let i = 0; i < stamp_s.length; i++) {
-                stamp_old.push(stamp_s[i]);
+    let c_t = code_b(key_s, code);
+
+
+    if (c_t == true) {
+        //中身抽出
+        if (j_son.stamp) {
+            let stamp_s = j_son.stamp;
+            //stampインポート
+            if (localStorage.hasOwnProperty("stamp") || stamp_s == !"") {
+                let stamp_old = JSON.parse(localStorage.getItem("stamp"));
+                for (let i = 0; i < stamp_s.length; i++) {
+                    let same_s = false;
+                    for (let j = 0; j < stamp_old.length; j++) {
+                        if (stamp_s[i] == stamp_old[j]) {
+                            same_s = true;
+                        }
+                    }
+                    if (same_s == false) {
+                        stamp_old.push(stamp_s[i]);
+                    }
+                }
+                localStorage.setItem('stamp', JSON.stringify(stamp_old));
+                ipop_test.style.display = 'none';
+                show_notice({
+                    'msg': 'スタンプを正しくインポートしました。'
+                });
+            } else {
+                localStorage.setItem('stamp', JSON.stringify(stamp_s));
+                ipop_test.style.display = 'none';
+                show_notice({
+                    'msg': 'スタンプを正しくインポートしました。'
+                });
             }
-            localStorage.setItem('stamp', JSON.stringify(stamp_old));
-            ipop_test.style.display = 'none';
-            show_notice({
-                'msg': 'スタンプを正しくインポートしました。'
-            });
-        } else {
-            localStorage.setItem('stamp', JSON.stringify(stamp_s));
-            ipop_test.style.display = 'none';
-            show_notice({
-                'msg': 'スタンプを正しくインポートしました。'
-            });
+        }
+        if (j_son.config) {
+            let config_s = j_son.config;
+        }
+        if (j_son.ui) {
+            let ui_s = j_son.ui;
         }
     }
-    if (j_son.config) {
-        let config_s = j_son.config;
-    }
-    if (j_son.ui) {
-        let ui_s = j_son.ui;
-    }
+
 
 }
+
+
+//key解読用仮関数
+function code_b(key,code) {
+    return true
+}
+
+//表示する関数
+
+function show_stamp_frame() {
+    let html = "";
+    let j_son_3 = "";
+    if (localStorage.hasOwnProperty("stamp")){
+        j_son_3 = JSON.parse(localStorage.getItem("stamp"));
+    }
+    //やりなげ()
+    $('#stamps').html("");
+    ipop_test.style.display = 'block';
+
+}
+
+/*
+*▲SCRIPT OF IMPORT FUNCTION
+*
+*▼SCRIPT OF ENTER FUNCTION
+*/
+

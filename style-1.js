@@ -4,7 +4,7 @@
 
 let not_url = "https://netroom.oz96.com/sound/sound46.mp3";
 
-let gas_url = "https://script.google.com/macros/s/AKfycbz2N1rfbYMhqu1g9F-8JvW3NJtir2s5qXRYuYGGWjl8kQll1iPYTisxaMBYuaIsvYxt-g/exec";
+let gas_url = "https://script.google.com/macros/s/AKfycbzui9eio66Nwpg0eukThGqrlWoKcLKaGpDA9reKU-A0WomEpu-os9l_6nICw-ghVMNVGg/exec";
 
 //PC判定
 
@@ -112,7 +112,6 @@ html {
 }
 
 #d_user_list,
-.dialog,
 .mes_wrap,
 .nonroom,
 .inshadow,
@@ -120,6 +119,11 @@ html {
 .d_inner,
 .dialog_small {
     background-color: #1f1f1f !important;
+}
+
+.dialog,
+.dialog2 {
+    background: #1f1f1f !important;
 }
 
 a {

@@ -35,18 +35,18 @@
                     <br>　逆にそれ以上の場合、<b class="important">画像の左上部分が優先</b>され、はみ出た部分は<b class="important">表示されない。</b>
                     <br>・変更したくない項目がある場合、入力欄に<b class="important">「変更なし」</b>と入力する。
                     <br>・空白のまま登録した項目がある場合、その項目は<b class="important">何も表示されなくなる</b>。
-                    <br>・コマンドは、<b class="important">@で囲って使う</b>。現在は、<b class="important">同じ部分に複数のコマンドは使用できない</b>。
+                    <br>・コマンドは、<b class="important">$コマンド名[引数]</b>で入力する。現在は、<b class="important">同じ部分に複数のコマンドは使用できない</b>。
                     </div>
                     <h2>自己紹介文コマンド</h2>
                     <h3>・color</h3>
                     <div>　指定したカラーコード・カラーネームを基に、文字を塗る。
                     <br>構文
-                    <br>　@color (カラーコードorカラーネーム),(装飾したい文字)@
+                    <br>　$color[カラーコードorカラーネーム,装飾したい文字]
                     </div>
                     <h3>・link</h3>
                     <div>　文字をクリックすると、指定したURLに飛べるようにする。
                     <br>構文
-                    <br>　@link (転移先のURL),(クリック対象の文字)@
+                    <br>　$link[転移先のURL,クリック対象の文字]
                     </div>
                 `;
             } else {
@@ -66,7 +66,7 @@
                     <br>　逆にそれ以上の場合、<br>　<b class="important">画像の左上部分が優先</b>され、<br>　はみ出た部分は<b class="important">表示されない。</b>
                     <br>・変更したくない項目がある場合、<br>　入力欄に<b class="important">「変更なし」</b>と入力する。
                     <br>・空白のまま登録した項目がある場合、<br>　その項目は<b class="important">何も表示されなくなる</b>。
-                    <br>・コマンドは、<b class="important">@で囲って使う</b>。
+                    <br>・コマンドは、<b class="important">$コマンド名[引数]</b>で入力する。
                     <br>　現在は、
                     <br><b class="important">同じ部分に複数のコマンドは使用できない</b>。
                     </div>
@@ -75,13 +75,13 @@
                     <div>　指定したカラーコード・カラーネームを
                     <br>　基に、文字を塗る。
                     <br>構文
-                    <br>　@color (カラーコードorカラーネーム),(装飾したい文字)@
+                    <br>　$color[カラーコードorカラーネーム,装飾したい文字]
                     </div>
                     <h3>・link</h3>
                     <div>　文字をクリックすると、
                     <br>　指定したURLに飛べるようにする
                     <br>構文
-                    <br>　@link (転移先のURL),(クリック対象の文字)@
+                    <br>　$link[転移先のURL,クリック対象の文字]
                     </div>
                 `;
             }

@@ -42,16 +42,25 @@
                     <div>　指定したカラーコード・カラーネームを基に、文字を塗る。
                     <br>構文
                     <br>　$color[カラーコードorカラーネーム,色を変えたい文字]
+                    <br>例 : $color[#ff0000(redと同じ),テスト] → <span style="color: #ff0000;">テスト</span>
                     </div>
                     <h3>・link</h3>
                     <div>　文字をクリックすると、指定したURLに飛べるようにする。
                     <br>構文
                     <br>　$link[転移先のURL,クリック対象の文字]
+                    <br>例 : $link[https://tanabesan.github.io/netroom_extension,ホームページ] → <a href="https://tanabesan.github.io/netroom_extension" target="_blank">ホームページ</a>
                     </div>
                     <h3>・bold</h3>
                     <div>　文字の太さを太くする。
                     <br>構文
                     <br>　$bold[太くしたい文字]
+                    <br>例 : $bold[テスト] → <b>テスト</b>
+                    </div>
+                    <h3>・italic</h3>
+                    <div>　文字を斜めに傾ける。
+                    <br>構文
+                    <br>　$italic[斜めにしたい文字]
+                    <br>例 : $italic[テスト] → <i>テスト</i>
                     </div>
                 `;
             } else {
@@ -79,17 +88,34 @@
                     <br>　基に、文字を塗る。
                     <br>構文
                     <br>　$color[カラーコードorカラーネーム,装飾したい文字]
+                    <br>例 : $color[#ff0000(redと同じ),テスト]
+                    <br>↓
+                    <br><span style="color: #ff0000;">テスト</span>
                     </div>
                     <h3>・link</h3>
                     <div>　文字をクリックすると、
                     <br>　指定したURLに飛べるようにする
                     <br>構文
                     <br>　$link[転移先のURL,クリック対象の文字]
+                    <br>例 : $link[https://tanabesan.github.io/netroom_extension,ホームページ]
+                    <br>↓
+                    <br><a href="https://tanabesan.github.io/netroom_extension" target="_blank">ホームページ</a>
                     </div>
                     <h3>・bold</h3>
                     <div>　文字の太さを太くする。
                     <br>構文
                     <br>　$bold[太くしたい文字]
+                    <br>例 : $bold[テスト]
+                    <br>↓
+                    <br><b>テスト</b>
+                    </div>
+                    <h3>・italic</h3>
+                    <div>　文字を斜めに傾ける。
+                    <br>構文
+                    <br>　$italic[斜めにしたい文字]
+                    <br>例 : $italic[テスト]
+                    <br>↓
+                    <br><i>テスト</i>
                     </div>
                 `;
             }

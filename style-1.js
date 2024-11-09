@@ -1320,15 +1320,27 @@ auto_btn.addEventListener('click', () => {
 
 var reload_btn = document.querySelectorAll(".reload_btn");
 reload_btn.forEach( el => {
-  el.addEventListener("mousedown", () => {
-    var btn = document.getElementById("auto_btn");
-    if (btn.textContent == "自動更新オン") {
-      clearInterval(reload_timer);
-      auto_l_time = 30;
-      auto_l.textContent = "Loading...";
-      reload_timer = setInterval(updateAuto, 1000);
-    }
-  });
+  if (isPC) {
+    el.addEventListener("mousedown", () => {
+      var btn = document.getElementById("auto_btn");
+      if (btn.textContent == "自動更新オン") {
+        clearInterval(reload_timer);
+        auto_l_time = 30;
+        auto_l.textContent = "Loading...";
+        reload_timer = setInterval(updateAuto, 1000);
+      }
+    });
+  } else {
+    el.addEventListener("touchstart", () => {
+      var btn = document.getElementById("auto_btn");
+      if (btn.textContent == "自動更新オン") {
+        clearInterval(reload_timer);
+        auto_l_time = 30;
+        auto_l.textContent = "Loading...";
+        reload_timer = setInterval(updateAuto, 1000);
+      }
+    });
+  }
 })
 
 // 半透明な灰色の壁を作成する関数

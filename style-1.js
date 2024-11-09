@@ -1302,8 +1302,8 @@ auto_btn.classList.add("btn");
 auto_btn.textContent = '自動更新オン';
 auto_btn.style.display = 'inline';
 var br = document.createElement("br");
-document.getElementById("clock2").after(br);
 document.getElementById("clock2").after(auto_btn);
+document.getElementById("clock2").after(br);
 auto_btn.addEventListener('click', () => {
   if (auto_btn.textContent == '自動更新オン') {
     clearInterval(reload_timer);

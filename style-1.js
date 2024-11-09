@@ -138,7 +138,8 @@ a {
 }
 
 .btn:not(#b_open_notice > span),
-.on {
+.on,
+#auto_btn {
     background-color: #0067C0;
     color: #ffffff !important;
 }

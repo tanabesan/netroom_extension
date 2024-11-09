@@ -328,6 +328,7 @@ img.selected {
 #d_user_list3 {
   background-color :#1f1f1f;
   border-radius: 3px;
+  text-align: center;
 }
 
 .col{

@@ -1275,7 +1275,7 @@ function updateAuto() {
       'room_name': searched_room_name,
       'update_time': ""
     };
-    auto_l.textContent = "Loading";
+    auto_l.textContent = "Loading...";
     auto_l_time = 30;
     socket.json.emit('get_room_list', parameter);
   } else {
@@ -1325,6 +1325,7 @@ reload_btn.forEach( el => {
     if (btn.textContent == "自動更新オン") {
       clearInterval(reload_timer);
       auto_l_time = 30;
+      auto_l.textContent = "Loading...";
       reload_timer = setInterval(updateAuto, 1000);
     }
   });

@@ -1251,7 +1251,7 @@ function change_ui(ui_name) {
 //部屋リスト自動更新30s毎
 
 var auto_l = document.createElement('div');
-auto_l.id = 'clock';
+auto_l.id = 'clock2';
 auto_l.style.display = 'inline';
 if (dark_2 == "dark") {
   auto_l.style.color = 'white';
@@ -1292,8 +1292,8 @@ var auto_btn = document.createElement('button');
 auto_btn.id = 'auto_btn';
 auto_btn.textContent = '自動更新オン';
 auto_btn.style.display = 'inline';
-document.getElementById("clock").after(auto_btn);
-auto_btn.addEventListener('click', function() {
+document.getElementById("clock2").after(auto_btn);
+auto_btn.addEventListener('click', () => {
   if (auto_btn.textContent == '自動更新オン') {
     clearInterval(reload_timer);
     auto_l_time = 30;

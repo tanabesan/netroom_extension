@@ -2,6 +2,8 @@
  *定義系
  */
 
+let br = document.createElement("br");
+
 let not_url = "https://netroom.oz96.com/sound/sound46.mp3";
 
 let gas_url = "https://script.google.com/macros/s/AKfycbxkOd0qyJ0zTbeABUUP48Jv42lAQ8VU7ZfyUgTaEgS3A2KGKO1JAzEp0Lke01mlJ0g98g/exec";
@@ -1282,9 +1284,11 @@ var reload_timer = setInterval(updateAuto, 1000);
 
 if (isPC) {
   var myinfowrap = document.getElementById("reload_btn_wrap");
+  myinfowrap.insertBefore(br, myinfowrap.nextChild);
   myinfowrap.insertBefore(auto_l, myinfowrap.nextChild);
 } else {
   var myinfowrap = document.querySelector(".in_ui:not(.inshadow)");
+  myinfowrap.insertBefore(br, myinfowrap.nextChild);
   myinfowrap.appendChild(auto_l);
 }
 
@@ -1292,6 +1296,7 @@ var auto_btn = document.createElement('button');
 auto_btn.id = 'auto_btn';
 auto_btn.textContent = '自動更新オン';
 auto_btn.style.display = 'inline';
+document.getElementById("clock2").after(br);
 document.getElementById("clock2").after(auto_btn);
 auto_btn.addEventListener('click', () => {
   if (auto_btn.textContent == '自動更新オン') {

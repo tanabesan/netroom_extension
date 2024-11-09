@@ -141,6 +141,10 @@ a {
     color: #ffffff !important;
 }
 
+#auto_btn {
+    width: auto !important;
+}
+
 #b_send {
     height: 32px;
 }

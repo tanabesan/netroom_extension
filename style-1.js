@@ -1301,6 +1301,7 @@ auto_btn.addEventListener('click', () => {
     auto_btn.textContent = "自動更新オフ";
   } else if (auto_btn.textContent == '自動更新オフ') {
     reload_timer = setInterval(updateAuto, 1000);
+    auto_l.textContent = "自動更新まであと" + auto_l_time + "秒";
     auto_btn.textContent = "自動更新オン";
   }
 });

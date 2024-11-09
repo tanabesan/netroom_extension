@@ -1278,13 +1278,32 @@ function updateAuto() {
   }
 }
 
-setInterval(updateAuto, 1000);
+var reload_timer = setInterval(updateAuto, 1000);
 
-if (isPC == true) {
+if (isPC) {
   var myinfowrap = document.getElementById("reload_btn_wrap");
   myinfowrap.insertBefore(auto_l, myinfowrap.nextChild);
+} else {
+  var myinfowrap = document.querySelector(".in_ui:not(.inshadow)");
+  myinfowrap.appendChild(auto_l);
 }
 
+var auto_btn = document.createElement('button');
+auto_btn.id = 'auto_btn';
+auto_btn.textContent = '自動更新オン';
+auto_btn.style.display = 'inline';
+document.getElementById("clock").after(auto_btn);
+auto_btn.addEventListener('click', function() {
+  if (auto_btn.textContent == '自動更新オン') {
+    clearInterval(reload_timer);
+    auto_l_time = 30;
+    auto_l.textContent = "自動更新停止中";
+    auto_btn.textContent = "自動更新オフ";
+  } else if (auto_btn.textContent == '自動更新オフ') {
+    reload_timer = setInterval(updateAuto, 1000);
+    auto_btn.textContent = "自動更新オン";
+  }
+});
 
 // 半透明な灰色の壁を作成する関数
 let overlay = null;

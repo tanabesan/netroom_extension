@@ -96,8 +96,12 @@ if (isPC) {
   var wh = -120 + innerHeight;
 } else {
   var wh = -261 + innerHeight;
+  var s = document.getElementById("mes_wrap_box");
+  var shn = getComputedStyle(s);
+  var sh = shn.height + 45;
 }
 document.documentElement.style.setProperty('--wh', wh + 'px');
+document.documentElement.style.setProperty('--sh', sh + 'px');
 
 let css = "";
 
@@ -729,6 +733,14 @@ if (_MY_SP_ == '0') {
 
   #tab_friends {
     display: none !important;
+  }
+
+  #mes_wrap_box {
+    height: --sh !important;
+  }
+
+  #dice {
+    display: none;
   }
   `;
 }

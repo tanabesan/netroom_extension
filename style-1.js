@@ -97,7 +97,7 @@ if (isPC) {
 } else {
   var wh = -261 + innerHeight;
   var s = document.getElementById("mes_wrap_box");
-  var shn = getComputedStyle(s);
+  var shn = Math.round(getComputedStyle(s).replace('px', ''));
   var sh = shn.height + 45;
 }
 document.documentElement.style.setProperty('--wh', wh + 'px');

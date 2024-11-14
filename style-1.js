@@ -738,7 +738,7 @@ if (_MY_SP_ == '0') {
   }
 
   #mes_wrap_box {
-    height: --sh !important;
+    height: var(--sh) !important;
   }
 
   #dice {

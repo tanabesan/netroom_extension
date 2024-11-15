@@ -221,6 +221,10 @@ function show_stamp_frame() {
     if (localStorage.hasOwnProperty("stamp")){
         j_son_3 = JSON.parse(localStorage.getItem("stamp"));
     }
+
+for(i=0;i<j_son_3.length;i++;){
+//追加動作
+}
     //やりなげ()
     $('#stamps').html("");
     ipop_test.style.display = 'block';

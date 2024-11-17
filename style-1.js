@@ -2760,6 +2760,16 @@ socket.on('got_room_list', function(res0) {
 
 //引用カスタム
 
+// ==UserScript==
+// @name        安価
+// @namespace   http://tampermonkey.net/
+// @version     none
+// @author      baka
+// @match       https://netroom.oz96.com/*
+// @grant       none
+// @run-at      document-idle
+// ==/UserScript==
+
 let link;
 let or;
 let ankaCount;
@@ -2786,12 +2796,11 @@ let hisB = function () {
 $(document).on(_E.clickd, 'a.link', function (event) {
     link = this;
     or = false;
-$(link).parent()[0].childNodes.forEach((node, index) => {
-    if (node.nodeType === 3 && node.textContent.trim() === ',') {
-        node.remove();
-    }
-});
-
+    $(link).parent()[0].childNodes.forEach((node, index) => {
+        if (node.nodeType === 3 && node.textContent.trim() === ',') {
+            node.remove();
+        }
+    });
 });
 
 
@@ -2915,9 +2924,19 @@ socket.on("one_msg_", data => {
 
     if (or) {
         lastElement.outerHTML = newHTML;
-        if (document.getElementsByClassName("comd")[document.getElementsByClassName("comd").length - 2].childNodes[2]) {
-            document.getElementsByClassName("comd")[document.getElementsByClassName("comd").length - 2].childNodes[2].remove();
+        const comdElements = document.getElementsByClassName("comd");
+        let last = Array.from(comdElements).reverse().find(el =>
+            Array.from(el.childNodes).filter(child => child.classList?.contains("msg-item")).length >= 2
+        );
+
+        if (last) {
+            Array.from(last.childNodes).forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim() === ',') {
+                    node.remove();
+                }
+            });
         }
+
     } else {
         if (link && link.parentNode) {
             link.outerHTML = newHTML;
@@ -2948,27 +2967,7 @@ $(document).on('click', '.msg-item button', function (event) {
     msgItem.dataset.collapsed = !isCollapsed;
 });
 
-//通知のタイトル設定可能に
 
-function show_notice(res, time, title) {
-  var type = res.type;
-  var add_html = drow_notice(res);
-  if (add_html == "") {
-    return
-  }
-  clear_notice();
-  $('#notice_msg').append(add_html);
-  if (!title) title = 'お知らせ';
-  var add_title = document.createElement('b');
-  add_title.innerText = title;
-  $('.h.clearfix.ipop_title b').replaceWith(add_title);
-  to_bottom('div_notice_in', 1);
-  position_notice();
-  $('#div_notice').show();
-  if (type == 2 || type == 0 || type == undefined) {
-      erase_notice(time)
-  }
-}
 
 //通知音カスタム
 

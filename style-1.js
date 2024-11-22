@@ -1,109 +1,53 @@
-/*
- *定義系
- */
+//定義系 
+const not_url = "https://netroom.oz96.com/sound/sound46.mp3", // 通知音声
+      gas_url = "https://script.google.com/macros/s/AKfycbxkOd0qyJ0zTbeABUUP48Jv42lAQ8VU7ZfyUgTaEgS3A2KGKO1JAzEp0Lke01mlJ0g98g/exec", // GASのURL
+      isPC = !/iPhone|Android.+Mobile/.test(navigator.userAgent), // PC判定
+      isDarkMode = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-let not_url = "https://netroom.oz96.com/sound/sound46.mp3";
+// ダークモード設定の取得・保存
+let dark_2 = localStorage.getItem('darkmode') || (isDarkMode() ? 'dark' : 'light');
+localStorage.setItem('darkmode', dark_2);
 
-let gas_url = "https://script.google.com/macros/s/AKfycbxkOd0qyJ0zTbeABUUP48Jv42lAQ8VU7ZfyUgTaEgS3A2KGKO1JAzEp0Lke01mlJ0g98g/exec";
+// システムテーマの取得・保存
+let sys_dark_2 = isDarkMode() ? 'dark' : 'light';
+let old_sys_dark_2 = localStorage.getItem("sys-darkmode") || "";
+localStorage.setItem('sys-darkmode', sys_dark_2);
 
-//PC判定
-
-let isPC = !(navigator.userAgent.match(/iPhone|Android.+Mobile/));
-
-//ダークモード対応
-let dark_2;
-
-if (localStorage.hasOwnProperty("darkmode")) {
-  dark_2 = localStorage.getItem("darkmode");
-} else {
-  dark_2 = "";
+// システムテーマが変更された場合の処理
+if (sys_dark_2 !== old_sys_dark_2) {
+  createOverlay();
+  updateText(
+    "<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>システムテーマが変更されました。設定を同期しますか？<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>いいえ</b></button><button onclick='syn_theme();' style='font-size:22px;'><b>はい</b></button>"
+  );
 }
 
-function isDarkMode() {
-  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-}
-if (dark_2 == "") {
-  if (isDarkMode() == true) {
-    dark_2 = "dark";
-    localStorage.setItem('darkmode', 'dark');
-  } else {
-    dark_2 = "light";
-    localStorage.setItem('darkmode', 'light');
-  }
-} else {
-  if (dark_2 == "dark") {
-    dark_2 = "dark";
-  } else {
-    dark_2 = "light";
-  }
-}
-
-let old_sys_dark_2 = "";
-
-if (localStorage.hasOwnProperty("darkmode")) {
-  old_sys_dark_2 = localStorage.getItem("sys-darkmode");
-}
-let sys_dark_2;
-
-if (isDarkMode() == true) {
-  sys_dark_2 = "dark";
-  localStorage.setItem('sys-darkmode', 'dark');
-} else {
-  sys_dark_2 = "light";
-  localStorage.setItem('sys-darkmode', 'light');
-}
-
-if (old_sys_dark_2 == "") {
-  if (sys_dark_2 == old_sys_dark_2) {
-    console.log("なにもおきません")
-  } else {
-    createOverlay();
-    updateText(
-      "<img src='https://netroom.oz96.com/css/icon/err.png' alt='㊟' width='24' height='24'>システムテーマが変更されました。設定を同期しますか？<br><br><button onclick='removeOverlay();' style='font-size:22px;'><b>いいえ</b></button><button onclick='syn_theme();' style='font-size:22px;'><b>はい</b></button>"
-    );
-  }
-}
-
+// テーマ同期関数
 function syn_theme() {
-  if (isDarkMode() == true) {
-    dark_2 = "dark";
-    localStorage.setItem('darkmode', 'dark');
-  } else {
-    dark_2 = "light";
-    localStorage.setItem('darkmode', 'light');
-  }
+  const darkMode = isDarkMode() ? 'dark' : 'light';
+  localStorage.setItem('darkmode', darkMode);
+  dark_2 = darkMode;
 }
 
-let notice_mode = "";
+// 通知モードの設定
+let notice_mode = localStorage.getItem('notice_mode') || 'true';
+console.log(`notice_mode: ${notice_mode}`);
+localStorage.setItem('notice_mode', notice_mode);
 
-if (localStorage.hasOwnProperty("notice_mode")) {
-  notice_mode = localStorage.getItem('notice_mode');
-  console.log("str_notice_mode:" + notice_mode);
-} else {
-  localStorage.setItem('notice_mode', 'true');
-  notice_mode = "true";
-  console.log("def_notice_mode:" + notice_mode);
-}
+// spanの追加
+$('<span>', {
+  id: 'pvt_msg_introduce',
+  css: { whiteSpace: 'pre-wrap' }
+}).appendTo('#pvm2');
 
-let int_text_el = document.createElement("span");
-int_text_el.id = "pvt_msg_introduce";
-int_text_el.style = "white-space: pre-wrap;";
-let pvm_el = document.getElementById("pvm2");
-pvm_el.appendChild(int_text_el);
 
-//css変更帯
-if (isPC) {
-  var wh = -120 + innerHeight;
-} else {
-  var wh = -261 + innerHeight;
-  var s = document.getElementById("mes_wrap_box");
-  var shn = getComputedStyle(s).height;
-  console.log(shn);
-  shn = Math.round(Number(shn.replace('px', '')));
-  var sh = shn + 45;
-}
-document.documentElement.style.setProperty('--wh', wh + 'px');
-document.documentElement.style.setProperty('--sh', sh + 'px');
+// CSS変更帯
+let wh = innerHeight + (isPC ? -120 : -261),
+    sh = isPC ? 0 : Math.round(parseInt(getComputedStyle(document.getElementById("mes_wrap_box")).height, 10)) + 45;
+
+$('html').css({
+  '--wh': `${wh}px`,
+  '--sh': `${sh}px`
+});
 
 let css = "";
 
@@ -747,96 +691,74 @@ if (_MY_SP_ == '0') {
   `;
 }
 
-const style = document.createElement('style');
-style.appendChild(document.createTextNode(css));
-document.head.appendChild(style);
+$('head').append(`<style>${css}</style>`);
 $('#box3, .tabs.clearfix, #d_user_list, #d_user_list2, #d_userlist3, #user_list, #user_list2').show();
 $('#create_new_user').remove();
 
-
 function show_room_name(res) {
-  roomnam = res.room_name;
-  roomdes = res.room_desc;
-  lastupd = res.room_update_time;
-  //adminam = res.admi_name;
-  adminid = res.a_admi;
-  var room_id = res.room_id;
-  var w_permition = res.w_permition;
-  prev_room_id = disp_room_id;
-  disp_room_id = room_id;
-  leaved_room = "";
+  var room_id = res.room_id,
+      w_permition = res.w_permition;
+      roomnam = res.room_name;
+      roomdes = res.room_desc;
+      lastupd = res.room_update_time;
+      adminid = res.a_admi;
+      prev_room_id = disp_room_id;
+      disp_room_id = room_id;
+      leaved_room = "";
   view_at_join_room(w_permition);
 
   if (_MY_SP_ == '1') {
-    $('#room_title').replaceWith('');
-    $('#room_title2').html('<marquee style="display:inline-block; width: 100%; color: #ffffff !important;" scrollamount="6">' + res.room_name + '</marquee>')
+    $('#room_title').empty();
+    $('#room_title2').html(`<marquee style="display:inline-block; width: 100%; color: #ffffff !important;" scrollamount="6">${res.room_name}</marquee>`);
   } else {
-  $('#room_title').replaceWith('<div id="room_title"></div>');
-  $('#room_title').css({
-    'width': '90%',
-    'box-sizing': 'border-box'
-  });
-    $('#room_title').html('<marquee style="display:inline-block; width: 100%; color: #ffffff !important;" scrollamount="6">' + res.room_name + '</marquee>');
+    $('#room_title').replaceWith('<div id="room_title"></div>').css({
+      'width': '90%',
+      'box-sizing': 'border-box'
+    }).html(`<marquee style="display:inline-block; width: 100%; color: #ffffff !important;" scrollamount="6">${res.room_name}</marquee>`);
   }
-  
-  var imgdata = "";
-  var html = "";
-  html += '<div class="comment"><div class="l">' + img_users_pict(res.a_admi[0],
-    res.admi_img_no) + '</div>';
-  html += '<div class="r">';
-  html += '<div class="comment_head"><span class="m_no">' +
-    '</span><span class="m_uname">' + res.admi_name +
-    '</span><span class="m_time">' + date_f(res.room_update_time) +
-    '</span></div>';
-  html += '<div class="comd">' + imgdata + comvert_msg(res.room_desc) + '</div>';
-  html += '</div></div>';
+
+  var html = `
+    <div class="comment">
+      <div class="l">${img_users_pict(res.a_admi[0], res.admi_img_no)}</div>
+      <div class="r">
+        <div class="comment_head">
+          <span class="m_no"></span>
+          <span class="m_uname">${res.admi_name}</span>
+          <span class="m_time">${date_f(res.room_update_time)}</span>
+        </div>
+        <div class="comd">${imgdata}${comvert_msg(res.room_desc)}</div>
+      </div>
+    </div>
+  `;
   $('#room_desc').html(html);
-  var uid_data = {};
-  uid_data[res.a_admi[0]] = [res.admi_name, res.admi_img_no];
-  add_user_store(uid_data);
-  var a_admi = res.a_admi;
-  admi_flag = 0;
-  if (a_admi) {
-    for (var i = 0; i < a_admi.length; i++) {
-      if (a_admi[i] == uid) {
-        admi_flag = 1
-      }
-    }
-  }
+
+  add_user_store({ [res.a_admi[0]]: [res.admi_name, res.admi_img_no] });
+
+  var admi_flag = res.a_admi.includes(uid) ? 1 : 0;
   if (admi_flag) {
     sp_d_show();
-    $('#b_change_room_info').show()
+    $('#b_change_room_info').show();
   } else {
-    $('#b_change_room_info').hide()
+    $('#b_change_room_info').hide();
   }
-  coloring_joined_room()
+
+  coloring_joined_room();
 }
 
 
 var intervalId;
 
 function set_url_mode(room_id, page, title, cmd) {
-  now_cmd = cmd;
-  var disp_room_id = get_parameter();
-  var disp_page = get_parameter(1);
+      now_cmd = cmd;
+  var disp_room_id = get_parameter(),
+      disp_page = get_parameter(1);
+      room_id = $.isNumeric(room_id) ? room_id : 0;
+      page = $.isNumeric(page) ? page : 0;
+  var url_page = page || "",
+      max_page = "";
 
-  if (!validator.isNumeric(room_id + "")) {
-    room_id = 0;
-  }
-
-  if (!validator.isNumeric(page + "")) {
-    page = 0;
-  }
-
-  var url_page = "";
-  if (page) {
-    url_page = page;
-  }
-
-  var max_page = "";
-  if (typeof(last_msg_seq[room_id]) != 'undefined') {
-    var room_last_seq = last_msg_seq[room_id];
-    max_page = which_page(room_last_seq);
+  if (typeof last_msg_seq[room_id] !== 'undefined') {
+    max_page = which_page(last_msg_seq[room_id]);
   }
 
   if (max_page == url_page) {
@@ -849,43 +771,32 @@ function set_url_mode(room_id, page, title, cmd) {
     return;
   }
 
-  if (room_id - 0) {
-    var _suf = '&p=';
-
-    if (Number(url_page) < 1) {
-      _suf = '';
-    }
-
-    var url_param = "/?r=" + room_id + _suf + url_page;
-
-    if (title) {
-      title = title + ' | NETROOM Extensionsᅟᅟᅟ';
-    } else {
-      title = document.title;
-    }
+  var url_param, newTitle;
+  if (room_id) {
+    var _suf = (Number(url_page) < 1) ? '' : '&p=';
+    url_param = `/?r=${room_id}${_suf}${url_page}`;
+    newTitle = title ? `${title} | NETROOM Extensionsᅟᅟᅟ` : document.title;
   } else {
-    var url_param = "/";
-    title = 'Room List | NETROOM Extensionsᅟᅟᅟ';
+    url_param = "/";
+    newTitle = 'Room List | NETROOM Extensionsᅟᅟᅟ';
   }
 
-  History.pushState({
-    room_id: room_id,
-    page: page
-  }, title, url_param);
+  History.pushState({ room_id, page }, newTitle, url_param);
 
   if (Number(url_page) < 1) {
     twiFunc();
   }
 
-  var scrollTitle = title;
   clearInterval(intervalId);
-
   intervalId = setInterval(function() {
-    scrollTitle = scrollTitle.substring(1) + scrollTitle.substring(0, 1);
-    document.title = scrollTitle;
+    newTitle = newTitle.slice(1) + newTitle[0];
+    document.title = newTitle;
   }, 800);
 }
 
+/**
+   現在はここまで短縮済み
+*/
 
 var clock = document.createElement('div');
 clock.id = 'clock';

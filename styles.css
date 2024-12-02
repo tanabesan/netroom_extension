@@ -35,11 +35,10 @@
             border-radius: 50%;
         }
       #team .team-members li {
-            margin: 6vw;
+            margin: 2vw;
         }
+}
 
-
-	}
         .button {
             display: inline-block;
             padding: 10px 20px;

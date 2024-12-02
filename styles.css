@@ -12,10 +12,7 @@
             padding: 0;
         }
 
-        #team .team-members li {
-            margin: 10px;
-        }
-
+  
 
 
 @media screen and (min-width: 600px) {
@@ -24,6 +21,10 @@
             height: 150px;
             border-radius: 50%;
         }
+      #team .team-members li {
+            margin: 10px;
+        }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -33,6 +34,10 @@
             height: 25vw;
             border-radius: 50%;
         }
+      #team .team-members li {
+            margin: 6vw;
+        }
+
 
 	}
         .button {

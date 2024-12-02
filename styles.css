@@ -16,12 +16,25 @@
             margin: 10px;
         }
 
-        #team .team-member-photo {
+
+
+@media screen and (min-width: 600px) {
+	        #team .team-member-photo {
             width: 150px;
             height: 150px;
             border-radius: 50%;
         }
+}
 
+@media screen and (max-width: 600px) {
+
+        #team .team-member-photo {
+            width: 25vw;
+            height: 25vw;
+            border-radius: 50%;
+        }
+
+	}
         .button {
             display: inline-block;
             padding: 10px 20px;

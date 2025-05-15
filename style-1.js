@@ -992,6 +992,8 @@ if (isPC == true) {
       console.log("notice_mode is diff!!;" + notice_mode);
     }
   });
+
+	
 }
 
 function sended(data) {
@@ -1012,6 +1014,11 @@ function sended(data) {
   }
   if (disp_room_id == room_id) {
     show_msg(room_id, data, 0)
+	  if(yomiage_o==true){
+var uttr = new SpeechSynthesisUtterance(data[0].uname+"。"+data[0].comment.replace(/>>.*\n/g, ''));
+uttr.lang = "ja-JP";
+speechSynthesis.speak(uttr);
+	  }
   } else {}
 }
 
@@ -1048,11 +1055,32 @@ if (isPC) {
   // ツールボタンB
   var toolButtonB = document.createElement('button');
   toolButtonB.id = 'tool_btn_b';
-  toolButtonB.textContent = '仮ボタンb';
+	if(localStorage.hasOwnProperty("yomiage")){
+		yomiage_o=false;
+		localStorage.setItem("yomiage","false");
+
+	}else{
+		yomiage_o=localStorage.getItem("yomiage");
+	}
+	
+if(yomiage_o==true){
+			  toolButtonB.textContent = '読みオン';
+}else{
+			  toolButtonB.textContent = '読みオフ';
+}
+
   toolButtonB.style.display = 'inline';
   returnButton.parentNode.insertBefore(toolButtonB, returnButton.nextSibling);
   toolButtonB.addEventListener('click', function() {
-    //write code here
+    if(yomiage_o==true){
+	    localStorage.setItem("yomiage","false");
+	    toolButtonB.textContent = '読みオフ';
+	    yomiage_o=false;
+		    }else{
+	    localStorage.setItem("yomiage","true");
+	    toolButtonB.textContent = '読みオン';
+	    	    yomiage_o=true;
+		    }
   });
 
   // ツールボタンC

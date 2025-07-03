@@ -943,7 +943,7 @@ function url_to_a(txt) {
       let ret = "";
       ret += `<a href="${url}" target="_blank" rel="nofollow" style="color:#777777; padding: 0;position: relative;top: 0;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 150px;"><div style="border-radius: 2px 2px 2px 2px; background-color:` + col_u_to_a + `;color:#777777 !important;"><img src="https://tanabesan.github.io/netroom_extension/img/link.png" style="width: 15%;position: relative;bottom:7px;vertical-align: middle;"></img>${hostname}</div></a>`;
       if (y_id == null) {} else {
-        ret += `<br><img style="height:120px" src="http://img.youtube.com/vi/${y_id}/default.jpg" onclick="open_youtube('https://www.youtube.com/embed/${y_id}')">`
+        ret += `<br><img style="height:120px" src="http://img.youtube.com/vi/${y_id}/hq720.jpg" onclick="open_youtube('https://www.youtube.com/embed/${y_id}')">`
       }
       return ret;
     });

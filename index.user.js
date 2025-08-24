@@ -13,9 +13,9 @@
  */
 
 let not_url = "https://netroom.oz96.com/sound/sound46.mp3",
-let gas_url = "https://script.google.com/macros/s/AKfycbxkOd0qyJ0zTbeABUUP48Jv42lAQ8VU7ZfyUgTaEgS3A2KGKO1JAzEp0Lke01mlJ0g98g/exec",
-let isPC = !(navigator.userAgent.match(/iPhone|Android.+Mobile/)),
-let dark_2;
+    gas_url = "https://script.google.com/macros/s/AKfycbxkOd0qyJ0zTbeABUUP48Jv42lAQ8VU7ZfyUgTaEgS3A2KGKO1JAzEp0Lke01mlJ0g98g/exec",
+    isPC = !(navigator.userAgent.match(/iPhone|Android.+Mobile/)),
+    dark_2;
 
 if (localStorage.hasOwnProperty("darkmode")) {
   dark_2 = localStorage.getItem("darkmode");

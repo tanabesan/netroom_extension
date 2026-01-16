@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Extensions - ホーム</title>
+    <title>Netroom Extensions - ホーム</title>
+
+    <script>
+        (function() {
+            if (sessionStorage.getItem("load") === "1") {
+                document.documentElement.classList.add('no-splash');
+            }
+        })();
+    </script>
 
     <link rel="icon" href="https://tanabesan.github.io/netroom_extension/img/favicon.ico" type="image/png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://tanabesan.github.io/netroom_extension/img/favicon2.png">
@@ -12,155 +20,296 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:image" content="https://tanabesan.github.io/netroom_extension/img/eye.png">
-    <meta property="og:title" content="Netroom Extension">
+    <meta property="og:title" content="Netroom Extensions">
     <meta property="og:description" content="チャットサイト Netroom の拡張機能機能を取り扱うサイトです。">        
     
-    <link rel="stylesheet" href="https://tanabesan.github.io/netroom_extension/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html, body {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow-x: hidden;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #0d0d0d; color: #f0f0f0;
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        /* スプラッシュスクリーン */
+        #splash-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #000; display: flex; justify-content: center; align-items: center;
+            z-index: 9999; opacity: 1; transition: opacity 0.5s ease;
+        }
+        #splash-screen img { width: 85%; max-width: 600px; height: auto; }
+        .no-splash #splash-screen { display: none !important; }
+
+        /* ヘッダー: 視認性向上のため背景を透過させず色を固定 */
+        header {
+            background-color: #1a1a1a; 
+            padding: 15px 5%; position: sticky; top: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 2px solid #30D2BE;
+        }
+        .logo-text { font-size: 1.5rem; font-weight: bold; cursor: pointer; color: #ffffff; margin: 0; }
+
+        .navbar ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+        .navbar li { cursor: pointer; font-size: 0.95rem; color: #ffffff; transition: 0.3s; }
+        .navbar li:hover { color: #30D2BE; }
+
+        /* ハンバーガーメニュー: ボタン自体の色を白で固定 */
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: none; border: none; padding: 0; z-index: 1100; }
+        .hamburger span { display: block; width: 28px; height: 3px; background-color: #ffffff; transition: 0.3s; }
+
+        @media screen and (max-width: 768px) {
+            .hamburger { display: flex; }
+            .navbar {
+                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+                background-color: #111111; /* メニュー展開時の背景色を濃くして文字を浮かせる */
+                padding: 100px 40px; transition: 0.4s; z-index: 1050;
+            }
+            .navbar.active { right: 0; }
+            .navbar ul { flex-direction: column; gap: 30px; align-items: center; }
+            .navbar li { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
+            .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        }
+
+        /* メインビジュアル: グラデーションを復活 */
+        #main {
+            width: 100%; min-height: 100vh; position: relative;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 100px 20px; z-index: 1;
+        }
+        #main::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+            background-size: 400% 400%; animation: gradientAnimation 10s ease infinite; z-index: -1;
+        }
+        @keyframes gradientAnimation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        #main h2 { font-size: clamp(1.8rem, 6vw, 3rem); margin-bottom: 20px; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .product-image { width: 100%; max-width: 300px; margin: 30px 0; filter: drop-shadow(0 0 20px rgba(0,0,0,0.2)); }
+
+        /* 追加セクション */
+        .additional-section {
+            display: flex; align-items: center; justify-content: center;
+            max-width: 1100px; margin: 80px auto; padding: 40px;
+            background-color: #161616; border-radius: 20px; gap: 50px;
+            border: 1px solid #333;
+        }
+        .additional-section:nth-child(even) { flex-direction: row-reverse; }
+
+        .description { flex: 1; }
+        .description h3 { font-size: 1.8rem; margin-bottom: 20px; color: #30D2BE; }
+        .description p { font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; }
+        .image-container { flex: 1; text-align: center; }
+        .additional-image { width: 100%; max-width: 450px; border-radius: 12px; border: 1px solid #444; }
+
+        @media screen and (max-width: 768px) {
+            .additional-section, 
+            .additional-section:nth-child(even) { 
+                flex-direction: column !important; 
+                text-align: center; padding: 30px 20px; 
+            }
+            .description { order: 1; }
+            .image-container { order: 2; }
+        }
+
+        /* 導入手順 */
+        .step-container {
+            display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 40px;
+        }
+        .step-card {
+            background-color: #1a1a1a; padding: 30px; border-radius: 15px; border: 1px solid #333; flex: 1; min-width: 250px; max-width: 320px;
+        }
+        .step-num {
+            display: block; font-size: 2rem; font-weight: bold; color: #30D2BE; margin-bottom: 10px;
+        }
+
+        /* チーム紹介 */
+        #team { text-align: center; margin: 80px auto; max-width: 1000px; padding: 0 20px; }
+        .team-members { display: flex; justify-content: center; flex-wrap: wrap; list-style: none; padding: 0; gap: 30px; margin-top: 40px; }
+        .team-member-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #333; transition: 0.3s; }
+        .team-member-photo:hover { border-color: #30D2BE; }
+        .team-member-name { margin-top: 15px; font-weight: bold; color: #ffffff; }
+        #team a { text-decoration: none; }
+
+        /* ボタン */
+        .button { display: inline-block; padding: 14px 32px; background: #333; color: #ffffff; text-decoration: none; border-radius: 50px; font-weight: bold; transition: 0.3s; border: 1px solid #555; }
+        .button:hover { background: #30D2BE; color: #000; border-color: #30D2BE; transform: translateY(-3px); }
+        .button-primary { background: #ffffff; color: #000; border: none; }
+        .button-primary:hover { background: #30D2BE; color: #000; }
+
+        /* フッター・免責事項: 視認性向上のための背景と枠線 */
+        footer { text-align: center; padding: 80px 20px; border-top: 1px solid #333; color: #888; background-color: #0a0a0a; }
+        .disclaimer-container {
+            max-width: 850px; margin: 0 auto 40px; text-align: left; background-color: #161616; padding: 30px; border: 1px solid #444; border-radius: 12px;
+        }
+        .disclaimer-title {
+            color: #ffffff; font-weight: bold; margin-bottom: 15px; display: block; border-left: 4px solid #30D2BE; padding-left: 15px; font-size: 1.1rem;
+        }
+        .disclaimer-text { font-size: 0.95rem; line-height: 1.8; color: #cccccc; }
+        .copyright { margin-top: 20px; font-size: 0.85rem; }
+    </style>
 </head>
 <body>
 
-    <!-- スプラッシュスクリーン -->
     <div id="splash-screen">
-        <img src="https://tanabesan.github.io/netroom_extension/img/FLASH_LOGO_D.gif" alt="Logo" class="logo">
+        <img src="https://tanabesan.github.io/netroom_extension/img/FLASH_LOGO_D.gif" alt="Logo">
     </div>
 
-    <!-- ヘッダー -->
     <header>
-        <div class="header-content">
-            <h1 class="logo" onclick="window.location.href='https://tanabesan.github.io/netroom_extension/index.html';">Netroom Extensions</h1>
-            <nav class="navbar">
-                <ul>
-                    <li onclick="window.location.href='https://tanabesan.github.io/netroom_extension/function.html';">機能紹介</li>
-                    <li>チーム紹介</li>
-                    <li onclick="window.location.href='https://forms.gle/ctgEXRn1EJCcxm6D8';">フォーム</li>
-                    <li>利用方法</li>
-                </ul>
-            </nav>
-        </div>
+        <div class="logo-text" onclick="window.scrollTo(0,0);">Netroom Extensions</div>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        <nav class="navbar" id="navbar">
+            <ul>
+                <li onclick="window.location.href='https://tanabesan.github.io/netroom_extension/function.html';">機能紹介</li>
+                <li onclick="document.getElementById('team').scrollIntoView();">チーム紹介</li>
+                <li onclick="window.location.href='https://forms.gle/ctgEXRn1EJCcxm6D8';">お問い合わせ</li>
+                <li onclick="document.getElementById('download').scrollIntoView();">導入方法</li>
+            </ul>
+        </nav>
     </header>
 
-    <section id="main">    
-    <h2>とてもシンプルなデザイン、<br>なのにパワフルな機能性。</h2>
-    <p>この拡張機能を使って、あなたのチャット体験を次のレベルへ。</p>
-    <div class="product-image-container">
-        <img src="https://tanabesan.github.io/netroom_extension/img/remo_logo.png" class="product-image">
-    </div>
-    <div class="product-info">
-        <h2 class="product-name">Netroom Extensions</h2>
-        <p>netroom page用に作成。</p>
-    </div>  
-    </section>
-
-<section class="additional-section">
-    <div class="description">
-        <h3>フレンド検索</h3>
-        <p>すぐにフレンドを探し出せて、ストレスフリーに過ごせます。</p>
-    </div>
-    <div class="image-container">
-        <img src="https://tanabesan.github.io/netroom_extension/img/friend_search.jpeg" alt="説明用画像" class="additional-image">
-    </div>
-</section>
-
-<section class="additional-section">
-    <div class="image-container">
-        <img src="https://tanabesan.github.io/netroom_extension/img/friend_favorite.jpeg" alt="説明用画像" class="additional-image">
-    </div>
-    <div class="description">
-        <h3>フレンドお気に入り</h3>
-        <p>フレンドの星マークを押すだけで、そのフレンドが1番上に表示されるようになります。</p>
-    </div>
-</section>
-
-<section class="additional-section">
-    <div class="description">
-        <h3>サイトテーマ</h3>
-        <p>お気に入りのテーマを見つけて、自分好みのサイトにしよう！</p>
-    </div>
-    <div class="image-container">
-        <img src="https://tanabesan.github.io/netroom_extension/img/darkmode.jpeg" alt="説明用画像" class="additional-image">
-    </div>
-</section>
-
-<section class="additional-section">
-    <div class="image-container">
-        <img src="https://tanabesan.github.io/netroom_extension/img/room_favorite.jpeg" alt="説明用画像" class="additional-image">
-    </div>
-    <div class="description">
-        <h3>ルームお気に入り</h3>
-        <p>部屋の横にある星マークを押すだけで、その部屋が1番上に表示されるようになります。</p>
-    </div>
-</section>
-
-
-    <div id="slideshow">
-        <!-- スライド1: 機能1の紹介 -->
-        <div class="slide">
-            <img src="https://tanabesan.github.io/netroom_extension/img/darkmode.jpeg" alt="Feature 1">
-            <div class="slide-content">
-                <h2>ダークモード</h2>
-                <p>視覚的に優しい色合いで目を保護します。</p>
+    <main>
+        <section id="main">    
+            <h2>シンプルなデザインとパワフルな機能性</h2>
+            <p>拡張機能を使用してチャット体験を向上させましょう</p>
+            <div class="product-image-container">
+                <img src="https://tanabesan.github.io/netroom_extension/img/remo_logo.png" class="product-image" alt="App Logo">
             </div>
+            <div class="product-info">
+                <h1 style="font-size: 2.2rem; margin: 0;">Netroom Extensions</h1>
+                <p style="opacity: 0.9;">netroom page用に作成されたプロジェクト</p>
+            </div>  
+            <div style="margin-top: 40px;">
+                <a href="#download" class="button button-primary">今すぐ利用する</a>
+            </div>
+        </section>
+
+        <section class="additional-section">
+            <div class="description">
+                <h3>フレンド検索</h3>
+                <p>特定のフレンドを素早く探し出すことが可能です。リストが長い場合でもストレスなく目的の相手を見つけられます。</p>
+            </div>
+            <div class="image-container">
+                <img src="https://tanabesan.github.io/netroom_extension/img/friend_search.jpeg" alt="フレンド検索" class="additional-image">
+            </div>
+        </section>
+
+        <section class="additional-section">
+            <div class="description">
+                <h3>フレンドお気に入り</h3>
+                <p>頻繁にやり取りするフレンドをリストの最上部に固定できます。星マークを選択するだけで設定が完了します。</p>
+            </div>
+            <div class="image-container">
+                <img src="https://tanabesan.github.io/netroom_extension/img/friend_favorite.jpeg" alt="フレンドお気に入り" class="additional-image">
+            </div>
+        </section>
+
+        <section class="additional-section">
+            <div class="description">
+                <h3>サイトテーマ</h3>
+                <p>ダークモードをはじめとする各種テーマを適用できます。利用環境や好みに合わせて視認性を最適化してください。</p>
+            </div>
+            <div class="image-container">
+                <img src="https://tanabesan.github.io/netroom_extension/img/darkmode.jpeg" alt="ダークモード" class="additional-image">
+            </div>
+        </section>
+
+        <section class="additional-section">
+            <div class="description">
+                <h3>ルームお気に入り</h3>
+                <p>特定のチャットルームを最上部に固定表示します。アクセス頻度の高い部屋への移動がスムーズになります。</p>
+            </div>
+            <div class="image-container">
+                <img src="https://tanabesan.github.io/netroom_extension/img/room_favorite.jpeg" alt="ルームお気に入り" class="additional-image">
+            </div>
+        </section>
+
+        <div style="text-align:center; padding: 40px 0;">
+            <a href="https://tanabesan.github.io/netroom_extension/function.html" class="button">全ての機能を見る</a>
         </div>
 
-        <!-- スライド2: 機能2の紹介 -->
-        <div class="slide">
-            <img src="https://tanabesan.github.io/netroom_extension/img/friend_favorite.jpeg" alt="Feature 2">
-            <div class="slide-content">
-                <h2>フレンドお気に入り</h2>
-                <p>お気に入りのフレンドが1番上に表示されるように。</p>
+        <section id="download" style="text-align:center; padding: 100px 20px; background-color: #050505;">
+            <h2 style="color: #ffffff;">導入方法</h2>
+            <p style="margin-bottom: 40px; color: #888;">以下の手順で利用を開始できます</p>
+            
+            <div class="step-container">
+                <div class="step-card">
+                    <span class="step-num">01</span>
+                    <p>スクリプトマネージャーをブラウザにインストールします</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">02</span>
+                    <p>公開されているスクリプトをマネージャーに追加します</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">03</span>
+                    <p>Netroomを開くと機能が自動的に有効化されます</p>
+                </div>
             </div>
+
+            <div style="margin-top: 60px;">
+                <a href="https://tanabesan.github.io/netroom_extension/index.user.js" class="button button-primary">GitHubでスクリプトを確認</a>
+            </div>
+        </section>
+
+        <section id="team">
+            <h2>チーム紹介</h2>
+            <p>開発に携わっているメンバーです</p>
+            <ul class="team-members">
+                <li><a href="https://github.com/AAniki" target="_blank"><img src="https://avatars.githubusercontent.com/u/176780978" alt="AAniki" class="team-member-photo"><p class="team-member-name">AAniki</p></a></li>
+                <li><a href="https://github.com/bakantrm" target="_blank"><img src="https://avatars.githubusercontent.com/u/186285702" alt="baka" class="team-member-photo"><p class="team-member-name">baka</p></a></li>
+                <li><a href="https://github.com/tanabesan" target="_blank"><img src="https://avatars.githubusercontent.com/u/152053837" alt="ぬーん" class="team-member-photo"><p class="team-member-name">ぬーん</p></a></li>
+                <li><a href="https://github.com/FFTdareka" target="_blank"><img src="https://avatars.githubusercontent.com/u/152751544" alt="FFTdareka" class="team-member-photo"><p class="team-member-name">FFTdareka</p></a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="disclaimer-container">
+            <span class="disclaimer-title">免責事項</span>
+            <p class="disclaimer-text">
+                本拡張機能は非公式のプロジェクトであり、Netroom運営とは一切関係がありません。ツールの利用によって生じたいかなる損害についても、開発チームは責任を負いかねます。自己責任においてご利用ください。
+            </p>
         </div>
-
-    <a href="https://tanabesan.github.io/netroom_extension/function.html" target="_blank" class="button">全ての機能を見る…</a>
-
-
-
-    <!-- ダウンロードセクション -->
-    <section id="download">
-        <h2>体感する</h2>
-        <p>今すぐユーザースクリプトを利用して、あなたのチャット体験を向上させましょう！</p>
-        <a href="download-link-here" class="button">今すぐ利用</a> <!-- ダウンロードリンク -->
-    </section>
-
-
-    <!-- チーム紹介セクション -->
-<section id="team">
-    <h2>チーム紹介</h2>
-    <p>私たちのチームは、チャット体験を向上させるために情熱を持って開発しています。</p>
-    <ul class="team-members">
-        <li>
-            <a href="https://github.com/AAniki" target="_blank">
-                <img src="https://avatars.githubusercontent.com/u/176780978" alt="AAniki" class="team-member-photo">
-                <p class="team-member-name">AAAAAAAAAAAA</p>
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/bakantrm" target="_blank">
-                <img src="https://avatars.githubusercontent.com/u/186285702" alt="baka" class="team-member-photo">
-                <p class="team-member-name">baka</p>
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/tanabesan" target="_blank">
-                <img src="https://avatars.githubusercontent.com/u/152053837" alt="田辺" class="team-member-photo">
-                <p class="team-member-name">ぬーん</p>
-            </a>
-        </li>
-                <li>
-            <a href="https://github.com/FFTdareka" target="_blank">
-                <img src="https://avatars.githubusercontent.com/u/152751544" alt="FFTdareka" class="team-member-photo">
-                <p class="team-member-name">FFTdareka</p>
-            </a>
-        </li>
-    </ul>
-</section>
-
-    <footer id="contact">
-        <p>2024 Netroom Extension</p>
+        <p class="copyright">2024-2026 Netroom Extension Team.</p>
     </footer>
 
-    <script src="https://tanabesan.github.io/netroom_extension/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navbar = document.getElementById('navbar');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navbar.classList.toggle('active');
+        });
+
+        window.addEventListener("load", function() {
+            const splashScreen = document.getElementById("splash-screen");
+            if (document.documentElement.classList.contains('no-splash')) {
+                splashScreen.style.display = "none";
+                return;
+            }
+            setTimeout(function() {
+                splashScreen.style.opacity = "0";
+                setTimeout(function() {
+                    splashScreen.style.display = "none"; 
+                    sessionStorage.setItem("load", "1"); 
+                }, 500); 
+            }, 1850); 
+        });
+
+        navbar.querySelectorAll('li').forEach(item => {
+            item.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navbar.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>

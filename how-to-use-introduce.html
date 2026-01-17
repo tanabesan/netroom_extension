@@ -1,126 +1,198 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>自己紹介機能の使い方 | Netroom Extensions</title>
-        <link rel="icon" href="https://tanabesan.github.io/netroom_extension/img/favicon.ico" type="image/png">
-        <style>
-            body {
-                background-color: #1f1f1f;
-                color: #ffffff;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自己紹介機能の使い方 | Netroom Extensions</title>
+    <link rel="icon" href="https://tanabesan.github.io/netroom_extension/img/favicon.ico" type="image/png">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
 
-            .important {
-                color: #ff0000;
+        html, body {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #0d0d0d; color: #f0f0f0;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ヘッダー: index.html と完全一致 */
+        header {
+            background-color: #1a1a1a; 
+            padding: 15px 5%; position: sticky; top: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 2px solid #30D2BE;
+        }
+        .logo-text { font-size: 1.5rem; font-weight: bold; cursor: pointer; color: #ffffff; margin: 0; }
+
+        .navbar ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+        .navbar li { cursor: pointer; font-size: 0.95rem; color: #ffffff; transition: 0.3s; }
+        .navbar li:hover { color: #30D2BE; }
+
+        /* ハンバーガーメニュー */
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: none; border: none; padding: 0; z-index: 1100; }
+        .hamburger span { display: block; width: 28px; height: 3px; background-color: #ffffff; transition: 0.3s; }
+
+        @media screen and (max-width: 768px) {
+            .hamburger { display: flex; }
+            .navbar {
+                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+                background-color: #111111;
+                padding: 100px 40px; transition: 0.4s; z-index: 1050;
             }
-        </style>
-    </head>
-    <body>
-        <script>
-            let isPC = !(navigator.userAgent.match(/iPhone|Android.+Mobile/));
-            if (isPC) {
-                var el = `
-                    <h1>自己紹介機能</h1>
-                    <h2>使い方</h2>
-                    <div>1. Netroom Extension 機能設定タブを開く。
-                    <br>2. プロフィール編集の自己紹介文・背景画像URL入力欄にそれぞれ入れたいものを入れる。
-                    <br>3. 登録・変更するボタンを押す。
-                    <br>4. 登録・変更が完了したら、「追加が完了しました。」と表示される。
-                    <br>この時、入力条件に満たなかった場合、理由とともにエラー文が表示される。
-                    </div>
-                    <h2>自己紹介文・背景画像URLの入力条件</h2>
-                    <div>・自己紹介文は、<b class="important">最大100文字</b>まで入力できる。
-                    <br>・背景画像のサイズは、<b class="important">300x57がぴったり</b>となる。
-                    <br>　それ以下の場合、<b class="important">左上詰め</b>で表示され、足りない部分は背景色と同じ色で塗りつぶされる。
-                    <br>　逆にそれ以上の場合、<b class="important">画像の左上部分が優先</b>され、はみ出た部分は<b class="important">表示されない。</b>
-                    <br>・変更したくない項目がある場合、入力欄に<b class="important">「変更なし」</b>と入力する。
-                    <br>・空白のまま登録した項目がある場合、その項目は<b class="important">何も表示されなくなる</b>。
-                    <br>・コマンドは、<b class="important">$コマンド名[引数]</b>で入力する。
-                    </div>
-                    <h2>自己紹介文コマンド</h2>
-                    <h3>・color</h3>
-                    <div>　指定したカラーコード・カラーネームを基に、文字を塗る。
-                    <br>構文
-                    <br>　$color[カラーコードorカラーネーム,色を変えたい文字]
-                    <br>例 : $color[#ff0000(redと同じ),テスト] → <span style="color: #ff0000;">テスト</span>
-                    </div>
-                    <h3>・link</h3>
-                    <div>　文字をクリックすると、指定したURLに飛べるようにする。
-                    <br>構文
-                    <br>　$link[転移先のURL,クリック対象の文字]
-                    <br>例 : $link[https://tanabesan.github.io/netroom_extension,ホームページ] → <a href="https://tanabesan.github.io/netroom_extension" target="_blank">ホームページ</a>
-                    </div>
-                    <h3>・bold</h3>
-                    <div>　文字の太さを太くする。
-                    <br>構文
-                    <br>　$bold[太くしたい文字]
-                    <br>例 : $bold[テスト] → <b>テスト</b>
-                    </div>
-                    <h3>・italic</h3>
-                    <div>　文字を斜めに傾ける。一部の端末には対応していない。
-                    <br>構文
-                    <br>　$italic[斜めにしたい文字]
-                    <br>例 : $italic[テスト] → <i>テスト</i>
-                    </div>
-                `;
-            } else {
-                var el = `
-                    <h1>自己紹介機能</h1>
-                    <h2>使い方</h2>
-                    <div>1. Netroom Extension 機能設定タブを<br>　開く。
-                    <br>2. プロフィール編集の<br>　自己紹介文・背景画像URL入力欄に<br>　それぞれ入れたいものを入れる。
-                    <br>3. 登録・変更するボタンを押す。
-                    <br>4. 登録・変更が完了したら、<br>　「追加が完了しました。」<br>　と表示される。
-                    <br>　この時、入力条件に満たなかった場合、<br>　理由とともにエラー文が表示される。
-                    </div>
-                    <h2>自己紹介文・背景画像URLの入力条件</h2>
-                    <div>・自己紹介文は、<br>　<b class="important">最大100文字</b>まで入力できる。
-                    <br>・背景画像のサイズは、<br>　<b class="important">300x57がぴったり</b>となる。
-                    <br>　それ以下の場合、<b class="important">左上詰め</b>で表示され、<br>　足りない部分は背景色と同じ色で塗りつぶされる。
-                    <br>　逆にそれ以上の場合、<br>　<b class="important">画像の左上部分が優先</b>され、<br>　はみ出た部分は<b class="important">表示されない。</b>
-                    <br>・変更したくない項目がある場合、<br>　入力欄に<b class="important">「変更なし」</b>と入力する。
-                    <br>・空白のまま登録した項目がある場合、<br>　その項目は<b class="important">何も表示されなくなる</b>。
-                    <br>・コマンドは、<b class="important">$コマンド名[引数]</b>で入力する。
-                    </div>
-                    <h2>自己紹介文コマンド</h2>
-                    <h3>・color</h3>
-                    <div>　指定したカラーコード・カラーネームを
-                    <br>　基に、文字を塗る。
-                    <br>構文
-                    <br>　$color[カラーコードorカラーネーム,装飾したい文字]
-                    <br>例 : $color[#ff0000(redと同じ),テスト]
-                    <br>↓
-                    <br><span style="color: #ff0000;">テスト</span>
-                    </div>
-                    <h3>・link</h3>
-                    <div>　文字をクリックすると、
-                    <br>　指定したURLに飛べるようにする
-                    <br>構文
-                    <br>　$link[転移先のURL,クリック対象の文字]
-                    <br>例 : $link[https://tanabesan.github.io/netroom_extension,ホームページ]
-                    <br>↓
-                    <br><a href="https://tanabesan.github.io/netroom_extension" target="_blank">ホームページ</a>
-                    </div>
-                    <h3>・bold</h3>
-                    <div>　文字の太さを太くする。
-                    <br>構文
-                    <br>　$bold[太くしたい文字]
-                    <br>例 : $bold[テスト]
-                    <br>↓
-                    <br><b>テスト</b>
-                    </div>
-                    <h3>・italic</h3>
-                    <div>　文字を斜めに傾ける。
-                    <br>　一部の端末には対応していない。
-                    <br>構文
-                    <br>　$italic[斜めにしたい文字]
-                    <br>例 : $italic[テスト]
-                    <br>↓
-                    <br><i>テスト</i>
-                    </div>
-                `;
-            }
-            document.body.insertAdjacentHTML('beforeend', el);
-        </script>
-    </body>
+            .navbar.active { right: 0; }
+            .navbar ul { flex-direction: column; gap: 30px; align-items: center; }
+            .navbar li { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
+            .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        }
+
+        /* コンテンツエリア */
+        .container {
+            max-width: 900px; margin: 40px auto; padding: 0 20px 80px;
+        }
+
+        h1 {
+            font-size: 2rem; border-left: 5px solid #30D2BE; padding-left: 15px;
+            margin-bottom: 40px; color: #ffffff;
+        }
+
+        h2 {
+            font-size: 1.5rem; color: #30D2BE; margin-top: 50px;
+            border-bottom: 1px solid #333; padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.2rem; color: #ffffff; background: #1a1a1a;
+            padding: 10px 15px; border-radius: 5px; margin-top: 30px;
+        }
+
+        .content-box {
+            background-color: #161616; padding: 25px; border-radius: 12px;
+            border: 1px solid #333; margin-top: 15px;
+        }
+
+        .important { color: #ff4d4d; font-weight: bold; }
+        code {
+            background: #2a2a2a; padding: 2px 6px; border-radius: 4px;
+            font-family: Consolas, Monaco, monospace; color: #30D2BE;
+        }
+
+        .example-box {
+            background: #000; padding: 15px; border-left: 3px solid #555; margin: 10px 0;
+        }
+
+        a { color: #30D2BE; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-text" onclick="window.location.href='index.html';">Netroom Extensions</div>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        <nav class="navbar" id="navbar">
+            <ul>
+                <li onclick="window.location.href='https://tanabesan.github.io/netroom_extension/function.html';">機能紹介</li>
+                <li onclick="window.location.href='index.html#team';">チーム紹介</li>
+                <li onclick="window.location.href='https://forms.gle/ctgEXRn1EJCcxm6D8';">お問い合わせ</li>
+                <li onclick="window.location.href='index.html#download';">導入方法</li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>自己紹介機能</h1>
+
+        <section>
+            <h2>使い方</h2>
+            <div class="content-box">
+                1. Netroom Extension 機能設定タブを開く。<br>
+                2. プロフィール編集の自己紹介文・背景画像URL入力欄にそれぞれ入れたいものを入れる。<br>
+                3. 登録・変更するボタンを押す。<br>
+                4. 登録・変更が完了したら、「追加が完了しました。」と表示される。<br>
+                <small style="color: #888;">※入力条件に満たなかった場合、理由とともにエラー文が表示されます。</small>
+            </div>
+        </section>
+
+        <section>
+            <h2>入力条件</h2>
+            <div class="content-box">
+                <ul>
+                    <li>自己紹介文は、<span class="important">最大100文字</span>まで入力できます。</li>
+                    <li>背景画像のサイズは、<span class="important">300x57がぴったり</span>となります。
+                        <ul style="font-size: 0.9rem; margin-top: 5px; color: #ccc;">
+                            <li>小さい場合：<span class="important">左上詰め</span>で表示され、余白は背景色で塗りつぶされます。</li>
+                            <li>大きい場合：<span class="important">画像の左上部分が優先</span>され、はみ出た部分は表示されません。</li>
+                        </ul>
+                    </li>
+                    <li>変更したくない項目がある場合、入力欄に<span class="important">「変更なし」</span>と入力してください。</li>
+                    <li>空白のまま登録すると、その項目は<span class="important">何も表示されなくなります</span>。</li>
+                    <li>コマンドは、<code>$コマンド名[引数]</code> の形式で入力します。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>自己紹介文コマンド</h2>
+            <h3>・color (文字色)</h3>
+            <div class="content-box">
+                指定したカラーコード・カラーネームで文字を装飾します。<br>
+                <strong>構文：</strong> <code>$color[カラーコードor名, 対象文字列]</code>
+                <div class="example-box">
+                    例：<code>$color[#ff0000, テスト]</code> → <span style="color: #ff0000;">テスト</span>
+                </div>
+            </div>
+
+            <h3>・link (リンク)</h3>
+            <div class="content-box">
+                文字をクリックすると指定したURLへ遷移させます。<br>
+                <strong>構文：</strong> <code>$link[URL, 対象文字列]</code>
+                <div class="example-box">
+                    例：<code>$link[https://tanabesan.github.io/netroom_extension, ホームページ]</code> → <a href="https://tanabesan.github.io/netroom_extension" target="_blank">ホームページ</a>
+                </div>
+            </div>
+
+            <h3>・bold (太字)</h3>
+            <div class="content-box">
+                文字を太くします。<br>
+                <strong>構文：</strong> <code>$bold[対象文字列]</code>
+                <div class="example-box">
+                    例：<code>$bold[テスト]</code> → <b>テスト</b>
+                </div>
+            </div>
+
+            <h3>・italic (斜体)</h3>
+            <div class="content-box">
+                文字を斜めに傾けます。<br>
+                <small style="color: #888;">※一部の端末では表示されない場合があります。</small><br>
+                <strong>構文：</strong> <code>$italic[対象文字列]</code>
+                <div class="example-box">
+                    例：<code>$italic[テスト]</code> → <i>テスト</i>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navbar = document.getElementById('navbar');
+        
+        // ハンバーガーメニューの開閉
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navbar.classList.toggle('active');
+        });
+
+        // メニュー項目クリック時に閉じる
+        navbar.querySelectorAll('li').forEach(item => {
+            item.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navbar.classList.remove('active');
+            });
+        });
+    </script>
+</body>
 </html>
